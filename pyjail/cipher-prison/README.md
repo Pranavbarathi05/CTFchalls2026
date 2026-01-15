@@ -2,19 +2,6 @@
 
 A CTF challenge combining a Python jail with a dynamic key-swapping cipher.
 
-## Challenge Description
-
-```
-Welcome to the Dynamic KeySwapper PyJail!
-
-Your mission: Escape the Python sandbox and read the flag at /flag.txt
-
-But there's a twist - all your input is key-swapped using a rotating cipher,
-and the output is swapped too! The rotation increases by 7 after EVERY command.
-
-Can you break free?
-```
-
 ## Deployment
 
 ### Using Docker Compose (Recommended)
