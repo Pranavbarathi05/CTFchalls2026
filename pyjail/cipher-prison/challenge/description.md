@@ -11,5 +11,5 @@ Can you escape and claim the flag?
 
 nc ctf.dscctf.com 1337
 
-Author: pranav
+Author: ShadowPB
 Difficulty: Hard
