@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  pyjail-keyswap:
+    build: .
+    container_name: pyjail-keyswap
+    ports:
+      - "1337:1337"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=10M,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 50
