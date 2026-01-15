@@ -154,9 +154,9 @@ cipher-prison/
 ## Hints for Players (optional, release progressively)
 
 1. **Hint 1** (free): "Output isn't scrambled, only input!"
-2. **Hint 2** (50 pts): "Caesar cipher, +7 rotation each command"
-3. **Hint 3** (100 pts): "chr(95) == '_'"
-4. **Hint 4** (150 pts): "getattr is your friend for accessing attributes"
+2. **Hint 2** (50 pts): "It's a Caesar cipher! Each letter shifts by 7 positions forward in the alphabet: a→h, b→i, etc. The rotation increases by 7 after each command you send."
+3. **Hint 3** (100 pts): "You can't use underscore _ directly, but chr(95) gives you '_' character. The flag is at /flag.txt and you have access to open() function."
+4. **Hint 4** (150 pts): "Solution: First command (rot 0): print('test'). Second command (rot 7): encode 'print(open(\"/flag.txt\").read())' with +7 shift to get the flag!"
 
 ---
 
