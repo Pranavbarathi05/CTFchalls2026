@@ -1,8 +1,8 @@
 FROM python:3.11-slim
 
-# Install xinetd
+# Install socat (simpler and more reliable than xinetd)
 RUN apt-get update && \
-    apt-get install -y xinetd && \
+    apt-get install -y socat && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -18,14 +18,11 @@ RUN chmod 555 /challenge/jail.py && \
     chmod 444 /flag.txt && \
     chown root:root /flag.txt
 
-# Copy xinetd configuration
-COPY xinetd.conf /etc/xinetd.d/pyjail
-
-# Create the ctf user (matching xinetd config)
+# Create the ctf user
 RUN useradd -m -s /bin/bash ctf
 
 # Expose the challenge port
 EXPOSE 1337
 
-# Start xinetd in foreground
-CMD ["xinetd", "-dontfork"]
+# Start with socat - forks for each connection, 180s timeout
+CMD ["socat", "-T180", "TCP-LISTEN:1337,reuseaddr,fork", "EXEC:python3 /challenge/jail.py,stderr"]

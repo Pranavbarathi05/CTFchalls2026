@@ -1,40 +1,50 @@
 #!/bin/bash
-# Quick start script for the PyJail KeySwapper challenge
 
-set -e
+# Cipher-Prison CTF Challenge Launcher
+# Usage: ./start.sh [port]
 
-echo "=== PyJail KeySwapper Challenge ==="
-echo ""
+PORT=${1:-1337}
 
-# Check if docker is available
-if ! command -v docker &> /dev/null; then
-    echo "[!] Docker not found. Please install Docker first."
+echo "🔐 Starting Cipher-Prison CTF Challenge..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Stop any existing container
+echo "📋 Stopping existing containers..."
+sudo docker-compose down 2>/dev/null || true
+
+# Start the challenge
+echo "🚀 Building and starting container..."
+if ! sudo docker-compose up -d --build; then
+    echo "❌ Failed to start container"
     exit 1
 fi
 
-# Check if docker-compose is available
-if command -v docker-compose &> /dev/null; then
-    COMPOSE_CMD="docker-compose"
-elif docker compose version &> /dev/null 2>&1; then
-    COMPOSE_CMD="docker compose"
-else
-    echo "[!] Docker Compose not found. Using plain Docker..."
-    echo "[*] Building image..."
-    docker build -t pyjail-keyswap .
-    echo "[*] Starting container..."
-    docker run -d -p 1337:1337 --name pyjail-keyswap --rm pyjail-keyswap
+# Wait for container to be ready
+echo "⏳ Waiting for container to be ready..."
+sleep 3
+
+# Test connection
+if nc -z localhost $PORT 2>/dev/null; then
+    echo "✅ Challenge is now running!"
     echo ""
-    echo "[+] Challenge is now running!"
-    echo "[+] Connect with: nc localhost 1337"
-    exit 0
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🎯 Challenge Access:"
+    echo "   nc localhost $PORT"
+    echo ""
+    echo "🔧 Management Commands:"
+    echo "   sudo docker-compose logs -f    # View live logs"
+    echo "   sudo docker-compose down       # Stop challenge"
+    echo "   sudo docker-compose restart    # Restart challenge"
+    echo ""
+    echo "🧪 Quick Test:"
+    echo "   echo 'print(1+1)' | nc localhost $PORT"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+else
+    echo "❌ Container started but port $PORT is not accessible"
+    echo "📋 Container status:"
+    sudo docker-compose ps
+    echo ""
+    echo "📋 Container logs:"
+    sudo docker-compose logs
+    exit 1
 fi
-
-echo "[*] Starting with Docker Compose..."
-$COMPOSE_CMD up -d --build
-
-echo ""
-echo "[+] Challenge is now running!"
-echo "[+] Connect with: nc localhost 1337"
-echo ""
-echo "To stop: $COMPOSE_CMD down"
-echo "To view logs: $COMPOSE_CMD logs -f"

