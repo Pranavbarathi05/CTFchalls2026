@@ -139,6 +139,10 @@ BANNER = r"""
 ║   4. ⚠️  FORBIDDEN WORDS = INSTANT DEATH ⚠️                   ║
 ║   5. The flag awaits those who break free                     ║
 ║                                                               ║
+║   💀 BLACKLIST (instant death): import, exec, eval, compile,  ║
+║      subprocess, system, popen                                ║
+║   🚫 FORBIDDEN CHARS: _ (use chr(95) instead)                 ║
+║                                                               ║
 ║   Hints:                                                      ║
 ║   • Caesar cipher on: a-z, A-Z, 0-9 (62 chars)                ║
 ║   • Rotation shown in prompt: [Rotation: XX]                  ║
