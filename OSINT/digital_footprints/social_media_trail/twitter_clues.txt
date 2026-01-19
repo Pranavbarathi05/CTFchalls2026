@@ -1,0 +1,115 @@
+# Twitter/X Investigation - Digital Footprints Challenge
+
+## Official DSC Twitter Account
+
+### @DSC Profile Setup
+**Display Name:** "Digital Security Champions"
+**Bio:** "Official DSC CTF 2026 🚩 | Cybersecurity Education | OSINT Challenges | Next clue: Find our dedicated investigation account on Instagram 📸"
+**Location:** "Cyberspace"
+**Website:** "dsc-ctf-2026.org"
+**Joined:** "December 2025"
+**Following:** 127 | **Followers:** 1,847
+
+**Profile Banner:** Contains subtle text overlay: "IG: @dsc_digital_footprints_2026"
+
+### Recent Tweets from @DSC_CTF_2026
+
+#### Tweet 1: Challenge Announcement
+**Posted:** January 18, 2026
+**Tweet:** "🚀 Digital Footprints Challenge is LIVE! 
+
+Our most comprehensive OSINT investigation yet. This multi-platform hunt tests your ability to:
+✅ Follow digital breadcrumbs
+✅ Connect social media accounts  
+✅ Extract hidden information
+✅ Think like a digital detective
+
+The investigation continues on Instagram... but which account? 🤔
+
+#DigitalFootprints #OSINT #CTF2026 #SocialMediaInvestigation"
+
+**Engagement:** 89 retweets, 156 likes, 23 comments
+
+#### Tweet 2: Instagram Direction  
+**Posted:** January 19, 2026
+**Tweet:** "🔍 OSINT Tip: When investigating organizations, always check if they have dedicated accounts for specific projects.
+
+Our Digital Footprints challenge has its own Instagram presence. The username follows our naming pattern: @dsc_[project_name]_[year] 
+
+Time to put those social media investigation skills to work! 🕵️
+
+#OSINT #Instagram #Investigation #DigitalDetective"
+
+**Engagement:** 67 retweets, 134 likes, 18 comments
+
+#### Tweet 3: Breadcrumb Hint
+**Posted:** January 20, 2026  
+**Tweet:** "🧩 The trail continues...
+
+LinkedIn brought you here ✅
+Twitter gives you the direction ✅  
+Instagram holds the next piece ⏳
+
+Remember: Every platform reveals one part of a larger puzzle. The complete picture emerges when you connect ALL the dots.
+
+Where will the investigation take you next? 🎯
+
+#MultiPlatformOSINT #DigitalBreadcrumbs #CTF"
+
+**Engagement:** 45 retweets, 98 likes, 12 comments
+
+## Investigation Strategy for Participants
+
+### Step 1: Arrive from LinkedIn
+- Participants follow the two-part clue from LinkedIn creators  
+- Twitter account pattern revealed: @DSC_[TYPE]_2026 = @DSC_CTF_2026
+- Search and locate the official DSC Twitter account
+
+### Step 2: Twitter Account Analysis
+- **Profile Investigation:** Read bio for Instagram direction
+- **Banner Analysis:** Extract Instagram handle from banner text overlay  
+- **Recent Tweets:** Look for Instagram account naming pattern clues
+- **Pattern Recognition:** @dsc_[project_name]_[year] format
+
+### Step 3: Instagram Discovery
+- **Target Account:** @dsc_digital_footprints_2026
+- **Confirmation:** Account specifically created for this challenge
+- **Next Phase:** Continue investigation on Instagram platform
+
+## Platform Investigation Flow
+
+```
+LinkedIn (Pranav & Hiral Posts)
+        ↓
+Twitter Pattern: @DSC 
+        ↓
+Twitter Bio + Banner + Tweets
+        ↓
+Instagram Handle: @dsc_digital_footprints_2026
+        ↓
+[Continue with Instagram investigation...]
+```
+
+## Key OSINT Skills Demonstrated
+
+### Twitter Investigation Techniques
+- **Profile Verification:** Distinguishing official accounts from fake ones
+- **Multi-Source Intel:** Bio + banner + tweets for complete picture  
+- **Pattern Recognition:** Understanding organizational social media naming conventions
+- **Cross-Platform Tracking:** Following breadcrumbs between platforms
+
+### Learning Objectives
+1. **Official Account Identification:** How to verify organizational accounts
+2. **Information Synthesis:** Combining multiple clues from one platform  
+3. **Social Media Patterns:** Understanding how organizations structure their online presence
+4. **Digital Breadcrumb Following:** Systematic approach to multi-platform investigations
+
+## Expected Participant Actions
+
+1. **Search Twitter for:** @DSC (from LinkedIn pattern)
+2. **Read bio carefully:** Note Instagram direction
+3. **Examine banner image:** Extract handle @dsc_digital_footprints_2026
+4. **Analyze recent tweets:** Confirm Instagram account naming pattern
+5. **Move to Instagram:** Search for @dsc_digital_footprints_2026
+6. **Verify account:** Ensure it's the challenge-specific account
+7. **Continue investigation:** Follow Instagram trail to next phase

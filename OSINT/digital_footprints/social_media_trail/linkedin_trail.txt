@@ -1,0 +1,183 @@
+# LinkedIn Investigation Trail - Digital Footprints Challenge
+
+## Entry Point: DSC Official LinkedIn Page
+
+**⚠️ PARTICIPANTS START HERE:** The challenge description directs participants to find the DSC official LinkedIn page.
+
+### DSC CTF Organization Page
+**Company Name:** "Digital Security Champions (DSC)"
+**Industry:** "Education Technology"  
+**Website:** "dsc-ctf-2026.org"
+**Specialties:** "Cybersecurity Training, CTF Challenges, OSINT Education"
+**Followers:** "2,847 followers"
+
+**About Section:**
+"Digital Security Champions (DSC) is a premier cybersecurity education organization specializing in hands-on learning through Capture The Flag (CTF) competitions. Our mission is to develop the next generation of cybersecurity professionals through practical challenges and real-world scenarios.
+
+Founded in 2024, we've created over 200 unique challenges across multiple domains including Binary Exploitation, Web Security, OSINT, Cryptography, and Reverse Engineering.
+
+Our 2026 challenge series features innovative multi-platform investigations that teach participants advanced digital investigation techniques.
+
+🏆 CTF 2026 Challenge Creators: Pranav Barathi & Hiral Jain
+🔍 Specializing in OSINT and Social Media Intelligence
+🌐 Follow our creators for the latest challenge updates!"
+
+### Challenge Creator Profiles
+
+#### Profile: Pranav Barathi
+**Headline:** "Cybersecurity Researcher | OSINT Specialist | Digital Footprints Challenge Co-Creator at DSC"
+**Location:** "Mysore, India"
+**Industry:** "Computer and Network Security"
+**Connections:** "500+ connections"
+
+#### Profile: Hiral Jain (@spaggetti99)
+**Headline:** "CTF Challenge Designer | Social Media Intelligence Expert | Digital Footprints Co-Creator at DSC"  
+**Location:** "Mysore, India"
+**Industry:** "Information Security"
+**Connections:** "500+ connections"
+
+## Recent LinkedIn Posts - SHARED CHALLENGE POSTS
+
+### 🔥 SHARED POST: Digital Footprints Challenge Launch (Part 1)
+**Originally posted by:** DSC CTF Organization  
+**Shared by:** Pranav Barathi
+**Posted:** January 18, 2026
+
+**Pranav's Share Comment:**
+"Excited to finally reveal our latest OSINT masterpiece! 🎯 
+
+This challenge pushes the boundaries of social media investigation. We've hidden the next clue across multiple platforms, and finding it requires true detective work.
+
+**PART 1 OF 2 - TWITTER TRAIL BEGINS:** 
+The investigation continues on Twitter. Look for the account that matches this pattern: @DSC_[CHALLENGE_TYPE]_2026
+
+The first half of the critical information is hidden in our Twitter bio. But you'll need BOTH parts to proceed... 🧩
+
+#DigitalFootprints #OSINT #TwitterTrail #CTF2026"
+
+**Engagement:** 23 likes, 7 comments, 12 shares
+
+---
+
+### 🔥 SHARED POST: Digital Footprints Challenge Launch (Part 2)  
+**Originally posted by:** DSC CTF Organization
+**Shared by:** Hiral Jain (@spaggetti99)
+**Posted:** January 18, 2026
+
+**Hiral's Share Comment:**
+"The hunt intensifies! 🕵️‍♀️ As co-creator of Digital Footprints, I'm amazed by the community response.
+
+**PART 2 OF 2 - COMPLETE THE PUZZLE:**
+After you find our Twitter account and get the first half, you need to combine it with what's hidden in our Twitter banner image. The pattern is: [FIRST_HALF] + [BANNER_SECRET] = Next Platform
+
+Remember: Twitter leads to Instagram, but only if you can decode both pieces correctly! 
+
+The real treasure hunt begins when you complete the Twitter investigation. Each platform reveals one piece of a larger puzzle.
+
+Can't wait to see who solves this first! 🚀
+
+#OSINT #SocialMediaInvestigation #TwitterToInstagram #CTF #DigitalDetective"
+
+**Engagement:** 31 likes, 9 comments, 15 shares
+
+## Additional Supporting Posts
+
+### Background Post 1: Challenge Development
+**Author:** Pranav Barathi
+**Posted:** January 15, 2026
+**Post:** "Behind the scenes of Digital Footprints challenge development 🔧
+
+Spent weeks crafting the perfect OSINT investigation trail. The challenge needed to be:
+✅ Educational yet challenging
+✅ Multi-platform without being overwhelming  
+✅ Technical but accessible to beginners
+
+Working with @spaggetti99 (Hiral) has been incredible. She brought the social media intelligence expertise while I focused on the technical metadata aspects.
+
+The most rewarding part? Watching participants connect the dots across platforms. Each clue builds on the last, creating a comprehensive learning experience.
+
+Can't wait for the community to experience what we've built! 🚀
+
+#CTFDevelopment #OSINT #TeamWork #CyberEducation"
+
+### Background Post 2: OSINT Methodology  
+**Author:** Hiral Jain (@spaggetti99)
+**Posted:** January 16, 2026
+**Post:** "OSINT Investigation Tip: Cross-Platform Correlation 🔗
+
+One key skill every digital investigator needs is connecting information across multiple social media platforms. Here's my approach:
+
+1️⃣ **Start with one verified account**
+2️⃣ **Look for username patterns across platforms**  
+3️⃣ **Check bio information for hidden clues**
+4️⃣ **Analyze posting patterns and timing**
+5️⃣ **Cross-reference shared content**
+
+In our Digital Footprints challenge, participants will need to master these skills. The investigation spans LinkedIn → Twitter → Instagram, with each platform revealing crucial pieces of the puzzle.
+
+The beauty of OSINT is that the information is all publicly available - you just need to know where to look! 👀
+
+Excited to see how our community tackles this multi-platform investigation.
+
+#OSINT #SocialMediaInvestigation #DigitalDetective #Methodology"
+
+## Investigation Strategy for Participants
+
+Participants should follow this path:
+
+### Step 1: Find DSC Official Page
+- **Search:** "Digital Security Champions DSC" on LinkedIn
+- **Locate:** Company page with 2,847 followers
+- **Identify:** Challenge creators listed in About section
+
+### Step 2: Investigate Creators
+- **Find:** Pranav Barathi and Hiral Jain (@spaggetti99) profiles  
+- **Check:** Their recent shared posts from January 18, 2026
+- **Read:** Both share comments carefully for Twitter clues
+
+### Step 3: Decode Twitter Instructions
+- **Part 1 (Pranav's post):** Twitter account pattern @DSC_[TYPE]_2026
+- **Part 2 (Hiral's post):** Combine bio info + banner secret = next platform
+- **Action:** Search Twitter for @DSC_CTF_2026 (following the pattern)
+
+### Step 4: Twitter Investigation
+- **Location:** Find Twitter bio for first half of clue
+- **Banner:** Extract hidden information from banner image
+- **Combine:** First half + banner secret = Instagram clue
+- **Proceed:** Move to Instagram investigation
+
+## Platform Flow Summary
+
+```
+Challenge Description 
+        ↓
+DSC LinkedIn Page 
+        ↓  
+Creator Profiles (Pranav & Hiral)
+        ↓
+Shared Posts with Twitter Clues (2 Parts)
+        ↓
+Twitter Account (@DSC_CTF_2026)
+        ↓
+Instagram Discovery
+        ↓
+[Continue with existing Instagram trail...]
+```
+
+## Skills Demonstrated
+
+This LinkedIn phase teaches:
+- **Company intelligence gathering**  
+- **Employee/creator identification**
+- **Cross-platform account correlation**
+- **Social media post analysis**
+- **Multi-part clue reconstruction**
+- **Professional network investigation**
+
+## Key Learning Points
+
+1. **Start with official sources** (company pages) before individual profiles
+2. **Employee accounts often contain more detailed clues** than official accounts  
+3. **Shared content can reveal collaboration patterns** and hidden information
+4. **Bio sections and post comments** are rich sources of OSINT data
+5. **Multi-part clues require patience** and careful documentation to solve

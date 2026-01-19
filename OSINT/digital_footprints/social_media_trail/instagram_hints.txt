@@ -1,0 +1,69 @@
+# Instagram Clues for Digital Footprints Challenge
+
+## Profile Setup Instructions
+
+### Account: @dsc_ctf_2026
+**Bio:** "🚩 Digital Security Champions 2026 | CTF Challenges | OSINT Masters | Link in bio for more 🔍"
+**Link:** https://linktr.ee/dsc_ctf_2026
+
+### Account: @shadowpb_ctf  
+**Bio:** "CTF Creator 🛡️ | Hiding flags since 2024 | Check stories for hints 👀 | #OSINT #CTF #Steganography"
+
+## Story Highlights
+
+### Highlight: "Project Clues" 🔍
+- **Story 1:** Screenshot of GitHub repository page (blurred) with visible URL containing "hidden-treasures"
+- **Story 2:** Photo of laptop screen showing exiftool command output (metadata visible)
+- **Story 3:** White text on white background saying "The answer is in the comments"
+
+### Highlight: "Behind The Scenes" 🎬
+- **Story 1:** Photo of code editor with visible file names: decoy.png, treasure.png, secret.txt
+- **Story 2:** Terminal screenshot showing "exiftool -Comment treasure.png"
+- **Story 3:** Text overlay: "Password hidden where you'd never look"
+
+## Recent Posts
+
+### Post 1: Project Teaser
+**Image:** Artistic photo of a computer screen with GitHub repository
+**Caption:** "Late night coding session 💻 Working on something special for the CTF community. The treasure hunt begins with a simple search... #CTF #OSINT #DigitalFootprints #GitHub #SecretProject"
+**Hashtags:** #DSC2026 #CTF #OSINT #GitHub #HiddenTreasures
+
+### Post 2: Metadata Hint
+**Image:** Close-up of camera with focus on "EXIF" display
+**Caption:** "Every picture tells a story, but the real story is in the details you can't see 📸 Sometimes the most important information is hiding in the comments section. Tools of the trade: exiftool, strings, hexdump 🔍 #MetadataAnalysis #OSINT #DigitalForensics"
+
+### Post 3: Repository Direction  
+**Image:** GitHub logo with artistic filter
+**Caption:** "Open source is beautiful 💫 Our latest project just dropped on GitHub. Look for repos created this week... the name might surprise you 😉 Organization name starts with DSC, you know the drill! #OpenSource #GitHub #CTF"
+
+### Post 4: Steganography Hint
+**Image:** White flower on white background (barely visible)
+**Caption:** "Beauty in simplicity. Sometimes what you can't see is more valuable than what you can see 🤍 White on white, like secrets hidden in plain sight. The flag is there, you just need to know how to look 👻 #Steganography #Hidden #WhiteOnWhite"
+
+## Location Tags
+
+- **DSC Headquarters** (fictional location)
+- **Cyber Security Lab**  
+- **CTF Arena**
+
+## Tagged Accounts
+
+- @security_enthusiasts
+- @ctf_community_2026
+- @osint_professionals
+
+## Investigation Notes
+
+Participants should:
+1. **Search for the accounts** using CTF-related hashtags
+2. **Check story highlights** for technical clues
+3. **Analyze post captions** for GitHub repository hints
+4. **Follow tagged accounts** for additional context
+5. **Note the timing** of posts for recency clues
+
+## Visual Clues in Images
+
+- GitHub repository URL partially visible in screenshots
+- Terminal commands showing metadata extraction
+- File names visible in code editor screenshots  
+- Exiftool output samples in story highlights
