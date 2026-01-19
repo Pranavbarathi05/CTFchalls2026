@@ -11,5 +11,3 @@
 
 ## Total = 22
 
-## Test Header
-
