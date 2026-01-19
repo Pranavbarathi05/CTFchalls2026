@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Endgame Protocol</title>
+</head>
+
+<body>
+    <h2>Endgame Protocol</h2>
+    <p>Perfectly balanced. As all things should be.</p>
+
+    <button onclick="snap()">Snap</button>
+
+    <pre id="out"></pre>
+
+    <script src="/static/protocol.min.js"></script>
+    <script>
+        function snap() {
+            fetch("/snap")
+                .then(r => r.text())
+                .then(t => document.getElementById("out").innerText = t);
+        }
+    </script>
+</body>
+
+</html>
