@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  regex-master:
+    build: .
+    container_name: regex_master
+    ports:
+      - "8006:8006"

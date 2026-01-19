@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  caesars-pizza-menu:
+    build: .
+    container_name: caesars_pizza_menu
+    ports:
+      - "8001:8001"

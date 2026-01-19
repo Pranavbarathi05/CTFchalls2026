@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  license-checker:
+    build: .
+    container_name: license_checker
+    ports:
+      - "8002:8002"

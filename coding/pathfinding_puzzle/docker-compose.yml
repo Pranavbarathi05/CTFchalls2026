@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  pathfinding-puzzle:
+    build: .
+    container_name: pathfinding_puzzle
+    ports:
+      - "8004:8004"

@@ -9,7 +9,7 @@ A classic Python sandbox escape challenge where most built-in functions are rest
 | **Name**      | Prison Break |
 | **Category**  | pyjail |
 | **Difficulty**| Easy-Medium (150-200 pts) |
-| **Flag**      | `dscctf{m1c34l_sc0fi3ld_fr0m_pr1s0n_br34k}` |
+| **Flag**      | `DSCCTF{m1c34l_sc0fi3ld_fr0m_pr1s0n_br34k}` |
 | **Port**      | 9999 |
 
 ## Challenge Description (for CTF platform)

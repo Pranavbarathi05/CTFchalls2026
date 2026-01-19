@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  tree-traversal-secret:
+    build: .
+    container_name: tree_traversal_secret
+    ports:
+      - "8005:8005"

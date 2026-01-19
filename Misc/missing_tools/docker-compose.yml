@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  missing-tools:
+    build: .
+    container_name: missing_tools_ctf
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+    networks:
+      - ctf_network
+
+networks:
+  ctf_network:
+    driver: bridge
