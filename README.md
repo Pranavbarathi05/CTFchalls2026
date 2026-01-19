@@ -6,6 +6,10 @@
 | **Pyjail** | 0 | 2 | 0 |
 | **Reverse Engineering** | 1 | 0 | 1 |
 | **Web exploitation** | 0 | 7 | 0 |
-| **OSINT** | 0 | 1 | 0 |
+| **OSINT** | 1 | 0 | 0 |
 | **Misc** | 1 | 3 | 0 |
+
+## Total = 22
+
+## Test Header
 
