@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  echo-chamber:
+    build: .
+    ports:
+      - "8080:80"
+    container_name: echo_chamber_web
+    restart: unless-stopped
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    volumes:
+      - ./flag.txt:/flag:ro
