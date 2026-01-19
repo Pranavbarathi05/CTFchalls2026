@@ -1,0 +1,1 @@
+DSCCTF{tcp_s3lf_c0nn3ct_3ch0_ch4mb3r_2026}
