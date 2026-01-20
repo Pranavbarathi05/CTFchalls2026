@@ -5,9 +5,9 @@
 | **Cryptography** | 1 | 0 | 0 |
 | **Pyjail** | 0 | 2 | 0 |
 | **Reverse Engineering** | 1 | 0 | 1 |
-| **Web exploitation** | 0 | 7 | 0 |
+| **Web exploitation** | 3 | 5 | 1 |
 | **OSINT** | 1 | 0 | 0 |
 | **Misc** | 1 | 3 | 0 |
 
-## Total = 22
+## Total = 24
 
