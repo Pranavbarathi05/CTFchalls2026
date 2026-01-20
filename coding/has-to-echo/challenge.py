@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+import sys
+import time
+
+FLAG = "DSCCTF{3ch0_1s_n0t_r3p34t_2026}"
+
+def transform(s):
+    # subtle but consistent
+    out = []
+    for i, c in enumerate(s):
+        out.append(chr((ord(c) + i) % 128))
+    return "".join(out)
+
+def main():
+    print("=== Echo for me ===")
+    print("I will echo what you say.")
+    print("But only if you sound like me.\n")
+    print("Send input. End with EOF (Ctrl+D / Ctrl+Z).")
+
+    data = sys.stdin.read().rstrip("\n")
+
+    if not data:
+        print("Silence detected.")
+        return
+
+    echoed = transform(data)
+    time.sleep(1)
+
+    if data == echoed:
+        print("\nYou understand the echo.")
+        print(FLAG)
+    else:
+        print("\nEcho received.")
+        print(echoed)
+
+if __name__ == "__main__":
+    main()
