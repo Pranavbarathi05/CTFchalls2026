@@ -1,0 +1,3 @@
+Tried base64.
+Tried xor.
+Nothing worked.
