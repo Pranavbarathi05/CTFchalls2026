@@ -7,7 +7,10 @@
 ---
 
 ## Flag
-DSCCTF{g1t_n3v3r_f0rg3t5}
+
+
+DSCCTF{git_nev3r_f0rg3t5}
+
 
 ---
 
