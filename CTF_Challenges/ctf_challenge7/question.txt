@@ -1,0 +1,13 @@
+🔐 Challenge — Cipher Vault
+
+Category: Reverse Engineering + Cryptography
+Difficulty: Medium–Hard
+
+📖 Description
+
+A secure vault program protects sensitive data.
+The password is not stored in plain text.
+
+Instead, the developer left behind an encrypted message using a classical cipher.
+
+Break the cipher to recover the password, then use it to unlock the vault and retrieve the flag.

@@ -1,0 +1,17 @@
+🕵️ Challenge 1 — Hidden in Plain Sight
+
+Category: Forensics
+Difficulty: Easy–Medium
+
+A suspicious image was recovered during a digital investigation.
+At first glance, it looks like a normal vacation photo.
+
+However, investigators believe that sensitive data may be hidden inside the file.
+
+The image might be hiding more than just memories.
+
+Tools to be used:
+
+1. Exiftool
+2. Binwalk(run as root)
+

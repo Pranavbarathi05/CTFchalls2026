@@ -1,0 +1,11 @@
+🕵️ Challenge 2 — So Meta, So Secret
+
+Category: Forensics
+Difficulty: Medium
+
+📖 Story (Player View)
+
+A PNG image was recovered from a compromised system.
+The file looks normal — but investigators suspect the truth is hidden in its properties.
+
+Metadata never lies.

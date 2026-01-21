@@ -1,0 +1,11 @@
+🕵️ Challenge 1 — Garden Secrets
+
+Category: Forensics
+Difficulty: Easy → Medium
+
+📖 Story
+
+A mysterious image was recovered from a suspect’s USB drive.
+At first glance, it looks like an ordinary garden photograph.
+
+But investigators believe something important is hidden inside the file.

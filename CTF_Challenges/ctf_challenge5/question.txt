@@ -1,0 +1,11 @@
+🧩 Challenge 3 — Extensions (DSC Edition)
+
+Category: Forensics
+Difficulty: Easy → Medium
+
+Description:
+
+A file recovered from a compromised system claims to be a text file.
+But investigators believe it’s hiding something else.
+
+File extensions can lie. File signatures don’t.
