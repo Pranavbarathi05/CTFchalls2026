@@ -7,7 +7,10 @@
 ---
 
 ## Flag
-DSCCTF{git_never_forgets}
+
+
+DSCCTF{git_nev3r_f0rg3t5}
+
 
 ---
 
