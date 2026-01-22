@@ -3,7 +3,16 @@
 **Author:** Shadow PB  
 **Category:** String Processing  
 **Difficulty:** Medium  
-**Points:** 250
+**Points:** 250  
+**Port:** 8006
+
+---
+
+## Connection
+
+```bash
+nc ctf.dscjssstuniv.in 8006
+```
 
 ---
 

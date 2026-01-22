@@ -3,7 +3,16 @@
 **Author:** Shadow PB  
 **Category:** Data Structures  
 **Difficulty:** Medium  
-**Points:** 200
+**Points:** 200  
+**Port:** 8005
+
+---
+
+## Connection
+
+```bash
+nc ctf.dscjssstuniv.in 8005
+```
 
 ---
 
