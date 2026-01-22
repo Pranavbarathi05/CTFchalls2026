@@ -1,16 +1,16 @@
 | Domain                  | Easy | Medium | Hard |
 | ----------------------- | ---- | ------ | ---- |
-| **Binary Exploitation** | 1    | 1      | 0    |
+| **Binary Exploitation** | 2    | 1      | 0    |
 | **Coding**              | 1    | 4      | 0    |
 | **Cryptography**        | 1    | 0      | 0    |
 | **Forensics**           | 1    | 0      | 0    |
-| **Pyjail**              | 0    | 2      | 1    |
+| **Pyjail**              | 0    | 3      | 1    |
 | **Reverse Engineering** | 1    | 0      | 1    |
 | **Web exploitation**    | 6    | 5      | 1    |
 | **OSINT**               | 2    | 0      | 0    |
 | **Misc**                | 2    | 3      | 2    |
 
-## Total = 35
+## Total = 37
 
 
 # CTF Challenge Port Mapping
@@ -26,6 +26,7 @@
 |--------------|---------------|----------------|----------|------|
 | 1337 | 1337 | cipher-prison | Pyjail | `pyjail/cipher-prison` |
 | 1338 | 1338 | blacklist-hell | Pyjail | `pyjail/blacklist-hell` |
+| 1339 | 1339 | math-prison | Pyjail | `pyjail/math-prison` |
 | 2222 | 22 | missing_tools | Misc | `Misc/missing_tools` |
 | 5001 | 5000 | robots-watching | Web | `web_exploitation/robots-watching` |
 | 5002 | 5000 | cookie-recipe | Web | `web_exploitation/cookie-recipe` |
@@ -57,11 +58,12 @@
 
 # CTF Challenge List - DSCCTF 2026
 
-## Binary Exploitation (2 challenges)
+## Binary Exploitation (3 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Overflow Academy** | Easy | Stack-based buffer overflow with all protections disabled (no canary, no ASLR, executable stack) |
+| **Zeros and Ones** | Easy | Simple 8-bit binary to ASCII conversion; decode binary string to reveal flag |
 | **Menu Pwner** | Medium | Use-After-Free (UAF) memory corruption in heap allocations; reallocate freed chunks to gain control |
 
 ---
@@ -86,12 +88,13 @@
 
 ---
 
-## Pyjail (3 challenges)
+## Pyjail (4 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Prison Break** | Medium | Python sandbox escape with restricted __builtins__; bypass using object introspection |
 | **Cipher-Prison** | Medium | Dynamic Caesar cipher rotates keyboard mapping after each input; decode while evading blacklist |
+| **Math Prison** | Medium | Floating-point precision exploitation; find input where cubic inverse fails due to rounding errors |
 | **Blacklist-Hell** | Hard | Extreme blacklist blocks digits, quotes, underscores, operators; construct payloads with chr()/len() |
 
 ---
@@ -193,20 +196,20 @@
 
 ## Statistics
 
-**Total Challenges:** 35  
+**Total Challenges:** 37  
 **Difficulty Breakdown:**
-- Easy: 9 challenges (26%)
-- Medium: 16 challenges (46%)
+- Easy: 10 challenges (27%)
+- Medium: 17 challenges (46%)
 - Hard: 5 challenges (14%)
 - Forensics: 5 challenges (14%)
 
 **Category Distribution:**
-- Web Exploitation: 9 (26%)
-- Miscellaneous: 7 (20%)
+- Web Exploitation: 9 (24%)
+- Miscellaneous: 7 (19%)
 - Coding: 5 (14%)
-- Pyjail: 3 (9%)
-- Binary Exploitation: 2 (6%)
-- Reverse Engineering: 2 (6%)
-- OSINT: 2 (6%)
+- Pyjail: 4 (11%)
+- Binary Exploitation: 3 (8%)
+- Reverse Engineering: 2 (5%)
+- OSINT: 2 (5%)
 - Forensics: 5 (14%)
 - Cryptography: 1 (3%)

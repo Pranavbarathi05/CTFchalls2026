@@ -1,0 +1,10 @@
+services:
+  math-prison:
+    build: .
+    container_name: math_prison
+    ports:
+      - "1339:1339"
+    restart: unless-stopped
+    command: sh -c "socat TCP-LISTEN:1339,reuseaddr,fork EXEC:'python3 -u challenge.py',pty,stderr"
+    stdin_open: true
+    tty: true
