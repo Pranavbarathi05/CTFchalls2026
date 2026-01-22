@@ -50,7 +50,7 @@ docker-compose up -d --build
 
 Test connection:
 ```bash
-nc localhost 1338
+nc ctf.dscjssstuniv.in 1338
 ```
 
 ### Using socat (Quick testing)
@@ -120,7 +120,7 @@ blacklist-hell/
 docker-compose up -d --build
 
 # Test connection
-nc localhost 1338
+nc ctf.dscjssstuniv.in 1338
 
 # Check logs
 docker-compose logs -f

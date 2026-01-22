@@ -2,7 +2,7 @@
 from pwn import *
 
 # Connect to the challenge
-conn = remote('localhost', 1339)
+conn = remote('ctf.dscjssstuniv.in', 1339)
 
 # Receive prompt
 conn.recvuntil(b'Enter a number: ')

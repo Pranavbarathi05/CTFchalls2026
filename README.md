@@ -51,8 +51,8 @@
 | 9999 | 9999 | menu_pwner | Binary Exploitation | `binary_exploitation/menu_pwner` |
 
 **Access URLs:**
-- Pyjail challenges: `nc localhost <PORT>`
-- Web/Coding/Crypto challenges: `http://localhost:<PORT>`
+- Pyjail challenges: `nc ctf.dscjssstuniv.in <PORT>`
+- Web/Coding/Crypto challenges: `http://ctf.dscjssstuniv.in:<PORT>`
 - Missing Tools (SSH): `ssh ctfplayer@localhost -p 2222` (password: `startwithbasics`)
 
 

@@ -4,7 +4,7 @@
 |-------        |-------|
 | **Name**      | math-prison |
 | **Category**  | pyjail |
-| **Difficulty**| Medium (200-250 pts) |
+| **Difficulty**| Easy |
 | **Flag**      | `DSCCTF{m4th_1s_h4rd_wh3n_1ts_n0t_1nv3rt1bl3_2026}` |
 ## Description
 
@@ -13,7 +13,7 @@ Numbers don't always behave the way you expect them to. Can you find the input t
 ## Connection
 
 ```bash
-nc localhost 1339
+nc ctf.dscjssstuniv.in 1339
 ```
 
 ## Challenge
@@ -58,7 +58,7 @@ Testing reveals that values like **6, 7, 8, 10-19** all have enough floating-poi
 ### Quick Solution
 
 ```bash
-nc localhost 1339
+nc ctf.dscjssstuniv.in 1339
 # Enter: 6 (or most numbers from 6-100)
 ```
 
@@ -68,7 +68,7 @@ nc localhost 1339
 from pwn import *
 
 # Connect to the challenge
-conn = remote('localhost', 1339)
+conn = remote('ctf.dscjssstuniv.in', 1339)
 
 # Receive prompt
 conn.recvuntil(b'Enter a number: ')
