@@ -1,0 +1,10 @@
+services:
+  has-to-echo:
+    build: .
+    container_name: has_to_echo
+    ports:
+      - "1340:1340"
+    restart: unless-stopped
+    command: sh -c "socat TCP-LISTEN:1340,reuseaddr,fork EXEC:'python3 -u challenge.py',pty,stderr"
+    stdin_open: true
+    tty: true

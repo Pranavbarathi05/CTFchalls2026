@@ -2,7 +2,14 @@
 import sys
 import time
 
-FLAG = "DSCCTF{3ch0_1s_n0t_r3p34t_2026}"
+def load_flag():
+    try:
+        with open('flag.txt', 'r') as f:
+            return f.read().strip()
+    except:
+        return "DSCCTF{3ch0_1s_n0t_r3p34t_2026}"
+
+FLAG = load_flag()
 
 def transform(s):
     # subtle but consistent
