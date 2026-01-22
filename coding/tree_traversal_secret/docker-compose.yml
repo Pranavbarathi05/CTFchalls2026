@@ -1,7 +1,10 @@
-version: '3.8'
 services:
   tree-traversal-secret:
     build: .
     container_name: tree_traversal_secret
     ports:
       - "8005:8005"
+    restart: unless-stopped
+    command: sh -c "socat TCP-LISTEN:8005,reuseaddr,fork EXEC:'python3 -u tree_traversal.py',pty,stderr"
+    stdin_open: true
+    tty: true
