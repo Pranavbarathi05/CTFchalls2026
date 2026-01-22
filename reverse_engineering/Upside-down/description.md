@@ -18,7 +18,7 @@ It's a really hard maths function, isn't it?
 ## Connection
 
 ```bash
-nc localhost 1339
+nc ctf.dscjssstuniv.in 1339
 ```
 
 ## Files

@@ -14,7 +14,7 @@
 The system administrator has been "cleaning up" the server and may have removed some commonly used tools. Your mission is to locate and read the flag file despite the missing utilities.
 
 **Connection Details:**
-- Host: `localhost` (or your Docker host IP)
+- Host: `ctf.dscjssstuniv.in`
 - Port: `2222`  
 - Username: `ctf`
 - Password: `ctf`
@@ -35,7 +35,7 @@ The system administrator has been "cleaning up" the server and may have removed 
 docker-compose up -d
 
 # Connect to the challenge
-ssh ctf@localhost -p 2222
+ssh ctf@ctf.dscjssstuniv.in -p 2222
 # Password: ctf
 ```
 
@@ -43,7 +43,7 @@ ssh ctf@localhost -p 2222
 
 ## Connection
 ```bash
-ssh ctf@localhost -p 2222
+ssh ctf@ctf.dscjssstuniv.in -p 2222
 ```
 When prompted, use password: `ctf`
 

@@ -22,7 +22,7 @@ Your mission: Investigate this form and find what's really going on.
 
 Investigate the form application and discover the hidden information. The flag is somewhere in the analytics...
 
-**Starting Point:** http://localhost:8015
+**Starting Point:** http://ctf.dscjssstuniv.in:8015
 
 ---
 
