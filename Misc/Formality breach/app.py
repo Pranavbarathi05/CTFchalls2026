@@ -24,12 +24,20 @@ def viewform(form_id):
 @app.route('/forms/d/<form_id>/formResponse', methods=['POST'])
 def form_response(form_id):
     """Handle form submission"""
+    # Validate the flag
+    submitted_flag = request.form.get('entry.1234567890', '').strip()
+    correct_flag = 'DSCCTF{4n4ly71c5_3xp053d_2026}'
+    
+    if submitted_flag != correct_flag:
+        # Redirect back to form with error (handled by client-side JS)
+        return redirect(f'/forms/d/{form_id}/viewform')
+    
     # Generate a fake response ID
     response_id = str(uuid.uuid4())
     
     # Store response in memory (will be lost on restart)
     responses[response_id] = {
-        'flag': request.form.get('entry.1234567890', '')
+        'flag': submitted_flag
     }
     
     # Store response ID in session
