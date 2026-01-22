@@ -3,13 +3,14 @@
 | **Binary Exploitation** | 1    | 1      | 0    |
 | **Coding**              | 1    | 4      | 0    |
 | **Cryptography**        | 1    | 0      | 0    |
+| **Forensics**           | 1    | 0      | 0    |
 | **Pyjail**              | 0    | 2      | 1    |
 | **Reverse Engineering** | 1    | 0      | 1    |
-| **Web exploitation**    | 3    | 5      | 1    |
-| **OSINT**               | 1    | 0      | 0    |
+| **Web exploitation**    | 6    | 5      | 1    |
+| **OSINT**               | 2    | 0      | 0    |
 | **Misc**                | 1    | 3      | 2    |
 
-## Total = 28
+## Total = 34
 
 
 # CTF Challenge List - DSCCTF 2026
