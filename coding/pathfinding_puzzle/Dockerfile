@@ -2,10 +2,20 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
+# Install socat for TCP handling
+RUN apt-get update && \
+    apt-get install -y socat && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY pathfinding.py /app/
 COPY solve.py /app/
 COPY flag.txt /app/
 
-EXPOSE 8004
+# Run as non-root user
+RUN useradd -m -u 1000 ctfuser && \
+    chown -R ctfuser:ctfuser /app
 
-CMD ["python3", "pathfinding.py", "interactive"]
+USER ctfuser
+
+CMD ["python3", "-u", "pathfinding.py", "interactive"]

@@ -3,7 +3,18 @@
 **Author:** Shadow PB  
 **Category:** Algorithms  
 **Difficulty:** Medium  
-**Points:** 200
+**Points:** 200  
+**Port:** 8004
+
+---
+
+## Connection
+
+Access the challenge with:
+
+```bash
+nc ctf.dscjssstuniv.in 8004
+```
 
 ---
 
