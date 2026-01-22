@@ -4,8 +4,8 @@
 | **Coding**              | 1    | 4      | 0    |
 | **Cryptography**        | 1    | 0      | 0    |
 | **Forensics**           | 1    | 0      | 0    |
-| **Pyjail**              | 0    | 3      | 1    |
-| **Reverse Engineering** | 1    | 0      | 1    |
+| **Pyjail**              | 0    | 2      | 1    |
+| **Reverse Engineering** | 1    | 1      | 1    |
 | **Web exploitation**    | 6    | 5      | 1    |
 | **OSINT**               | 2    | 0      | 0    |
 | **Misc**                | 2    | 3      | 2    |
@@ -26,7 +26,7 @@
 |--------------|---------------|----------------|----------|------|
 | 1337 | 1337 | cipher-prison | Pyjail | `pyjail/cipher-prison` |
 | 1338 | 1338 | blacklist-hell | Pyjail | `pyjail/blacklist-hell` |
-| 1339 | 1339 | math-prison | Pyjail | `pyjail/math-prison` |
+| 1339 | 1339 | math-prison | Reverse Engineering | `reverse_engineering/math-prison` |
 | 2222 | 22 | missing_tools | Misc | `Misc/missing_tools` |
 | 5001 | 5000 | robots-watching | Web | `web_exploitation/robots-watching` |
 | 5002 | 5000 | cookie-recipe | Web | `web_exploitation/cookie-recipe` |
@@ -88,22 +88,22 @@
 
 ---
 
-## Pyjail (4 challenges)
+## Pyjail (3 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Prison Break** | Medium | Python sandbox escape with restricted __builtins__; bypass using object introspection |
 | **Cipher-Prison** | Medium | Dynamic Caesar cipher rotates keyboard mapping after each input; decode while evading blacklist |
-| **Math Prison** | Medium | Floating-point precision exploitation; find input where cubic inverse fails due to rounding errors |
 | **Blacklist-Hell** | Hard | Extreme blacklist blocks digits, quotes, underscores, operators; construct payloads with chr()/len() |
 
 ---
 
-## Reverse Engineering (2 challenges)
+## Reverse Engineering (3 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **License Checker** | Easy | License key validation algorithm; reverse engineer checksum calculation and format requirements |
+| **Math Prison** | Easy | Floating-point precision exploitation; reverse engineer cubic formula to find input where inverse fails |
 | **Endgame Protocol** | Hard | Complex obfuscated protocol with balanced true/false responses; reverse logic to extract flag |
 
 ---
@@ -207,9 +207,9 @@
 - Web Exploitation: 9 (24%)
 - Miscellaneous: 7 (19%)
 - Coding: 5 (14%)
-- Pyjail: 4 (11%)
+- Pyjail: 3 (8%)
 - Binary Exploitation: 3 (8%)
-- Reverse Engineering: 2 (5%)
+- Reverse Engineering: 3 (8%)
 - OSINT: 2 (5%)
 - Forensics: 5 (14%)
 - Cryptography: 1 (3%)
