@@ -51,8 +51,8 @@
 | 9999 | 9999 | menu_pwner | Binary Exploitation | `binary_exploitation/menu_pwner` |
 
 **Access URLs:**
-- Pyjail challenges: `nc ctf.dscjssstuniv.in <PORT>`
-- Web/Coding/Crypto challenges: `http://ctf.dscjssstuniv.in:<PORT>`
+- Pyjail challenges: `nc localhost <PORT>`
+- Web/Coding/Crypto challenges: `http://localhost:<PORT>`
 - Missing Tools (SSH): `ssh ctfplayer@localhost -p 2222` (password: `startwithbasics`)
 
 
@@ -72,7 +72,6 @@
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
-| **Has-to-Echo** | Easy | Behavioral pattern matching; must echo input exactly to pass validation checks |
 | **Dystopian Arithmetic** | Medium | Logic manipulation where mathematical truths are redefined (2+2=5); accept false premises |
 | **Pathfinding Puzzle** | Medium | Graph traversal and shortest path algorithms; collect flag pieces in correct order through maze |
 | **Regex Master** | Medium | Regular expression crafting across 5 progressively harder pattern matching scenarios |
@@ -105,6 +104,7 @@
 | **License Checker** | Easy | License key validation algorithm; reverse engineer checksum calculation and format requirements |
 | **Math Prison** | Easy | Floating-point precision exploitation; reverse engineer cubic formula to find input where inverse fails |
 | **Endgame Protocol** | Hard | Complex obfuscated protocol with balanced true/false responses; reverse logic to extract flag |
+| **Has-to-Echo** | Easy | Behavioral pattern matching; must echo input exactly to pass validation checks |
 
 ---
 
