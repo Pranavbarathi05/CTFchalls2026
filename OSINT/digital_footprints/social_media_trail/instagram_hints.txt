@@ -2,9 +2,9 @@
 
 ## Profile Setup Instructions
 
-### Account: @dsc_ctf_2026
+### Account: @custom account with 0 posts and just this:
 **Bio:** "🚩 Digital Security Champions 2026 | CTF Challenges | OSINT Masters | Link in bio for more 🔍"
-**Link:** https://linktr.ee/dsc_ctf_2026
+**Link:** another instagram account that is private but will be public during the ctf
 
 ### Account: @shadowpb_ctf  
 **Bio:** "CTF Creator 🛡️ | Hiding flags since 2024 | Check stories for hints 👀 | #OSINT #CTF #Steganography"
@@ -12,7 +12,7 @@
 ## Story Highlights
 
 ### Highlight: "Project Clues" 🔍
-- **Story 1:** Screenshot of GitHub repository page (blurred) with visible URL containing "hidden-treasures"
+- **Story 1:** Screenshot of GitHub repository page (blurred) with visible URL containing "Digital_Footprints"
 - **Story 2:** Photo of laptop screen showing exiftool command output (metadata visible)
 - **Story 3:** White text on white background saying "The answer is in the comments"
 

@@ -4,14 +4,14 @@
 
 ### Repository Name: `DSC_Digital_Footprint`
 ### Organization: `DSC`
-### URL: `https://github.com/DSC-CTF-2026/`
+### URL: `https://github.com/DSC/DSC_Digital_Footprint`
 
 ### Repository Description:
 "Digital footprints investigation challenge - Three files, multiple layers, one flag 🔍"
 
 ### README.md Content:
 ```markdown
-# Hidden Treasures 026
+# Hidden Treasures
 
 Welcome to the final stage of the Digital Footprints investigation! 🕵️
 
