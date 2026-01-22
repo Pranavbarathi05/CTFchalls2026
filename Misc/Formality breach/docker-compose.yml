@@ -1,0 +1,7 @@
+services:
+  formality-breach:
+    build: .
+    container_name: formality_breach
+    ports:
+      - "8015:8015"
+    restart: unless-stopped

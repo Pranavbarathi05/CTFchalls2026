@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formality Breach - Google Forms</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f0ebf8;
+            margin: 0;
+            padding: 40px 12px;
+        }
+        
+        .form-container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        
+        .form-header {
+            background: white;
+            border-top: 10px solid #673ab7;
+            border-radius: 8px;
+            padding: 32px 24px 24px;
+            margin-bottom: 12px;
+        }
+        
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .user-email {
+            color: #202124;
+        }
+        
+        .switch-account {
+            color: #1a73e8;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .not-shared {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #5f6368;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .form-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #202124;
+            margin: 0;
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+        
+        .question-text {
+            font-size: 16px;
+            color: #202124;
+            margin-bottom: 20px;
+        }
+        
+        .short-answer {
+            border: none;
+            border-bottom: 1px solid #dadce0;
+            font-size: 14px;
+            padding: 8px 0;
+            width: 100%;
+            max-width: 300px;
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #202124;
+        }
+        
+        .short-answer:focus {
+            outline: none;
+            border-bottom: 2px solid #673ab7;
+        }
+        
+        .short-answer::placeholder {
+            color: #70757a;
+        }
+        
+        .button-container {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .submit-button {
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 0.25px;
+        }
+        
+        .submit-button:hover {
+            background-color: #7c4dff;
+            box-shadow: 0 1px 1px 0 rgba(66,64,67,.3), 0 1px 3px 1px rgba(66,64,67,.15);
+        }
+        
+        .clear-link {
+            color: #673ab7;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 12px;
+            cursor: pointer;
+        }
+        
+        .clear-link:hover {
+            background-color: rgba(103, 58, 183, 0.04);
+            border-radius: 4px;
+        }
+        
+        .footer-disclaimer {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .footer-disclaimer-text {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links {
+            margin-top: 8px;
+        }
+        
+        .footer-links a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .report-link {
+            margin-top: 8px;
+        }
+        
+        .report-link a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+        
+        .google-forms-logo {
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .google-forms-logo img {
+            height: 40px;
+            opacity: 0.54;
+        }
+        
+        .forms-text {
+            color: #70757a;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <div class="user-info">
+                <span class="user-email">pranavbarathi05@gmail.com</span>
+                <a href="#" class="switch-account">Switch account</a>
+            </div>
+            <div class="not-shared">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#5f6368"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+                <span>Not shared</span>
+            </div>
+            <h1 class="form-title">Formality Breach</h1>
+        </div>
+        
+        <form action="/forms/d/{{ form_id }}/formResponse" method="POST">
+            <div class="question-card">
+                <div class="question-text">Enter the flag</div>
+                <input type="text" name="entry.1234567890" class="short-answer" placeholder="Your answer" required>
+            </div>
+            
+            <div class="button-container">
+                <button type="submit" class="submit-button">Submit</button>
+                <a href="#" class="clear-link" onclick="document.querySelector('form').reset(); return false;">Clear form</a>
+            </div>
+        </form>
+        
+        <div class="footer-disclaimer">
+            <div class="footer-disclaimer-text">Never submit passwords through Google Forms.</div>
+            <div class="footer-links">
+                This content is neither created nor endorsed by Google. 
+                <a href="#">Contact form owner</a> - 
+                <a href="#">Terms of Service</a> - 
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="report-link">
+                Does this form look suspicious? <a href="#">Report</a>
+            </div>
+        </div>
+        
+        <div class="google-forms-logo">
+            <span class="forms-text">Google Forms</span>
+        </div>
+    </div>
+</body>
+</html>

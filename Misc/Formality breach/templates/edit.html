@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit your response - Formality Breach</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            background-color: #f0ebf8;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .top-bar {
+            background: #673ab7;
+            height: 10px;
+        }
+        
+        .container {
+            max-width: 640px;
+            margin: 24px auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        
+        .header {
+            background: white;
+            border-top: 10px solid #673ab7;
+            padding: 24px 24px 0;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+            line-height: 40px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            color: #202124;
+            line-height: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .edit-notice {
+            background: #fef7e0;
+            border-left: 4px solid #f9ab00;
+            padding: 16px;
+            margin: 24px;
+            border-radius: 4px;
+        }
+        
+        .edit-notice p {
+            font-size: 14px;
+            color: #202124;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .divider {
+            height: 1px;
+            background: #dadce0;
+            margin: 0 24px;
+        }
+        
+        .form-content {
+            padding: 24px;
+        }
+        
+        .form-question {
+            background: white;
+            margin-bottom: 12px;
+            padding: 24px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+        }
+        
+        .question-label {
+            display: block;
+            color: #202124;
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            line-height: 24px;
+        }
+        
+        .required {
+            color: #d93025;
+            margin-left: 2px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: none;
+            border-bottom: 1px solid #dadce0;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+            background: transparent;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-bottom: 2px solid #673ab7;
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 64px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 16px;
+        }
+        
+        textarea.form-control:focus {
+            border: 2px solid #673ab7;
+        }
+        
+        .radio-group {
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            cursor: pointer;
+        }
+        
+        .radio-option:hover {
+            background: #f8f9fa;
+            margin: 0 -8px;
+            padding: 8px 8px;
+            border-radius: 4px;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 16px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #673ab7;
+        }
+        
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 14px;
+            color: #202124;
+            flex: 1;
+        }
+        
+        .submit-section {
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .submit-btn {
+            background: #673ab7;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            letter-spacing: 0.25px;
+        }
+        
+        .submit-btn:hover {
+            background: #7c4dff;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        
+        .footer {
+            padding: 12px 24px;
+            background: white;
+            font-size: 12px;
+            color: #5f6368;
+            text-align: center;
+            border-top: 1px solid #dadce0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Formality Breach</h1>
+            <p>Edit your previous response</p>
+        </div>
+        
+        <div class="edit-notice">
+            <p>📝 Editing your response</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <form action="/forms/d/{{ form_id }}/edit" method="POST" class="form-content">
+            <input type="hidden" name="response_id" value="{{ response_id }}">
+            
+            <div class="form-question">
+                <label class="question-label">Enter the flag <span class="required">*</span></label>
+                <input type="text" name="entry.1234567890" class="form-control" placeholder="Your answer" value="{{ data.name }}" required>
+            </div>
+            
+            <div class="submit-section">
+                <button type="submit" class="submit-btn">Update</button>
+            </div>
+        </form>
+        
+        <div class="footer">
+            <div>📋 Forms</div>
+        </div>
+    </div>
+</body>
+</html>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            background-color: #f0ebf8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-content {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #202124;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+        
+        .required {
+            color: #d93025;
+            margin-left: 2px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .radio-group {
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #5568d3;
+        }
+        
+        .edit-notice {
+            background: #fef7e0;
+            border-left: 4px solid #f9ab00;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .edit-notice p {
+            font-size: 14px;
+            color: #5f6368;
+            margin: 0;
+        }
+        
+        .footer {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            font-size: 12px;
+            color: #5f6368;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Edit Your Response</h1>
+            <p>Make changes to your previous submission</p>
+        </div>
+        
+        <form action="/update/{{ response_id }}" method="POST" class="form-content">
+            <div class="edit-notice">
+                <p>📝 You can edit your response as many times as you want!</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Your Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" class="form-control" value="{{ data.name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" value="{{ data.email }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>How satisfied are you with our service? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="rating1" name="rating" value="Very Satisfied" {% if data.rating == "Very Satisfied" %}checked{% endif %} required>
+                        <label for="rating1">Very Satisfied</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="rating2" name="rating" value="Satisfied" {% if data.rating == "Satisfied" %}checked{% endif %}>
+                        <label for="rating2">Satisfied</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="rating3" name="rating" value="Neutral" {% if data.rating == "Neutral" %}checked{% endif %}>
+                        <label for="rating3">Neutral</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="rating4" name="rating" value="Dissatisfied" {% if data.rating == "Dissatisfied" %}checked{% endif %}>
+                        <label for="rating4">Dissatisfied</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="rating5" name="rating" value="Very Dissatisfied" {% if data.rating == "Very Dissatisfied" %}checked{% endif %}>
+                        <label for="rating5">Very Dissatisfied</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="feedback">Additional Comments <span class="required">*</span></label>
+                <textarea id="feedback" name="feedback" class="form-control" required>{{ data.feedback }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Update Response</button>
+            </div>
+        </form>
+        
+        <div class="footer">
+            <div>Response ID: {{ response_id }}</div>
+        </div>
+    </div>
+</body>
+</html>

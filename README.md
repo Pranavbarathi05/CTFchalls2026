@@ -8,9 +8,51 @@
 | **Reverse Engineering** | 1    | 0      | 1    |
 | **Web exploitation**    | 6    | 5      | 1    |
 | **OSINT**               | 2    | 0      | 0    |
-| **Misc**                | 1    | 3      | 2    |
+| **Misc**                | 2    | 3      | 2    |
 
-## Total = 34
+## Total = 35
+
+
+# CTF Challenge Port Mapping
+
+**Complete reference for all challenge ports**  
+**Last Updated:** 2026-01-22
+
+---
+
+## All Challenges with Ports
+
+| External Port | Internal Port | Challenge Name | Category | Path |
+|--------------|---------------|----------------|----------|------|
+| 1337 | 1337 | cipher-prison | Pyjail | `pyjail/cipher-prison` |
+| 1338 | 1338 | blacklist-hell | Pyjail | `pyjail/blacklist-hell` |
+| 2222 | 22 | missing_tools | Misc | `Misc/missing_tools` |
+| 5001 | 5000 | robots-watching | Web | `web_exploitation/robots-watching` |
+| 5002 | 5000 | cookie-recipe | Web | `web_exploitation/cookie-recipe` |
+| 5003 | 5000 | curl-unfurl | Web | `web_exploitation/curl-unfurl` |
+| 8001 | 8001 | caesars_pizza_menu | Cryptography | `cryptography/caesars_pizza_menu` |
+| 8002 | 8002 | license_checker | Reverse Engineering | `reverse_engineering/license_checker` |
+| 8003 | 5000 | Time_window_Exposure | Web | `web_exploitation/Time_window_Exposure` |
+| 8004 | 8004 | pathfinding_puzzle | Coding | `coding/pathfinding_puzzle` |
+| 8005 | 8005 | tree_traversal_secret | Coding | `coding/tree_traversal_secret` |
+| 8006 | 8006 | regex_master | Coding | `coding/regex_master` |
+| 8007 | 8007 | secure_portal | Web | `web_exploitation/secure_portal` |
+| 8008 | 8008 | auth_adventure | Web | `web_exploitation/auth_adventure` |
+| 8009 | 8000 | flag_in_cache | Web | `web_exploitation/flag_in_cache` |
+| 8010 | 8000 | nothing-works | Web | `web_exploitation/nothing-works` |
+| 8011 | 8000 | overthinker | Web | `web_exploitation/overthinker` |
+| 8012 | 8000 | plain-sight | Web | `web_exploitation/plain-sight` |
+| 8013 | 8000 | stranger-things | Web | `web_exploitation/stranger-things` |
+| 8014 | 8000 | wrong_password | Web | `web_exploitation/wrong_password` |
+| 8015 | 8015 | Formality Breach | Misc | `Misc/Formality breach` |
+| 8080 | 80 | echo_chamber | Misc | `Misc/echo_chamber` |
+| 9001 | 9001 | overflow_academy | Binary Exploitation | `binary_exploitation/overflow_academy` |
+| 9999 | 9999 | menu_pwner | Binary Exploitation | `binary_exploitation/menu_pwner` |
+
+**Access URLs:**
+- Pyjail challenges: `nc localhost <PORT>`
+- Web/Coding/Crypto challenges: `http://localhost:<PORT>`
+- Missing Tools (SSH): `ssh ctfplayer@localhost -p 2222` (password: `startwithbasics`)
 
 
 # CTF Challenge List - DSCCTF 2026
@@ -87,11 +129,12 @@
 
 ---
 
-## Miscellaneous (6 challenges)
+## Miscellaneous (7 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Missing Tools** | Easy | Alternative command usage; `cat` removed but other file readers (less/more/head/tail) available |
+| **Formality Breach** | Easy | Social engineering; fake Google Form allows infinite edits; `/viewanalytics` reveals flag |
 | **Echo Chamber** | Medium | TCP self-connect vulnerability or debug test mode bypass; exploit network service logic |
 | **Flag is Pattern** | Medium | File metadata or ordering analysis; flag encoded in structure rather than content |
 | **Lying QR** | Medium | QR code error correction abuse; displays decoy flag while real flag hidden in redundant data |
@@ -150,18 +193,20 @@
 
 ## Statistics
 
-**Total Challenges:** 29  
+**Total Challenges:** 35  
 **Difficulty Breakdown:**
-- Easy: 8 challenges (28%)
-- Medium: 16 challenges (55%)
-- Hard: 5 challenges (17%)
+- Easy: 9 challenges (26%)
+- Medium: 16 challenges (46%)
+- Hard: 5 challenges (14%)
+- Forensics: 5 challenges (14%)
 
 **Category Distribution:**
-- Web Exploitation: 9 (31%)
-- Miscellaneous: 6 (21%)
-- Coding: 5 (17%)
-- Pyjail: 3 (10%)
-- Binary Exploitation: 2 (7%)
-- Reverse Engineering: 2 (7%)
+- Web Exploitation: 9 (26%)
+- Miscellaneous: 7 (20%)
+- Coding: 5 (14%)
+- Pyjail: 3 (9%)
+- Binary Exploitation: 2 (6%)
+- Reverse Engineering: 2 (6%)
+- OSINT: 2 (6%)
+- Forensics: 5 (14%)
 - Cryptography: 1 (3%)
-- OSINT: 1 (3%)
