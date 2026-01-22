@@ -6,9 +6,7 @@
 
 ## Challenge Description
 
-Numbers don't always behave the way you expect them to. Can you find the input that breaks the mathematical cycle?
-
-The server presents a mathematical puzzle where you must input a number between 3 and 100. The system applies complex transformations and checks if the output equals your input. Find a number where this doesn't hold true to retrieve the flag.
+It's a really hard maths function, isn't it?
 
 ## Hints
 
