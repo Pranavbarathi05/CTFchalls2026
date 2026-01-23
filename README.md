@@ -1,16 +1,16 @@
 | Domain                  | Easy | Medium | Hard |
 | ----------------------- | ---- | ------ | ---- |
 | **Binary Exploitation** | 2    | 1      | 0    |
-| **Coding**              | 1    | 4      | 0    |
-| **Cryptography**        | 1    | 0      | 0    |
-| **Forensics**           | 1    | 0      | 0    |
-| **Pyjail**              | 0    | 2      | 1    |
-| **Reverse Engineering** | 1    | 1      | 1    |
-| **Web exploitation**    | 6    | 5      | 1    |
-| **OSINT**               | 2    | 0      | 0    |
+| **Coding**              | 0    | 4      | 0    |
+| **Cryptography**        | 1    | 0      | 1    |
+| **Forensics**           | 8    | 0      | 0    |
+| **Pyjail**              | 1    | 1      | 1    |
+| **Reverse Engineering** | 2    | 1      | 1    |
+| **Web exploitation**    | 8    | 3      | 1    |
+| **OSINT**               | 2    | 2      | 0    |
 | **Misc**                | 2    | 3      | 2    |
 
-## Total = 37
+## Total = 47
 
 
 # CTF Challenge Port Mapping
