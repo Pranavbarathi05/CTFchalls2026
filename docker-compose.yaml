@@ -1,0 +1,516 @@
+services:
+  # ===========================================
+  # CTFd Platform & Infrastructure
+  # ===========================================
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "9090:80"
+      - "8080:8080"
+    networks:
+      - ctf_network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  ctfd:
+    image: ctfd/ctfd:latest
+    container_name: ctfd
+    user: root
+    restart: always
+    environment:
+      - UPLOAD_FOLDER=/var/uploads
+      - DATABASE_URL=mysql+pymysql://ctfd:ctfd@db/ctfd
+      - REDIS_URL=redis://cache:6379
+      - WORKERS=1
+      - LOG_FOLDER=/var/log/CTFd
+      - ACCESS_LOG=-
+      - ERROR_LOG=-
+    volumes:
+      - .data/CTFd/logs:/var/log/CTFd
+      - .data/CTFd/uploads:/var/uploads
+    depends_on:
+      - db
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ctfd.rule=Host(`ctf.dscjssstuniv.in`)"
+
+  db:
+    image: mariadb:10.11
+    restart: always
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=ctfd
+      - MYSQL_DATABASE=ctfd
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd
+    volumes:
+      - .data/CTFd/db:/var/lib/mysql
+    networks:
+      - ctf_network
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --wait_timeout=28800
+      - --log-warnings=0
+
+  cache:
+    image: redis:4
+    restart: always
+    volumes:
+      - .data/redis:/data
+    networks:
+      - ctf_network
+
+  # ===========================================
+  # Binary Exploitation Challenges
+  # ===========================================
+  menu_pwner:
+    build:
+      context: binary_exploitation/menu_pwner
+    image: menu_pwner
+    restart: always
+    container_name: pwn_menu_pwner
+    ports:
+      - "9999:9999"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.menupwner.rule=Host(`menupwner.ctf.dscjssstuniv.in`)"
+
+  overflow_academy:
+    build:
+      context: binary_exploitation/overflow_academy
+    image: overflow_academy
+    restart: always
+    container_name: pwn_overflow_academy
+    ports:
+      - "9001:9001"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overflow.rule=Host(`overflow.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Coding Challenges
+  # ===========================================
+  pathfinding_puzzle:
+    build:
+      context: coding/pathfinding_puzzle
+    image: pathfinding_puzzle
+    restart: always
+    container_name: coding_pathfinding
+    ports:
+      - "8004:8004"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pathfinding.rule=Host(`pathfinding.ctf.dscjssstuniv.in`)"
+
+  regex_master:
+    build:
+      context: coding/regex_master
+    image: regex_master
+    restart: always
+    container_name: coding_regex_master
+    ports:
+      - "8006:8006"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.regex.rule=Host(`regex.ctf.dscjssstuniv.in`)"
+
+  tree_traversal:
+    build:
+      context: coding/tree_traversal_secret
+    image: tree_traversal
+    restart: always
+    container_name: coding_tree_traversal
+    ports:
+      - "8005:8005"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.treetraversal.rule=Host(`tree.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Cryptography Challenges
+  # ===========================================
+  caesars_pizza:
+    build:
+      context: cryptography/caesars_pizza_menu
+    image: caesars_pizza
+    restart: always
+    container_name: crypto_caesars_pizza
+    ports:
+      - "8001:8001"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.caesar.rule=Host(`caesar.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Misc Challenges
+  # ===========================================
+  echo_chamber:
+    build:
+      context: Misc/echo_chamber
+    image: echo_chamber
+    restart: always
+    container_name: misc_echo_chamber
+    ports:
+      - "8017:80"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echochamber.rule=Host(`echochamber.ctf.dscjssstuniv.in`)"
+
+  missing_tools:
+    build:
+      context: Misc/missing_tools
+    image: missing_tools
+    restart: always
+    container_name: misc_missing_tools
+    ports:
+      - "2222:22"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.missingtools.rule=Host(`missingtools.ctf.dscjssstuniv.in`)"
+
+  formality_breach:
+    build:
+      context: "Misc/Formality breach"
+    image: formality_breach
+    restart: always
+    container_name: misc_formality_breach
+    ports:
+      - "8015:8015"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.formalitybreach.rule=Host(`formalitybreach.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Pyjail Challenges
+  # ===========================================
+  cipher_prison:
+    build:
+      context: pyjail/cipher-prison
+    image: cipher_prison
+    restart: always
+    container_name: pyjail_cipher_prison
+    ports:
+      - "1337:1337"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cipherprison.rule=Host(`cipherprison.ctf.dscjssstuniv.in`)"
+
+  prison_break:
+    build:
+      context: "pyjail/prison break"
+    image: prison_break
+    restart: always
+    container_name: pyjail_prison_break
+    ports:
+      - "9998:9999"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prisonbreak.rule=Host(`prisonbreak.ctf.dscjssstuniv.in`)"
+
+  blacklist_hell:
+    build:
+      context: pyjail/blacklist-hell
+    image: blacklist_hell
+    restart: always
+    container_name: pyjail_blacklist_hell
+    ports:
+      - "1338:1338"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blacklisthell.rule=Host(`blacklisthell.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Reverse Engineering Challenges
+  # ===========================================
+  license_checker:
+    build:
+      context: reverse_engineering/license_checker
+    image: license_checker
+    restart: always
+    container_name: rev_license_checker
+    ports:
+      - "8002:8002"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.license.rule=Host(`license.ctf.dscjssstuniv.in`)"
+
+  endgame_protocol:
+    build:
+      context: reverse_engineering/endgame-protocol
+    image: endgame_protocol
+    restart: always
+    container_name: rev_endgame
+    ports:
+      - "8016:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.endgame.rule=Host(`endgame.ctf.dscjssstuniv.in`)"
+
+  upside_down:
+    build:
+      context: reverse_engineering/Upside-down
+    image: upside_down
+    restart: always
+    container_name: rev_upside_down
+    ports:
+      - "1339:1339"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.upsidedown.rule=Host(`upsidedown.ctf.dscjssstuniv.in`)"
+
+  has_to_echo:
+    build:
+      context: reverse_engineering/has-to-echo
+    image: has_to_echo
+    restart: always
+    container_name: rev_has_to_echo
+    ports:
+      - "1340:1340"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hastoecho.rule=Host(`hastoecho.ctf.dscjssstuniv.in`)"
+
+  conditions:
+    build:
+      context: reverse_engineering/Conditions
+    image: conditions
+    restart: always
+    container_name: rev_conditions
+    ports:
+      - "42552:42552"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.conditions.rule=Host(`conditions.ctf.dscjssstuniv.in`)"
+
+  # ===========================================
+  # Web Exploitation Challenges
+  # ===========================================
+  wrong_password:
+    build:
+      context: web_exploitation/wrong_password
+    image: wrong_password
+    restart: always
+    container_name: web_wrong_password
+    ports:
+      - "8014:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wrongpassword.rule=Host(`wrongpassword.ctf.dscjssstuniv.in`)"
+
+  secure_portal:
+    build:
+      context: web_exploitation/secure_portal
+    image: secure_portal
+    restart: always
+    container_name: web_secure_portal
+    ports:
+      - "8007:8007"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.secureportal.rule=Host(`secureportal.ctf.dscjssstuniv.in`)"
+
+  stranger_things:
+    build:
+      context: web_exploitation/stranger-things
+    image: stranger_things
+    restart: always
+    container_name: web_stranger_things
+    ports:
+      - "8013:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stranger.rule=Host(`stranger.ctf.dscjssstuniv.in`)"
+
+  overthinker:
+    build:
+      context: web_exploitation/overthinker
+    image: overthinker
+    restart: always
+    container_name: web_overthinker
+    ports:
+      - "8011:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overthinker.rule=Host(`overthinker.ctf.dscjssstuniv.in`)"
+
+  plain_sight:
+    build:
+      context: web_exploitation/plain-sight
+    image: plain_sight
+    restart: always
+    container_name: web_plain_sight
+    ports:
+      - "8012:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plainsight.rule=Host(`plainsight.ctf.dscjssstuniv.in`)"
+
+  flag_in_cache:
+    build:
+      context: web_exploitation/flag_in_cache
+    image: flag_in_cache
+    restart: always
+    container_name: web_flag_in_cache
+    ports:
+      - "8009:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flagcache.rule=Host(`flagcache.ctf.dscjssstuniv.in`)"
+
+  auth_adventure:
+    build:
+      context: web_exploitation/auth_adventure
+    image: auth_adventure
+    restart: always
+    container_name: web_auth_adventure
+    ports:
+      - "8008:8008"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authadventure.rule=Host(`auth.ctf.dscjssstuniv.in`)"
+
+  nothing_works:
+    build:
+      context: web_exploitation/nothing-works
+    image: nothing_works
+    restart: always
+    container_name: web_nothing_works
+    ports:
+      - "8010:8000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nothingworks.rule=Host(`nothingworks.ctf.dscjssstuniv.in`)"
+
+  time_window:
+    build:
+      context: web_exploitation/Time_window_Exposure
+    image: time_window
+    restart: always
+    container_name: web_time_window
+    ports:
+      - "8003:5000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.timewindow.rule=Host(`timewindow.ctf.dscjssstuniv.in`)"
+
+  cookie_recipe:
+    build:
+      context: web_exploitation/cookie-recipe
+    image: cookie_recipe
+    restart: always
+    container_name: web_cookie_recipe
+    ports:
+      - "5002:5000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cookierecipe.rule=Host(`cookierecipe.ctf.dscjssstuniv.in`)"
+
+  curl_unfurl:
+    build:
+      context: web_exploitation/curl-unfurl
+    image: curl_unfurl
+    restart: always
+    container_name: web_curl_unfurl
+    ports:
+      - "5003:5000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.curlunfurl.rule=Host(`curlunfurl.ctf.dscjssstuniv.in`)"
+
+  robots_watching:
+    build:
+      context: web_exploitation/robots-watching
+    image: robots_watching
+    restart: always
+    container_name: web_robots_watching
+    ports:
+      - "5001:5000"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.robotswatching.rule=Host(`robotswatching.ctf.dscjssstuniv.in`)"
+
+networks:
+  ctf_network:
+    driver: bridge

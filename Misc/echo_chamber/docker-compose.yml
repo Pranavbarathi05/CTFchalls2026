@@ -4,7 +4,7 @@ services:
   echo-chamber:
     build: .
     ports:
-      - "8070:80"
+      - "8017:80"
     container_name: echo_chamber_web
     restart: unless-stopped
     environment:

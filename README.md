@@ -26,7 +26,7 @@
 |--------------|---------------|----------------|----------|------|
 | 1337 | 1337 | cipher-prison | Pyjail | `pyjail/cipher-prison` |
 | 1338 | 1338 | blacklist-hell | Pyjail | `pyjail/blacklist-hell` |
-| 1339 | 1339 | math-prison | Reverse Engineering | `reverse_engineering/math-prison` |
+| 1339 | 1339 | upside-down | Reverse Engineering | `reverse_engineering/math-prison` |
 | 2222 | 22 | missing_tools | Misc | `Misc/missing_tools` |
 | 5001 | 5000 | robots-watching | Web | `web_exploitation/robots-watching` |
 | 5002 | 5000 | cookie-recipe | Web | `web_exploitation/cookie-recipe` |
@@ -47,9 +47,11 @@
 | 8013 | 8000 | stranger-things | Web | `web_exploitation/stranger-things` |
 | 8014 | 8000 | wrong_password | Web | `web_exploitation/wrong_password` |
 | 8015 | 8015 | Formality Breach | Misc | `Misc/Formality breach` |
-| 8080 | 80 | echo_chamber | Misc | `Misc/echo_chamber` |
+| 8017 | 80 | echo_chamber | Misc | `Misc/echo_chamber` |
 | 9001 | 9001 | overflow_academy | Binary Exploitation | `binary_exploitation/overflow_academy` |
 | 9999 | 9999 | menu_pwner | Binary Exploitation | `binary_exploitation/menu_pwner` |
+| 1340 | 1340 | has-to-echo | Reverse Engineering | `reverse_engineering/has-to-echo` |
+
 
 **Access URLs:**
 - Pyjail challenges: `nc localhost <PORT>`
