@@ -2,7 +2,7 @@
 | ----------------------- | ---- | ------ | ---- |
 | **Binary Exploitation** | 2    | 1      | 0    |
 | **Coding**              | 0    | 4      | 0    |
-| **Cryptography**        | 1    | 0      | 1    |
+| **Cryptography**        | 2    | 0      | 1    |
 | **Forensics**           | 8    | 0      | 0    |
 | **Pyjail**              | 1    | 1      | 1    |
 | **Reverse Engineering** | 2    | 1      | 1    |
@@ -10,7 +10,7 @@
 | **OSINT**               | 2    | 2      | 0    |
 | **Misc**                | 2    | 3      | 2    |
 
-## Total = 47
+## Total = 48
 
 
 # CTF Challenge Port Mapping
@@ -85,6 +85,7 @@
 |-----------|------------|---------------|
 | **Caesar's Pizza Menu** | Easy | Classical Caesar cipher with shift-based substitution; brute force or frequency analysis |
 | **328** | Hard | sha256 layered on ascii and base64hex |
+| **Binary Walk** | Easy | use binwalk to extract and decode binary + base64 + binary to check ShadowPB discord bio |
 
 ---
 
