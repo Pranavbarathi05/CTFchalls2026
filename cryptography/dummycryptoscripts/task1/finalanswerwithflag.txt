@@ -1,0 +1,13 @@
+import hashlib
+
+original_text = "DSCCTF{CTF2026}"
+# Generate MD5 hash
+hash_object = hashlib.md5(original_text.encode())
+hash_hex = hash_object.hexdigest()
+
+print(f"Text: {original_text}")
+print(f"MD5:  {hash_hex}")
+
+# Comparison check
+if hash_hex == "df61683feae1e9e60457d2f85804142a":
+    print("Match found!")
