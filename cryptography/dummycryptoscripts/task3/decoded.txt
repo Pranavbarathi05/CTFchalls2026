@@ -27,7 +27,7 @@ FRAG1=(112 126 121 99)
 FRAG2=(44 60 50 89)
 FRAG3=(91 104 118 33)
 
-rebuilder ="Fapmk eqqye xuwq m oxagpk pmk. U'xx euf mf tayq mzp imfot etadfe."
+rebuilder ="Kag zqhqd wzai itqz kag iuxx sqf nuffqz. Uf ue iueq fa imfot kagd efqb."
 rebuild() {
   local arr=("$@") out=""
   for n in "${arr[@]}"; do
