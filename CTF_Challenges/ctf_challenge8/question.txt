@@ -1,0 +1,15 @@
+🔎 OSINT Challenge 2 — The Shadow Landmark
+
+Category: OSINT (Geo-location)
+Difficulty: Hard
+Skillset: Visual forensics
+
+📖 Story (Player View)
+
+A shadowy group shared this image as a clue before vanishing.
+
+The landmark is real.
+The angle is rare.
+The location is hidden.
+
+Find where this photo was taken.
