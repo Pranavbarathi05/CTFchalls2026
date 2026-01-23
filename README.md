@@ -8,7 +8,7 @@
 | **Reverse Engineering** | 3    | 1      | 1    |
 | **Web exploitation**    | 8    | 3      | 1    |
 | **OSINT**               | 2    | 2      | 0    |
-| **Misc**                | 2    | 3      | 2    |
+| **Misc**                | 2    | 3      | 3    |
 
 ## Total = 50
 
