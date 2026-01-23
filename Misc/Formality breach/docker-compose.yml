@@ -1,7 +1,10 @@
+
 services:
-  formality-breach:
-    build: .
-    container_name: formality_breach
+  formality_breach:
+    build:
+      context: .
+    image: formality_breach
+    working_dir: /app
+    container_name: misc_formality_breach
     ports:
       - "8015:8015"
-    restart: unless-stopped

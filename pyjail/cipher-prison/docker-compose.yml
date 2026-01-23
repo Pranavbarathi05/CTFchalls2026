@@ -1,17 +1,10 @@
-version: '3.8'
 
 services:
-  pyjail-keyswap:
-    build: .
-    container_name: pyjail-keyswap
+  cipher_prison:
+    build:
+      context: .
+    image: cipher_prison
+    working_dir: /challenge
+    container_name: pyjail_cipher_prison
     ports:
       - "1337:1337"
-    restart: unless-stopped
-    tmpfs:
-      - /tmp:size=10M,mode=1777
-      - /run:size=10M,mode=1777
-    security_opt:
-      - no-new-privileges:true
-    mem_limit: 256m
-    cpus: 0.5
-    pids_limit: 100

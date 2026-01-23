@@ -1,10 +1,10 @@
+
 services:
-  pathfinding-puzzle:
-    build: .
-    container_name: pathfinding_puzzle
+  pathfinding_puzzle:
+    build:
+      context: .
+    image: pathfinding_puzzle
+    working_dir: /app
+    container_name: coding_pathfinding
     ports:
       - "8004:8004"
-    restart: unless-stopped
-    command: sh -c "socat TCP-LISTEN:8004,reuseaddr,fork EXEC:'python3 -u pathfinding.py interactive',pty,stderr"
-    stdin_open: true
-    tty: true

@@ -1,10 +1,10 @@
+
 services:
-  upside-down:
-    build: .
-    container_name: upside-down
+  upside_down:
+    build:
+      context: .
+    image: upside_down
+    working_dir: /app
+    container_name: rev_upside_down
     ports:
       - "1339:1339"
-    restart: unless-stopped
-    command: sh -c "socat TCP-LISTEN:1339,reuseaddr,fork EXEC:'python3 -u challenge.py',pty,stderr"
-    stdin_open: true
-    tty: true

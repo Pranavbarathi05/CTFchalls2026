@@ -1,10 +1,10 @@
+
 services:
-  regex-master:
-    build: .
-    container_name: regex_master
+  regex_master:
+    build:
+      context: .
+    image: regex_master
+    working_dir: /app
+    container_name: coding_regex_master
     ports:
       - "8006:8006"
-    restart: unless-stopped
-    command: sh -c "socat TCP-LISTEN:8006,reuseaddr,fork EXEC:'python3 -u regex_master.py',pty,stderr"
-    stdin_open: true
-    tty: true

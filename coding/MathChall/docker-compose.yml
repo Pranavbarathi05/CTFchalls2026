@@ -1,0 +1,10 @@
+
+services:
+  mathchall:
+    build:
+      context: .
+    image: mathchall
+    working_dir: /app
+    container_name: coding_mathchall
+    ports:
+      - "8018:8018"

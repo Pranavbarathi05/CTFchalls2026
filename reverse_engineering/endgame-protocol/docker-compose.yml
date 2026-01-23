@@ -1,9 +1,10 @@
-version: "3.8"
 
 services:
-  endgame:
-    build: .
-    container_name: endgame-protocol
+  endgame_protocol:
+    build:
+      context: .
+    image: endgame_protocol
+    working_dir: /app
+    container_name: rev_endgame
     ports:
-      - "8000:8000"
-    restart: unless-stopped
+      - "8016:8000"

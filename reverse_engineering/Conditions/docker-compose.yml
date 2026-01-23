@@ -1,7 +1,10 @@
+
 services:
   conditions:
-    build: .
-    container_name: conditions_chall
-    restart: unless-stopped
+    build:
+      context: .
+    image: conditions
+    working_dir: /app
+    container_name: rev_conditions
     ports:
       - "42552:42552"

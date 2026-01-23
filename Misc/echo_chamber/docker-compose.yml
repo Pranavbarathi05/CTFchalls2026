@@ -1,14 +1,10 @@
-version: '3.8'
 
 services:
-  echo-chamber:
-    build: .
+  echo_chamber:
+    build:
+      context: .
+    image: echo_chamber
+    working_dir: /var/www/html
+    container_name: misc_echo_chamber
     ports:
       - "8017:80"
-    container_name: echo_chamber_web
-    restart: unless-stopped
-    environment:
-      - APACHE_RUN_USER=www-data
-      - APACHE_RUN_GROUP=www-data
-    volumes:
-      - ./flag.txt:/flag:ro

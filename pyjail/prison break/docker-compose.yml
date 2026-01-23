@@ -1,0 +1,10 @@
+
+services:
+  prison_break:
+    build:
+      context: .
+    image: prison_break
+    working_dir: /challenge
+    container_name: pyjail_prison_break
+    ports:
+      - "9998:9999"
