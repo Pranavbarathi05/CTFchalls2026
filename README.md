@@ -10,7 +10,7 @@
 | **OSINT**               | 2    | 2      | 0    |
 | **Misc**                | 2    | 3      | 3    |
 
-## Total = 54
+## Total = 55
 
 
 # CTF Challenge Port Mapping
