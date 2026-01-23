@@ -35,7 +35,7 @@ But you get 2 chances to execute Python code. Can you escape?
 nc ctf.dscctf.com 1338
 
 Author: ShadowPB
-Difficulty: Medium
+Difficulty: Hard
 ```
 
 ---

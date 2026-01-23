@@ -2,7 +2,7 @@
 
 | Field         | Value |
 |-------        |-------|
-| **Name**      | math-prison |
+| **Name**      | upside-down |
 | **Category**  | pyjail |
 | **Difficulty**| Easy |
 | **Flag**      | `DSCCTF{m4th_1s_h4rd_wh3n_1ts_n0t_1nv3rt1bl3_2026}` |

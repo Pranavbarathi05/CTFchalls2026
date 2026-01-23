@@ -10,7 +10,7 @@ A comprehensive **OSINT challenge** that tests social media investigation, metad
 |------|------|
 | **Name** | Digital Footprints |
 | **Category** | osint |
-| **Difficulty** | Easy |
+| **Difficulty** | Medium|
 | **Flag** | `DSCCTF{tr4c3d_th3_d1g1t4l_tr41l_2026}` |
 | **Author** | ShadowPB and Spaghetti99 |
 | **Skills Required** | Social media investigation, metadata analysis, steganography |

@@ -84,6 +84,7 @@
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Caesar's Pizza Menu** | Easy | Classical Caesar cipher with shift-based substitution; brute force or frequency analysis |
+| **328** | Hard | sha256 layered on ascii and base64hex |
 
 ---
 

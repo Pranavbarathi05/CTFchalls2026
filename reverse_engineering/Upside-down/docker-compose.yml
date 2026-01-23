@@ -1,7 +1,7 @@
 services:
-  math-prison:
+  upside-down:
     build: .
-    container_name: math_prison
+    container_name: upside-down
     ports:
       - "1339:1339"
     restart: unless-stopped
