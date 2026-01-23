@@ -5,12 +5,12 @@
 | **Cryptography**        | 3    | 0      | 1    |
 | **Forensics**           | 8    | 0      | 0    |
 | **Pyjail**              | 1    | 1      | 1    |
-| **Reverse Engineering** | 2    | 1      | 1    |
+| **Reverse Engineering** | 3    | 1      | 1    |
 | **Web exploitation**    | 8    | 3      | 1    |
 | **OSINT**               | 2    | 2      | 0    |
 | **Misc**                | 2    | 3      | 2    |
 
-## Total = 49
+## Total = 50
 
 
 # CTF Challenge Port Mapping
@@ -33,6 +33,7 @@
 | 5003 | 5000 | curl-unfurl | Web | `web_exploitation/curl-unfurl` |
 | 8001 | 8001 | caesars_pizza_menu | Cryptography | `cryptography/caesars_pizza_menu` |
 | 8002 | 8002 | license_checker | Reverse Engineering | `reverse_engineering/license_checker` |
+| 42552 | 42552 | Conditions | Reverse Engineering | `//ctf.dscjssstuniv.in:42552` |
 | 8003 | 5000 | Time_window_Exposure | Web | `web_exploitation/Time_window_Exposure` |
 | 8004 | 8004 | pathfinding_puzzle | Coding | `coding/pathfinding_puzzle` |
 | 8005 | 8005 | tree_traversal_secret | Coding | `coding/tree_traversal_secret` |

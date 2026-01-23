@@ -7,3 +7,4 @@ services:
     restart: unless-stopped
     ports:
       - "42552:42552"
+sudo
