@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# rotate 3 times 7
+
+# Simple utility script
+
+# Hidden encrypted message (ROT-style cipher)
+_secret="Gjjf dioj ocz kvno jixz hjmz viy adiy tjpm vinrzm di ocz kgvxz rczmz vitjiz dn rzgxjhz oj gjjf viy xcvibz"
+
+echo "Script executed successfully."
+
+# To reveal the hidden message, uncomment below:
+# echo "$_secret"
