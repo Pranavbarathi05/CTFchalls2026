@@ -1,0 +1,31 @@
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import binascii
+import os
+
+def run_aes_gcm_with_aad():
+    # 1. Setup
+    flag = "DSCCTF{cybersec101}".encode('utf-8')
+    # Associated Data: Not encrypted, but integrity is protected
+    aad = b"CTF-2026-Metadata"
+    
+    key = AESGCM.generate_key(bit_length=128)
+    nonce = os.urandom(12)
+    aesgcm = AESGCM(key)
+
+    print(f"Original Flag: {flag.decode()}")
+
+    # 2. Encryption (Passing 'aad' here)
+    ciphertext = aesgcm.encrypt(nonce, flag, aad)
+    
+    print(f"Ciphertext (Hex): {binascii.hexlify(ciphertext).decode()}")
+
+    # 3. Decryption
+    try:
+        # If the 'aad' is changed by even one character, decryption fails
+        decrypted_data = aesgcm.decrypt(nonce, ciphertext, aad)
+        print(f"Decrypted Flag: {decrypted_data.decode('utf-8')}")
+    except Exception as e:
+        print(f"Authentication Failed: {e}")
+
+if __name__ == "__main__":
+    run_aes_gcm_with_aad()

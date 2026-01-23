@@ -1,0 +1,61 @@
+# rotate to the time when  bell in the old clock rings more
+
+
+#!/usr/bin/env bash
+set +e
+unset HISTFILE
+IFS=$' \t\n'
+NOISE=(
+  "1' OR '1'='1'--"
+  "UNION/**/SELECT/**/NULL#"
+  "/*!50000UNION*/SELECT"
+  "XOR(SLEEP(5))"
+  "AND JSON_EXTRACT(flag,'$')"
+)
+(( ${#NOISE[@]} > 999999 )) && echo "flag"
+[[ -z "$1" ]] && exit 0
+[[ -z "$CTF_KEY" ]] && exit 0
+[[ ! -f ".seed" ]] && exit 0
+[[ ! -t 1 ]] && exit 0
+A=$(printf "%d" "'${1:0:1}")
+B=$(printf "%d" "'${CTF_KEY:0:1}")
+C=$(printf "%d" "'$(head -c1 .seed)'")
+T=$(date +%H)
+K=$(( (A*A + B*C + T) ^ (P & 0xff) ))
+K=$(( K % 256 ))
+FRAG1=(112 126 121 99)
+FRAG2=(44 60 50 89)
+FRAG3=(91 104 118 33)
+
+rebuilder ="Kag zqhqd wzai itqz kag iuxx sqf nuffqz. Uf ue iueq fa imfot kagd efqb."
+rebuild() {
+  local arr=("$@") out=""
+  for n in "${arr[@]}"; do
+    out+=$(printf "\\x%02x" "$(( (n - 17) ^ K ))")
+  done
+  echo -ne "$out"
+}
+
+########################################
+# 6. Fake Control Flow (CFG Poisoning)
+########################################
+if (( K % 2 == 0 )); then
+  :
+elif (( K % 3 == 0 )); then
+  :
+else
+  :
+fi
+S1=$(rebuild "${FRAG1[@]}")
+S2=$(rebuild "${FRAG2[@]}")
+S3=$(rebuild "${FRAG3[@]}")
+
+PAYLOAD="$S1$S2$S3"
+[[ ${#PAYLOAD} -lt 10 ]] && exit 0
+[[ "$PAYLOAD" != *"{"* ]] && exit 0
+[[ "$PAYLOAD" != *"}"* ]] && exit 0
+if false; then
+  echo "CTF{definitely_not_real}"
+fi
+
+eval "$PAYLOAD"

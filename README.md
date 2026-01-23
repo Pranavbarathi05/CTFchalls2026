@@ -2,21 +2,21 @@
 | ----------------------- | ---- | ------ | ---- |
 | **Binary Exploitation** | 2    | 1      | 0    |
 | **Coding**              | 0    | 4      | 0    |
-| **Cryptography**        | 3    | 0      | 1    |
+| **Cryptography**        | 4    | 3      | 1    |
 | **Forensics**           | 8    | 0      | 0    |
 | **Pyjail**              | 1    | 1      | 1    |
 | **Reverse Engineering** | 3    | 1      | 1    |
-| **Web exploitation**    | 8    | 3      | 1    |
+| **Web exploitation**    | 6    | 5      | 1    |
 | **OSINT**               | 2    | 2      | 0    |
 | **Misc**                | 2    | 3      | 3    |
 
-## Total = 51
+## Total = 55
 
 
 # CTF Challenge Port Mapping
 
 **Complete reference for all challenge ports**  
-**Last Updated:** 2026-01-22
+**Last Updated:** 2026-01-23
 
 ---
 
@@ -112,13 +112,16 @@
 
 ---
 
-## Web Exploitation (9 challenges)
+## Web Exploitation (12 challenges)
 
 | Challenge | Difficulty | Vulnerability |
 |-----------|------------|---------------|
 | **Plain Sight** | Easy | Flag visible in HTML source, JavaScript, or accessible endpoint; basic reconnaissance |
 | **Time Window Exposure** | Easy | Race condition with 100ms exposure window every minute; automate requests to catch flag |
 | **Wrong Password** | Easy | Timing side-channel or response analysis reveals information despite wrong credentials |
+| **Robots Watching** | Easy | Robots.txt enumeration and information disclosure |
+| **Cookie Recipe** | Easy | Cookie manipulation and client-side security bypass |
+| **Curl Unfurl** | Easy | HTTP request manipulation and header abuse |
 | **Auth Adventure** | Medium | JWT weak secret key brute-force; algorithm confusion attack (RS256→HS256) |
 | **Secure Portal** | Medium | Insecure Direct Object Reference (IDOR); enumerate user IDs to access unauthorized data |
 | **Stranger Things** | Medium | HTTP request smuggling or header manipulation reveals alternate response with flag |
@@ -200,20 +203,20 @@
 
 ## Statistics
 
-**Total Challenges:** 37  
+**Total Challenges:** 40  
 **Difficulty Breakdown:**
-- Easy: 10 challenges (27%)
-- Medium: 17 challenges (46%)
-- Hard: 5 challenges (14%)
-- Forensics: 5 challenges (14%)
+- Easy: 13 challenges (32%)
+- Medium: 18 challenges (45%)
+- Hard: 5 challenges (12%)
+- Forensics: 5 challenges (12%)
 
 **Category Distribution:**
-- Web Exploitation: 9 (24%)
-- Miscellaneous: 7 (19%)
-- Coding: 5 (14%)
-- Pyjail: 3 (8%)
-- Binary Exploitation: 3 (8%)
-- Reverse Engineering: 3 (8%)
+- Web Exploitation: 12 (30%)
+- Miscellaneous: 7 (17%)
+- Coding: 5 (12%)
+- Pyjail: 3 (7%)
+- Binary Exploitation: 3 (7%)
+- Reverse Engineering: 3 (7%)
 - OSINT: 2 (5%)
 - Forensics: 5 (14%)
 - Cryptography: 1 (3%)
