@@ -41,12 +41,24 @@ The menu seems to be encoded with some classical cipher method that Caesar himse
 
 ## Quick Start
 
+### Web Access
+```bash
+# View the challenge
+curl http://ctf.dscjssstuniv.in:8001/
+
+# Download encrypted menu
+curl http://ctf.dscjssstuniv.in:8001/encrypted_menu.txt -o encrypted_menu.txt
+
+# Solve the challenge
+python3 solve.py
+```
+
 ### Local Testing
 ```bash
 # Generate the encrypted menu
 python3 generate_menu.py
 
-# Solve the challenge
+# Solve the challenge locally
 python3 solve.py
 ```
 
@@ -58,7 +70,16 @@ docker-compose up -d
 # Or manually
 docker build -t caesars-pizza-menu .
 docker run -p 8001:8001 caesars-pizza-menu
+
+# Access via browser or curl
+curl http://localhost:8001/
 ```
+
+### Challenge Access
+
+Once deployed, the challenge is available at:
+- **URL**: http://ctf.dscjssstuniv.in:8001/
+- **Menu Download**: http://ctf.dscjssstuniv.in:8001/encrypted_menu.txt
 
 ---
 

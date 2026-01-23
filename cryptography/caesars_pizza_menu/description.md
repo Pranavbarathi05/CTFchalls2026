@@ -15,6 +15,10 @@ We've just received our encrypted menu for today's specials, but something went 
 
 The menu seems to be encoded with some classical cipher method that Caesar himself might have used. Can you help us decrypt it and find the secret flag?
 
+**Challenge URL**: http://ctf.dscjssstuniv.in:8001/
+
+Download the encrypted menu and decrypt it to find the flag!
+
 **Your task:** Decrypt the provided menu file and find the hidden flag.
 
 ---
