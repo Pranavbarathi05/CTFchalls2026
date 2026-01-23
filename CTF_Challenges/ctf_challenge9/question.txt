@@ -1,0 +1,10 @@
+🔎 Challenge — Where Was This Taken?
+
+Category: OSINT
+Difficulty: EASY
+
+Description
+
+A suspect posted a photo just before disappearing.
+
+Your job is to identify exactly where this photo was taken.
