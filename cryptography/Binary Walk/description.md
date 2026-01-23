@@ -1,6 +1,5 @@
+Here is a rookie challenge for you:
 A shadow hides more than it shows… 👤🕵️
-You’re given an image that looks completely normal at first glance — but something feels off
-Decrypt it and see where it leads you to!
 
 **Author:** Shadow PB  
 **Category:** Cryptography  
