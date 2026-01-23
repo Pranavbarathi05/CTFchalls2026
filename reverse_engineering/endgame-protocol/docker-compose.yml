@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  endgame:
+    build: .
+    container_name: endgame-protocol
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
