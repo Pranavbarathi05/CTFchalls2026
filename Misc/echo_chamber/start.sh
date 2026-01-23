@@ -10,7 +10,7 @@
 
 2. **Test the application:**
    ```bash
-   curl "http://localhost:8080/?scanner=50000"
+   curl "http://localhost:8070/?scanner=50000"
    ```
 
 3. **Run the exploit:**
