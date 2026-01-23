@@ -25,7 +25,7 @@ def create_menu():
         "5. ITALIAN SODA - $4",
         "",
         "SECRET ITEM FOR VIP CUSTOMERS:",
-        "FLAG PIZZA - DSCCTF{PIZZA_CIPHER_MASTER_2026}",
+        "FLAG PIZZA - DSCCTF{P1ZZ4_C1PH3R_M4ST3R_2026}",
         "",
         "THANK YOU FOR VISITING!"
     ]
