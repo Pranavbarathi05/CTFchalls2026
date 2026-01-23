@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  conditions:
+    build: .
+    container_name: conditions_chall
+    restart: unless-stopped
+    ports:
+      - "42552:42552"
