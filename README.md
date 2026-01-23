@@ -2,7 +2,7 @@
 | ----------------------- | ---- | ------ | ---- |
 | **Binary Exploitation** | 2    | 1      | 0    |
 | **Coding**              | 0    | 4      | 0    |
-| **Cryptography**        | 3    | 3      | 1    |
+| **Cryptography**        | 4    | 3      | 1    |
 | **Forensics**           | 8    | 0      | 0    |
 | **Pyjail**              | 1    | 1      | 1    |
 | **Reverse Engineering** | 3    | 1      | 1    |
