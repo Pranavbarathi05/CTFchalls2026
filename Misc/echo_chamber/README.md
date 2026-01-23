@@ -38,7 +38,7 @@ Your goal is to find and exploit the easier vulnerability path to achieve remote
 
 First, examine the source code by accessing the application:
 ```bash
-curl "http://localhost:8080/?scanner=50000"
+curl "sud"
 ```
 
 This reveals the PHP source code. Notice there are two main code paths:
