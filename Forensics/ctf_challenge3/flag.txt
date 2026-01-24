@@ -1,0 +1,1 @@
+DSCCTF{hidden_in_the_garden}
