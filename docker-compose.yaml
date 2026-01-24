@@ -147,6 +147,20 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.treetraversal.rule=Host(`tree.ctf.dscjssstuniv.in`)"
+  
+  coding_numbers:
+    build:
+      context: coding/NumberOfones/src
+    image: coding_numbers
+    restart: always
+    container_name: coding_numbers
+    ports:
+      - "54321:54321"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.numberofones.rule=Host(`ones.ctf.dscjssstuniv.in`)"
 
   
   # Cryptography Challenges
