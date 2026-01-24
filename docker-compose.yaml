@@ -160,7 +160,7 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.numberofones.rule=Host(`ones.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.numbers.rule=Host(`numbers.ctf.dscjssstuniv.in`)"
 
   
   # Cryptography Challenges
