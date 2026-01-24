@@ -1,0 +1,14 @@
+An abandoned settlement is shown in the provided images.
+
+The location was destroyed during a major global conflict in the 20th century
+and was never rebuilt. The site remains preserved in its ruined state, with
+roads, buildings, and civilian infrastructure still visible.
+
+Using open-source intelligence techniques only, determine the exact geographic
+coordinates of this place.
+
+Flag format:
+flag{latitude_longitude}
+
+Example:
+flag{12.9716_77.5946}

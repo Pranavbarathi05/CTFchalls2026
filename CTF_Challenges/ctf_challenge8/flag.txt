@@ -1,1 +1,1 @@
-DSCCTF{golden_lions_roundabout}
+DSCCTF{merilon_park_singapore_2026}

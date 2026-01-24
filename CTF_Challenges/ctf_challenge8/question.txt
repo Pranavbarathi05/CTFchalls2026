@@ -1,15 +1,10 @@
-🔎 OSINT Challenge 2 — The Shadow Landmark
+🔎 Challenge — Where Was This Taken?
 
-Category: OSINT (Geo-location)
-Difficulty: Hard
-Skillset: Visual forensics
+Category: OSINT
+Difficulty: EASY
 
-📖 Story (Player View)
+Description
 
-A shadowy group shared this image as a clue before vanishing.
+A suspect posted a photo just before disappearing.
 
-The landmark is real.
-The angle is rare.
-The location is hidden.
-
-Find where this photo was taken.
+Your job is to identify exactly where this photo was taken.
