@@ -25,6 +25,11 @@ The license validation binary is provided. Your task is to reverse engineer the 
 
 The binary performs several validation checks on the license key format and calculates a checksum to verify authenticity.
 
+**Connect to the challenge:**
+```bash
+nc ctf.dscjssstuniv.in 8002
+```
+
 ---
 
 ## Files
@@ -40,6 +45,15 @@ The binary performs several validation checks on the license key format and calc
 ---
 
 ## Quick Start
+
+### Connect to Challenge
+```bash
+# Connect to the remote service
+nc ctf.dscjssstuniv.in 8002
+
+# Or test locally
+nc localhost 8002
+```
 
 ### Local Testing
 ```bash
@@ -58,9 +72,12 @@ echo "DSCR-XXXX-YYYY-ZZZZ" | ./license_checker
 # Build and run
 docker-compose up -d
 
+# Test the connection
+nc localhost 8002
+
 # Or manually
 docker build -t license-checker .
-docker run -it license-checker
+docker run -p 8002:8002 license-checker
 ```
 
 ---

@@ -17,6 +17,11 @@ The binary performs several validation checks on the license key format and calc
 
 **Your task:** Generate a valid license key that passes all validation checks.
 
+**Connect to the challenge:**
+```bash
+nc ctf.dscjssstuniv.in 8002
+```
+
 ---
 
 ## Files Provided
