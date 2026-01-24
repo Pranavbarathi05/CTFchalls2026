@@ -26,7 +26,7 @@ But somewhere in this restricted world, a secret waits to be discovered...
 
 Can you break free and claim the flag?
 
-nc ctf.server.com 9999
+nc ctf.dscjssstuniv.in 9999
 
 Author: ShadowPB
 Difficulty: Easy-Medium
