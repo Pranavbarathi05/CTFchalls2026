@@ -1,0 +1,23 @@
+A classified, multi-volume government study analyzing internal policy
+decisions over an extended period was disclosed to the public without
+authorization.
+
+Following initial publication, the executive branch sought an
+extraordinary legal remedy to prevent further dissemination, arguing
+that continued release would cause irreparable harm to national
+interests.
+
+The dispute escalated rapidly through the federal court system and was
+resolved at the highest judicial level, setting a lasting precedent on
+the limits of governmental power over the press.
+
+Using open-source intelligence, identify the United States Supreme Court
+case associated with this attempt to halt publication.
+
+Flag format:
+DSCCTF{casename_2026}
+
+Notes:
+- Answer must be in lowercase.
+- Replace spaces with underscores.
+- This challenge refers to publicly documented historical events.
