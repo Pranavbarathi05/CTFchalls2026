@@ -7,16 +7,16 @@
 | **Pyjail**              | 1    | 1      | 1    |
 | **Reverse Engineering** | 3    | 1      | 1    |
 | **Web exploitation**    | 6    | 5      | 1    |
-| **OSINT**               | 2    | 2      | 0    |
+| **OSINT**               | 3    | 2      | 0    |
 | **Misc**                | 2    | 3      | 3    |
 
-## Total = 55
+## Total = 56
 
 
 # CTF Challenge Port Mapping
 
 **Complete reference for all challenge ports**  
-**Last Updated:** 2026-01-23
+**Last Updated:** 2026-01-25
 
 ---
 
