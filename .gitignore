@@ -5,3 +5,4 @@ __pycache__/
 *.pyd
 
 DOCKER_COMPOSE_README.md
+.data
