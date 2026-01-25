@@ -17,4 +17,6 @@ RUN useradd -m -u 1000 ctfuser && \
 
 USER ctfuser
 
-CMD ["python3", "-u", "challenge.py"]
+EXPOSE 1340
+
+CMD ["socat", "TCP-LISTEN:1340,reuseaddr,fork", "EXEC:python3 -u challenge.py,pty,stderr"]

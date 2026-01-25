@@ -18,4 +18,6 @@ RUN useradd -m -u 1000 ctfuser && \
 
 USER ctfuser
 
-CMD ["python3", "-u", "pathfinding.py", "interactive"]
+EXPOSE 8004
+
+CMD ["socat", "TCP-LISTEN:8004,reuseaddr,fork", "EXEC:python3 -u pathfinding.py interactive,pty,stderr"]

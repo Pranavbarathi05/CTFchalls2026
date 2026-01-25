@@ -159,6 +159,20 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.numbers.rule=Host(`numbers.ctf.dscjssstuniv.in`)"
 
+  math_challenge:
+    build:
+      context: coding/MathChall
+    image: math_challenge
+    restart: always
+    container_name: coding_math_challenge
+    ports:
+      - "8018:8018"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mathchallenge.rule=Host(`math.ctf.dscjssstuniv.in`)"
+
   # Cryptography Challenges
 
   caesars_pizza:
