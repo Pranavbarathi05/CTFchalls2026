@@ -36,7 +36,7 @@ Can you uncover the river that history tried to remove?
 
 Identify the **hidden river system** described by the clues.  
 
-The flag format is: DSCCTF{R1V3R\_N4M3}
+The flag format is: DSCCTF{R1V3R\_NAME}
 
 
 
@@ -103,7 +103,7 @@ The flag format is: DSCCTF{R1V3R\_N4M3}
 
 
 
-DSCCTF{S4R45W471\_R1V3R}
+DSCCTF{S4R4SW4T1_R1V3R}
 
 
 
