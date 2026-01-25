@@ -1,4 +1,4 @@
-\# OSINT Challenge
+# OSINT Challenge
 
 
 
@@ -6,7 +6,7 @@
 
 
 
-\*\*🔗 Challenge Name:\*\* The Lost River  
+**🔗 Challenge Name:** The Lost River  
 
 
 
@@ -14,7 +14,7 @@
 
 
 
-\*\*Description:\*\*  
+**Description:**  
 
 
 
@@ -30,11 +30,11 @@ Can you uncover the river that history tried to remove?
 
 
 
-\*\*Challenge Prompt:\*\*  
+**Challenge Prompt:**  
 
 
 
-Identify the \*\*hidden river system\*\* described by the clues.  
+Identify the **hidden river system** described by the clues.  
 
 The flag format is: DSCCTF{R1V3R\_N4M3}
 
@@ -50,31 +50,15 @@ The flag format is: DSCCTF{R1V3R\_N4M3}
 
 
 
-1\. I was worshipped before borders existed, yet I left no coordinates behind.  
+1. I was worshipped before borders existed, yet I left no coordinates behind.  
 
-2\. Three once agreed to meet — only two still answer their names.  
+2. Three once agreed to meet — only two still answer their names.  
 
-3\. Satellites remember what maps forgot.  
+3. Satellites remember what maps forgot.  
 
-4\. My path is written in dust, not ink.  
+4. My path is written in dust, not ink.  
 
-5\. I was not lost — I was overwritten.
-
-
-
----
-
-
-
-\*\*Triangular Coordinate Hint:\*\*  
-
-
-
-\- A: 30.845° N, 76.941° E  
-
-\- B: 28.745° N, 75.235° E  
-
-\- C: 26.245° N, 70.245° E  
+5. I was not lost — I was overwritten.
 
 
 
@@ -82,17 +66,14 @@ The flag format is: DSCCTF{R1V3R\_N4M3}
 
 
 
-\*\*Solution (for admins):\*\*  
+**Triangular Coordinate Hint:**  
 
 
 
-1\. Research lost rivers in ancient Indian texts.  
+ A: 30.845° N, 76.941° E  
 
-2\. Discover the Triveni Sangam reference.  
-
-3\. Use satellite palaeochannel data.  
-
-4\. Identify \*\*Saraswati River\*\*.
+ B: 28.745° N, 75.235° E  
+ C: 26.245° N, 70.245° E  
 
 
 
@@ -100,7 +81,25 @@ The flag format is: DSCCTF{R1V3R\_N4M3}
 
 
 
-\*\*Flag:\*\*  
+**Solution (for admins):**  
+
+
+
+1. Research lost rivers in ancient Indian texts.  
+
+2. Discover the Triveni Sangam reference.  
+
+3. Use satellite palaeochannel data.  
+
+4. Identify **Saraswati River**.
+
+
+
+---
+
+
+
+**Flag:**  
 
 
 
