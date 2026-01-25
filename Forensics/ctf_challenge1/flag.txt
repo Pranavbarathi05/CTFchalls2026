@@ -1,1 +1,1 @@
-DSCCTF{layers_not_just_pixels}
+DSCCTF{now_you_know_how_steganography_and_DFIR_works}
