@@ -1,0 +1,17 @@
+A former intelligence contractor disclosed classified material that
+triggered a global political crisis.
+
+Soon after the disclosure, an international arrest request was issued
+while the individual was traveling internationally. During this period,
+the person became stranded during transit due to sudden travel
+restrictions and was unable to continue onward.
+
+Using only open-source information, identify the country where the
+individual was physically present immediately before becoming stranded.
+
+Flag format:
+DSCCTF{countryname_2026}
+
+Notes:
+- Answer must be in lowercase.
+- This challenge refers to publicly documented historical events.

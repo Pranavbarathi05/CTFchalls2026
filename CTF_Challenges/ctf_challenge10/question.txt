@@ -1,11 +1,11 @@
 An image file named "IMG_8721.jpg" was uploaded online with the claim
 that it was taken in the year 2021.
 
-The image was shared directly, without being reprocessed by a social
-media platform.
+Archived records of the original upload indicate that the file metadata
+predates this claim.
 
-Using open-source intelligence techniques, analyze the metadata
-embedded in the file and determine the actual year the image was created.
+Using open-source intelligence techniques, determine the year the image
+was actually created.
 
 Flag format:
 DSCCTF{answer_2026}
