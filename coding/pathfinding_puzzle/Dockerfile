@@ -20,4 +20,4 @@ USER ctfuser
 
 EXPOSE 8004
 
-CMD ["socat", "TCP-LISTEN:8004,reuseaddr,fork", "EXEC:python3 -u pathfinding.py interactive,pty,stderr"]
+CMD ["socat", "TCP-LISTEN:8004,reuseaddr,fork", "EXEC:python3 -u pathfinding.py,pty,stderr"]
