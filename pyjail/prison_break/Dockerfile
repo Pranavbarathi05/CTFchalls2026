@@ -1,5 +1,9 @@
 FROM python:2.7-slim
 
+# Fix Debian Buster EOL repository issues
+RUN echo "deb http://archive.debian.org/debian/ buster main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list
+
 # Install socat for serving the jail
 RUN apt-get update && \
     apt-get install -y socat && \
