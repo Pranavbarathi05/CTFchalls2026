@@ -1,5 +1,4 @@
 services:
-  
   traefik:
     image: traefik:v2.10
     container_name: traefik
@@ -68,9 +67,8 @@ services:
     networks:
       - ctf_network
 
-  
   # Binary Exploitation Challenges
-  
+
   menu_pwner:
     build:
       context: binary_exploitation/menu_pwner
@@ -103,9 +101,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.overflow.rule=Host(`overflow.ctf.dscjssstuniv.in`)"
 
-  
   # Coding Challenges
-  
+
   pathfinding_puzzle:
     build:
       context: coding/pathfinding_puzzle
@@ -147,7 +144,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.treetraversal.rule=Host(`tree.ctf.dscjssstuniv.in`)"
-  
+
   coding_numbers:
     build:
       context: coding/NumberOfones/src
@@ -162,9 +159,22 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.numbers.rule=Host(`numbers.ctf.dscjssstuniv.in`)"
 
-  
+  math_challenge:
+    build:
+      context: coding/MathChall
+    image: math_challenge
+    restart: always
+    container_name: coding_math_challenge
+    ports:
+      - "8018:8018"
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mathchallenge.rule=Host(`math.ctf.dscjssstuniv.in`)"
+
   # Cryptography Challenges
-  
+
   caesars_pizza:
     build:
       context: cryptography/caesars_pizza_menu
@@ -179,9 +189,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.caesar.rule=Host(`caesar.ctf.dscjssstuniv.in`)"
 
-  
   # Misc Challenges
-  
+
   echo_chamber:
     build:
       context: Misc/echo_chamber
@@ -212,7 +221,7 @@ services:
 
   formality_breach:
     build:
-      context: "Misc/Formality breach"
+      context: "Misc/Formality_breach"
     image: formality_breach
     restart: always
     container_name: misc_formality_breach
@@ -224,9 +233,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.formalitybreach.rule=Host(`formalitybreach.ctf.dscjssstuniv.in`)"
 
-  
   # Pyjail Challenges
-  
+
   cipher_prison:
     build:
       context: pyjail/cipher-prison
@@ -248,7 +256,7 @@ services:
 
   prison_break:
     build:
-      context: "pyjail/prison break"
+      context: "pyjail/prison_break"
     image: prison_break
     restart: always
     container_name: pyjail_prison_break
@@ -279,9 +287,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.blacklisthell.rule=Host(`blacklisthell.ctf.dscjssstuniv.in`)"
 
-  
   # Reverse Engineering Challenges
-  
+
   license_checker:
     build:
       context: reverse_engineering/license_checker
@@ -352,9 +359,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.conditions.rule=Host(`conditions.ctf.dscjssstuniv.in`)"
 
-  
   # Web Exploitation Challenges
-  
+
   wrong_password:
     build:
       context: web_exploitation/wrong_password

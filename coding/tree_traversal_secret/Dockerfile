@@ -18,4 +18,6 @@ RUN useradd -m -u 1000 ctfuser && \
 
 USER ctfuser
 
-CMD ["python3", "-u", "tree_traversal.py"]
+EXPOSE 8005
+
+CMD ["socat", "TCP-LISTEN:8005,reuseaddr,fork", "EXEC:python3 -u tree_traversal.py,pty,stderr"]

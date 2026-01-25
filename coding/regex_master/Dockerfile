@@ -18,4 +18,6 @@ RUN useradd -m -u 1000 ctfuser && \
 
 USER ctfuser
 
-CMD ["python3", "-u", "regex_master.py"]
+EXPOSE 8006
+
+CMD ["socat", "TCP-LISTEN:8006,reuseaddr,fork", "EXEC:python3 -u regex_master.py,pty,stderr"]
