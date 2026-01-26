@@ -1,19 +1,16 @@
-challenge Name: global crisis
+A former intelligence contractor disclosed highly classified material that triggered a massive global political crisis.
 
-A former intelligence contractor disclosed classified material that
-triggered a global political crisis.
+Soon after the disclosure, an international arrest warrant was issued against him while he was traveling internationally.
 
-Soon after the disclosure, an international arrest request was issued
-while the individual was traveling internationally. During this period,
-the person became stranded during transit due to sudden travel
-restrictions and was unable to continue onward.
+During this period, he became stranded in transit at an airport in a third country due to the sudden revocation of his passport by his home country, preventing him from continuing his journey.
 
-Using only open-source information, identify the country where the
-individual was physically present immediately before becoming stranded.
+Using only open-source information, identify the country where the individual was physically present **immediately before** he became stranded at that airport.
+
+Important: The country you are looking for is **not** the United Kingdom (UK). The individual was not in the UK at any point during this sequence of events.
 
 Flag format:
 DSCCTF{countryname_2026}
 
 Notes:
-- Answer must be in lowercase.
-- This challenge refers to publicly documented historical events.
+- Answer must be in lowercase 
+- This challenge refers to a well-documented historical event from 2013.
