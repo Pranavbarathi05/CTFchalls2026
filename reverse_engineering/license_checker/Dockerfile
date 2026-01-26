@@ -6,7 +6,7 @@ COPY license_checker.c /build/
 RUN gcc -o license_checker license_checker.c
 
 # Runtime stage
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
