@@ -3,16 +3,16 @@
 | **Binary Exploitation** | 2    | 1      | 0    | 3     | 0                                             |
 | **Coding**              | 1    | 4      | 0    | 5     | 0                                             |
 | **Cryptography**        | 5    | 2      | 2    | 9     | 5 `dummycryptoscripts`                        |
-| **Forensics**           | 6    | 0      | 0    | 6     | 5 `ctf_challenge 3,4,5,6,7`                   |
+| **Forensics**           | 6    | 0      | 0    | 6     | 0                                             |
 | **Pyjail**              | 0    | 1      | 2    | 3     | 0                                             |
 | **Reverse Engineering** | 3    | 2      | 0    | 5     | 0                                             |
 | **Web exploitation**    | 4    | 7      | 1    | 12    | 0                                             |
-| **OSINT**               | 10   | 2      | 0    | 12    | 3 `ctf_challenge 1,10 , commit messages leak` |
-| **Misc**                | 2    | 3      | 3    | 8     | 2 `dont read me , the last input`             |
+| **OSINT**               | 8    | 2      | 0    | 10    | 8 `github ghost, digital footprints, commit messages leak` |
+| **Misc**                | 2    | 3      | 3    | 8     | 1 `the last input`                            |
 
-## Total = 63
+## Total = 61
 
-## Website = 48(46 cuz 2 osint yet to be updated)
+## Website = 47(+1 for warm up)
 
 # CTF Challenge Port Mapping
 
