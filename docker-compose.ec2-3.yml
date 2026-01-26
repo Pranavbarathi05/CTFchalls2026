@@ -1,0 +1,238 @@
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.le.acme.email=admin@dscjssstuniv.in"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    networks:
+      - ctf_network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+
+  # Binary Exploitation Challenges
+
+  menu_pwner:
+    build:
+      context: binary_exploitation/menu_pwner
+    image: menu_pwner
+    restart: always
+    container_name: pwn_menu_pwner
+    ports:
+      - "9999:9999"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.menupwner.rule=Host(`menupwner.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.menupwner.entrypoints=websecure"
+      - "traefik.http.routers.menupwner.tls=true"
+      - "traefik.http.routers.menupwner.tls.certresolver=le"
+      - "traefik.http.services.menupwner.loadbalancer.server.port=9999"
+
+  overflow_academy:
+    build:
+      context: binary_exploitation/overflow_academy
+    image: overflow_academy
+    restart: always
+    container_name: pwn_overflow_academy
+    ports:
+      - "9001:9001"
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overflow.rule=Host(`overflow.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.overflow.entrypoints=websecure"
+      - "traefik.http.routers.overflow.tls=true"
+      - "traefik.http.routers.overflow.tls.certresolver=le"
+      - "traefik.http.services.overflow.loadbalancer.server.port=9001"
+
+  # Heavy Reverse Engineering Challenges
+
+  upside_down:
+    build:
+      context: reverse_engineering/Upside-down
+    image: upside_down
+    restart: always
+    container_name: rev_upside_down
+    ports:
+      - "1339:1339"
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.upsidedown.rule=Host(`upsidedown.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.upsidedown.entrypoints=websecure"
+      - "traefik.http.routers.upsidedown.tls=true"
+      - "traefik.http.routers.upsidedown.tls.certresolver=le"
+      - "traefik.http.services.upsidedown.loadbalancer.server.port=1339"
+
+  has_to_echo:
+    build:
+      context: reverse_engineering/has-to-echo
+    image: has_to_echo
+    restart: always
+    container_name: rev_has_to_echo
+    ports:
+      - "1340:1340"
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hastoecho.rule=Host(`hastoecho.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.hastoecho.entrypoints=websecure"
+      - "traefik.http.routers.hastoecho.tls=true"
+      - "traefik.http.routers.hastoecho.tls.certresolver=le"
+      - "traefik.http.services.hastoecho.loadbalancer.server.port=1340"
+
+  conditions:
+    build:
+      context: reverse_engineering/Conditions
+    image: conditions
+    restart: always
+    container_name: rev_conditions
+    ports:
+      - "42552:42552"
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.conditions.rule=Host(`conditions.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.conditions.entrypoints=websecure"
+      - "traefik.http.routers.conditions.tls=true"
+      - "traefik.http.routers.conditions.tls.certresolver=le"
+      - "traefik.http.services.conditions.loadbalancer.server.port=42552"
+
+  # Pyjail Challenges
+
+  cipher_prison:
+    build:
+      context: pyjail/cipher-prison
+    image: cipher_prison
+    restart: always
+    container_name: pyjail_cipher_prison
+    ports:
+      - "1337:1337"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cipherprison.rule=Host(`cipherprison.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.cipherprison.entrypoints=websecure"
+      - "traefik.http.routers.cipherprison.tls=true"
+      - "traefik.http.routers.cipherprison.tls.certresolver=le"
+      - "traefik.http.services.cipherprison.loadbalancer.server.port=1337"
+
+  prison_break:
+    build:
+      context: "pyjail/prison_break"
+    image: prison_break
+    restart: always
+    container_name: pyjail_prison_break
+    ports:
+      - "9998:9999"
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prisonbreak.rule=Host(`prisonbreak.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.prisonbreak.entrypoints=websecure"
+      - "traefik.http.routers.prisonbreak.tls=true"
+      - "traefik.http.routers.prisonbreak.tls.certresolver=le"
+      - "traefik.http.services.prisonbreak.loadbalancer.server.port=9999"
+
+  blacklist_hell:
+    build:
+      context: pyjail/blacklist-hell
+    image: blacklist_hell
+    restart: always
+    container_name: pyjail_blacklist_hell
+    ports:
+      - "1338:1338"
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blacklisthell.rule=Host(`blacklisthell.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.blacklisthell.entrypoints=websecure"
+      - "traefik.http.routers.blacklisthell.tls=true"
+      - "traefik.http.routers.blacklisthell.tls.certresolver=le"
+      - "traefik.http.services.blacklisthell.loadbalancer.server.port=1338"
+
+  # Heavy Misc Challenges (SSH Service)
+
+  missing_tools:
+    build:
+      context: Misc/missing_tools
+    image: missing_tools
+    restart: always
+    container_name: misc_missing_tools
+    ports:
+      - "2222:22"
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.missingtools.rule=Host(`missingtools.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.missingtools.entrypoints=websecure"
+      - "traefik.http.routers.missingtools.tls=true"
+      - "traefik.http.routers.missingtools.tls.certresolver=le"
+      - "traefik.http.services.missingtools.loadbalancer.server.port=22"
+
+networks:
+  ctf_network:
+    driver: bridge
+
+# DNS Records to Create:
+# -----------------------
+# *.challenges2.ctf.dscjssstuniv.in  A    <EC2-3-PUBLIC-IP>
+#
+# Deploy Commands:
+# ----------------
+# docker compose -f docker-compose.ec2-3.yml up -d --build
+#
+# Note: Ensure ./letsencrypt directory exists and acme.json has 600 permissions:
+# mkdir -p letsencrypt && touch letsencrypt/acme.json && chmod 600 letsencrypt/acme.json

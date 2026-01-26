@@ -1,15 +1,29 @@
-FROM gcc:9
+# Build stage
+FROM gcc:9 AS builder
 
-WORKDIR /app
+WORKDIR /build
+COPY license_checker.c /build/
+RUN gcc -o license_checker license_checker.c
+
+# Runtime stage
+FROM debian:buster-slim
 
 RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
-COPY license_checker.c /app/
-COPY solve.py /app/
+# Create non-root user
+RUN useradd -m -u 1000 ctfuser
+
+WORKDIR /app
+
+# Copy compiled binary from builder stage
+COPY --from=builder /build/license_checker /app/
 COPY flag.txt /app/
 COPY start.sh /app/
 
-RUN gcc -o license_checker license_checker.c && chmod +x start.sh
+RUN chmod +x start.sh && \
+    chown -R ctfuser:ctfuser /app
+
+USER ctfuser
 
 EXPOSE 8002
 

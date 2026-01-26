@@ -1,5 +1,5 @@
-# Use an official Ubuntu base image.
-FROM ubuntu:latest
+# Use an official Ubuntu base image with pinned version
+FROM ubuntu:22.04
 
 # Avoid interactive prompts during package installation.
 ENV DEBIAN_FRONTEND=noninteractive
@@ -8,11 +8,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     openssh-server \
     curl \
-    vim \
-    nano \
-    less \
     python3 \
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create the SSH run directory.
 RUN mkdir /var/run/sshd
@@ -20,8 +18,8 @@ RUN mkdir /var/run/sshd
 # Create the CTF user and set the password.
 RUN useradd -m ctf && echo "ctf:ctf" | chpasswd
 
-# Add the flag file to the ctf user's home directory.
-RUN echo "DSCCTF{M1SS1NG_T00LS_N0_PR0BL3M_2026}" > /home/ctf/flag.txt
+# Copy the flag file to the ctf user's home directory (SECURITY: no longer hardcoded in Dockerfile)
+COPY flag.txt /home/ctf/flag.txt
 
 # Remove common file reading commands to create the challenge
 RUN rm /usr/bin/cat

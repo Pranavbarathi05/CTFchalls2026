@@ -8,8 +8,15 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Create non-root user
+RUN useradd -m -u 1000 ctfuser
+
 COPY dystopian_arithmetic.py .
 COPY flag.txt .
+
+RUN chown -R ctfuser:ctfuser /app
+
+USER ctfuser
 
 EXPOSE 8018
 
