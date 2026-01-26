@@ -7,7 +7,7 @@
 | **Pyjail**              | 0    | 1      | 2    | 3     | 0                                             |
 | **Reverse Engineering** | 3    | 2      | 0    | 5     | 0                                             |
 | **Web exploitation**    | 4    | 7      | 1    | 12    | 0                                             |
-| **OSINT**               | 8    | 2      | 0    | 10    | 8 `github ghost, digital footprints, commit messages leak` |
+| **OSINT**               | 8    | 2      | 0    | 10    | 3 `github ghost, digital footprints, commit messages leak` |
 | **Misc**                | 2    | 3      | 3    | 8     | 1 `the last input`                            |
 
 ## Total = 61
