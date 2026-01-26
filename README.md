@@ -12,7 +12,7 @@
 
 ## Total = 61
 
-## Website = 47(+1 for warm up)
+## Website = 52(+1 for warm up)
 
 # CTF Challenge Port Mapping
 
