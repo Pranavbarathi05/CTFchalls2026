@@ -20,9 +20,6 @@ File signatures don’t.
 
 flag.txt
 
-yaml
-Copy code
-
 ---
 
 ## 🎯 Objective
@@ -34,9 +31,6 @@ Determine the true file type and extract the hidden flag.
 ## 🚩 Flag Format
 
 DSCCTF{...}
-
-yaml
-Copy code
 
 ---
 
@@ -69,37 +63,27 @@ You are given:
 
 flag.txt
 
-csharp
-Copy code
-
 Although it has a `.txt` extension, that does not guarantee it is actually a text file.
 
 Run:
 
-bash
 file flag.txt
 This reveals that the file is actually a PNG image.
 
 Step 2 — Rename the file
 Rename the file to reflect its true type:
 
-bash
-Copy code
 mv flag.txt flag.png
 Step 3 — Open the image
 Open the image using any image viewer:
 
-bash
-Copy code
 xdg-open flag.png
 Step 4 — Extract the flag
 The image contains hidden data appended to it.
 
 Extract readable strings:
 
-bash
-Copy code
 strings flag.png | grep DSCCTF
 ✅ Final Flag
-Copy code
+
 DSCCTF{extensions_never_lie}
