@@ -9,7 +9,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY tree_traversal.py /app/
-COPY solve.py /app/
 COPY flag.txt /app/
 
 # Run as non-root user

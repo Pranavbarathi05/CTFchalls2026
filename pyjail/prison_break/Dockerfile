@@ -1,3 +1,7 @@
+# SECURITY WARNING: Python 2.7 reached End of Life in January 2020
+# This image uses EOL Debian Buster with archive.debian.org workarounds
+# Recommended for isolated/sandboxed environments only - NOT for production internet-facing deployments
+# Consider migrating to Python 3 if challenge logic permits
 FROM python:2.7-slim
 
 # Fix Debian Buster EOL repository issues
