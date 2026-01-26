@@ -63,7 +63,7 @@ DSCCTF{...}
 
 ##Walkthrough
 
-## Step 1 — Inspect the provided files
+Step 1 — Inspect the provided files
 
 You are given:
 
