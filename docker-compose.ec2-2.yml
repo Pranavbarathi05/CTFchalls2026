@@ -11,6 +11,13 @@ services:
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
       - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      # TCP entrypoints for coding challenges (netcat access)
+      - "--entrypoints.coding_pathfinding.address=:8004"
+      - "--entrypoints.coding_regex.address=:8006"
+      - "--entrypoints.coding_tree.address=:8005"
+      - "--entrypoints.coding_numbers.address=:54321"
+      - "--entrypoints.coding_math.address=:8018"
+      # Cert Resolvers
       - "--certificatesresolvers.le.acme.email=admin@dscjssstuniv.in"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesresolvers.le.acme.httpchallenge=true"
@@ -19,13 +26,20 @@ services:
       - "80:80"
       - "443:443"
       - "8080:8080"
+      # Expose coding challenge TCP ports
+      - "8004:8004"
+      - "8006:8006"
+      - "8005:8005"
+      - "54321:54321"
+      - "8018:8018"
+      - "8002:8002"
     networks:
       - ctf_network
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./letsencrypt:/letsencrypt"
 
-  # Coding Challenges
+  # Coding Challenges (TCP/netcat access)
 
   pathfinding_puzzle:
     build:
@@ -37,11 +51,10 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pathfinding.rule=Host(`pathfinding.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.pathfinding.entrypoints=websecure"
-      - "traefik.http.routers.pathfinding.tls=true"
-      - "traefik.http.routers.pathfinding.tls.certresolver=le"
-      - "traefik.http.services.pathfinding.loadbalancer.server.port=8004"
+      - "traefik.tcp.routers.pathfinding.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.pathfinding.entrypoints=coding_pathfinding"
+      - "traefik.tcp.routers.pathfinding.service=pathfinding"
+      - "traefik.tcp.services.pathfinding.loadbalancer.server.port=8004"
 
   regex_master:
     build:
@@ -53,11 +66,10 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.regex.rule=Host(`regex.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.regex.entrypoints=websecure"
-      - "traefik.http.routers.regex.tls=true"
-      - "traefik.http.routers.regex.tls.certresolver=le"
-      - "traefik.http.services.regex.loadbalancer.server.port=8006"
+      - "traefik.tcp.routers.regex.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.regex.entrypoints=coding_regex"
+      - "traefik.tcp.routers.regex.service=regex"
+      - "traefik.tcp.services.regex.loadbalancer.server.port=8006"
 
   tree_traversal:
     build:
@@ -69,11 +81,10 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.treetraversal.rule=Host(`tree.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.treetraversal.entrypoints=websecure"
-      - "traefik.http.routers.treetraversal.tls=true"
-      - "traefik.http.routers.treetraversal.tls.certresolver=le"
-      - "traefik.http.services.treetraversal.loadbalancer.server.port=8005"
+      - "traefik.tcp.routers.treetraversal.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.treetraversal.entrypoints=coding_tree"
+      - "traefik.tcp.routers.treetraversal.service=treetraversal"
+      - "traefik.tcp.services.treetraversal.loadbalancer.server.port=8005"
 
   coding_numbers:
     build:
@@ -85,11 +96,10 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.numbers.rule=Host(`numbers.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.numbers.entrypoints=websecure"
-      - "traefik.http.routers.numbers.tls=true"
-      - "traefik.http.routers.numbers.tls.certresolver=le"
-      - "traefik.http.services.numbers.loadbalancer.server.port=54321"
+      - "traefik.tcp.routers.numbers.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.numbers.entrypoints=coding_numbers"
+      - "traefik.tcp.routers.numbers.service=numbers"
+      - "traefik.tcp.services.numbers.loadbalancer.server.port=54321"
 
   math_challenge:
     build:
@@ -101,11 +111,10 @@ services:
       - ctf_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mathchallenge.rule=Host(`math.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.mathchallenge.entrypoints=websecure"
-      - "traefik.http.routers.mathchallenge.tls=true"
-      - "traefik.http.routers.mathchallenge.tls.certresolver=le"
-      - "traefik.http.services.mathchallenge.loadbalancer.server.port=8018"
+      - "traefik.tcp.routers.mathchallenge.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.mathchallenge.entrypoints=coding_math"
+      - "traefik.tcp.routers.mathchallenge.service=mathchallenge"
+      - "traefik.tcp.services.mathchallenge.loadbalancer.server.port=8018"
 
   # Cryptography Challenges
 
@@ -126,22 +135,6 @@ services:
       - "traefik.http.services.caesar.loadbalancer.server.port=8001"
 
   # Light Reverse Engineering Challenges
-
-  license_checker:
-    build:
-      context: reverse_engineering/license_checker
-    image: license_checker
-    restart: always
-    container_name: rev_license_checker
-    networks:
-      - ctf_network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.license.rule=Host(`license.challenges1.ctf.dscjssstuniv.in`)"
-      - "traefik.http.routers.license.entrypoints=websecure"
-      - "traefik.http.routers.license.tls=true"
-      - "traefik.http.routers.license.tls.certresolver=le"
-      - "traefik.http.services.license.loadbalancer.server.port=8002"
 
   endgame_protocol:
     build:

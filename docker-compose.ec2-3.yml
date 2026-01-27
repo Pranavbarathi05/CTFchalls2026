@@ -17,6 +17,8 @@ services:
       - "--entrypoints.pwn_overflow.address=:9001"
       - "--entrypoints.rev_upside.address=:1339"
       - "--entrypoints.rev_echo.address=:1340"
+      # TCP entrypoint for reverse engineering
+      - "--entrypoints.rev_license.address=:8002"
       # rev_cond removed - it's HTTP, uses web/websecure entrypoints
       - "--entrypoints.jail_cipher.address=:1337"
       - "--entrypoints.jail_break.address=:9998"
@@ -105,6 +107,21 @@ services:
       - "traefik.tcp.routers.upsidedown.entrypoints=rev_upside"
       - "traefik.tcp.routers.upsidedown.service=upsidedown"
       - "traefik.tcp.services.upsidedown.loadbalancer.server.port=1339"
+
+  license_checker:
+    build:
+      context: reverse_engineering/license_checker
+    image: license_checker
+    restart: always
+    container_name: rev_license_checker
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.license.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.license.entrypoints=rev_license"
+      - "traefik.tcp.routers.license.service=license"
+      - "traefik.tcp.services.license.loadbalancer.server.port=8002"
 
   has_to_echo:
     build:

@@ -39,12 +39,12 @@
 | Time_window_Exposure  | Web                 | EC2-1        | https://timewindow.ctf.dscjssstuniv.in                           | 8003     | `web_exploitation/Time_window_Exposure` |
 | wrong_password        | Web                 | EC2-1        | https://wrongpassword.ctf.dscjssstuniv.in                        | 8014     | `web_exploitation/wrong_password`       |
 | caesars_pizza_menu    | Cryptography        | EC2-2        | https://caesar.challenges1.ctf.dscjssstuniv.in                   | 8001     | `cryptography/caesars_pizza_menu`       |
-| pathfinding_puzzle    | Coding              | EC2-2        | https://pathfinding.challenges1.ctf.dscjssstuniv.in              | 8004     | `coding/pathfinding_puzzle`             |
-| regex_master          | Coding              | EC2-2        | https://regex.challenges1.ctf.dscjssstuniv.in                    | 8006     | `coding/regex_master`                   |
-| tree_traversal_secret | Coding              | EC2-2        | https://tree.challenges1.ctf.dscjssstuniv.in                     | 8005     | `coding/tree_traversal_secret`          |
-| Number of Ones        | Coding              | EC2-2        | https://numbers.challenges1.ctf.dscjssstuniv.in                  | 54321    | `coding/NumberOfones/src`               |
-| Math Chall            | Coding              | EC2-2        | https://math.challenges1.ctf.dscjssstuniv.in                     | 8018     | `coding/MathChall`                      |
-| license_checker       | Reverse Engineering | EC2-2        | https://license.challenges1.ctf.dscjssstuniv.in                  | 8002     | `reverse_engineering/license_checker`   |
+| pathfinding_puzzle    | Coding              | EC2-2        | nc pathfinding.challenges1.ctf.dscjssstuniv.in 8004                          | 8004     | `coding/pathfinding_puzzle`             |
+| regex_master          | Coding              | EC2-2        | nc regex.challenges1.ctf.dscjssstuniv.in 8006                          | 8006     | `coding/regex_master`                   |
+| tree_traversal_secret | Coding              | EC2-2        | nc tree.challenges1.ctf.dscjssstuniv.in 8005                          | 8005     | `coding/tree_traversal_secret`          |
+| Number of Ones        | Coding              | EC2-2        | nc numbers.challenges1.ctf.dscjssstuniv.in 54321                         | 54321    | `coding/NumberOfones/src`               |
+| Math Chall            | Coding              | EC2-2        | nc math.challenges1.ctf.dscjssstuniv.in 8018                          | 8018     | `coding/MathChall`                      |
+| license_checker       | Reverse Engineering | EC2-2        | nc challenges1.ctf.dscjssstuniv.in 8002                          | 8002     | `reverse_engineering/license_checker`   |
 | endgame-protocol      | Reverse Engineering | EC2-2        | https://endgame.challenges1.ctf.dscjssstuniv.in                  | 8016     | `reverse_engineering/endgame-protocol`  |
 | echo_chamber          | Misc                | EC2-2        | https://echochamber.challenges1.ctf.dscjssstuniv.in              | 8017     | `Misc/echo_chamber`                     |
 | Formality Breach      | Misc                | EC2-2        | https://formalitybreach.challenges1.ctf.dscjssstuniv.in          | 8015     | `Misc/Formality_breach`                 |

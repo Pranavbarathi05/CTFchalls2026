@@ -8,7 +8,7 @@ RUN gcc -o license_checker license_checker.c
 # Runtime stage
 FROM debian:bullseye-slim
 
-RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y socat && rm -rf /var/lib/apt/lists/*
 
 # Create non-root user
 RUN useradd -m -u 1000 ctfuser
