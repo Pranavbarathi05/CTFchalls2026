@@ -1,6 +1,2 @@
 #!/bin/bash
-
-# Start the license checker as a network service
-while true; do
-    ./license_checker | nc -l 8002
-done
+socat TCP-LISTEN:8002,reuseaddr,fork EXEC:"timeout 30 ./license_checker",pty,stderr,setsid,sigint,sane
