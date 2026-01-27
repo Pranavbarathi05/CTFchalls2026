@@ -20,7 +20,7 @@ def test_challenge():
         
         # Connect to the container
         print("Connecting to SSH service...")
-        ssh.connect('localhost', port=2222, username='ctf', password='ctf', timeout=10)
+        ssh.connect('missingtools.challenges2.ctf.dscjssstuniv.in', port=2222, username='ctf', password='ctf', timeout=10)
         
         print("✅ Successfully connected to SSH service\n")
         
