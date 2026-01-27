@@ -2,17 +2,17 @@
 | ----------------------- | ---- | ------ | ---- | ----- | --------------------------------------------- |
 | **Binary Exploitation** | 2    | 1      | 0    | 3     | 0                                             |
 | **Coding**              | 1    | 4      | 0    | 5     | 0                                             |
-| **Cryptography**        | 5    | 2      | 2    | 9     | 5 `dummycryptoscripts`                        |
+| **Cryptography**        | 5    | 2      | 2    | 9     | 0                                             |
 | **Forensics**           | 6    | 0      | 0    | 6     | 0                                             |
 | **Pyjail**              | 0    | 1      | 2    | 3     | 0                                             |
-| **Reverse Engineering** | 3    | 2      | 0    | 5     | 0                                             |
-| **Web exploitation**    | 4    | 7      | 1    | 12    | 0                                             |
-| **OSINT**               | 8    | 2      | 0    | 10    | 1 `commit messages leak`                      |
+| **Reverse Engineering** | 2    | 2      | 0    | 4     | 0                                             |
+| **Web exploitation**    | 4    | 7      | 1    | 12    | 1 `flag in cache`                             |
+| **OSINT**               | 8    | 2      | 0    | 10    | 4 `commit messages leak,pinpoint,github.digital` |
 | **Misc**                | 2    | 3      | 3    | 8     | 0                                             |
 
-## Total = 61
+## Total = 60
 
-## Website = 55(+1 for warm up, -4(to be fixed))
+## Website = 59(+1 for warm up)
 
 # CTF Challenge Port Mapping
 
@@ -44,7 +44,6 @@
 | tree_traversal_secret | Coding              | EC2-2        | nc tree.challenges1.ctf.dscjssstuniv.in 8005                          | 8005     | `coding/tree_traversal_secret`          |
 | Number of Ones        | Coding              | EC2-2        | nc numbers.challenges1.ctf.dscjssstuniv.in 54321                         | 54321    | `coding/NumberOfones/src`               |
 | Math Chall            | Coding              | EC2-2        | nc math.challenges1.ctf.dscjssstuniv.in 8018                          | 8018     | `coding/MathChall`                      |
-| license_checker       | Reverse Engineering | EC2-2        | nc challenges1.ctf.dscjssstuniv.in 8002                          | 8002     | `reverse_engineering/license_checker`   |
 | endgame-protocol      | Reverse Engineering | EC2-2        | https://endgame.challenges1.ctf.dscjssstuniv.in                  | 8016     | `reverse_engineering/endgame-protocol`  |
 | echo_chamber          | Misc                | EC2-2        | https://echochamber.challenges1.ctf.dscjssstuniv.in              | 8017     | `Misc/echo_chamber`                     |
 | Formality Breach      | Misc                | EC2-2        | https://formalitybreach.challenges1.ctf.dscjssstuniv.in          | 8015     | `Misc/Formality_breach`                 |
