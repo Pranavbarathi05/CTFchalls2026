@@ -25,10 +25,20 @@ COPY flag.txt /home/ctf/flag.txt
 RUN rm /usr/bin/cat
 RUN rm /bin/cat 2>/dev/null || true
 
-# Configure SSH settings
-RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+# Configure SSH settings for password authentication
+# Remove the Ubuntu 22.04 default config that disables password auth
+RUN rm -f /etc/ssh/sshd_config.d/*.conf && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
-    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/' /etc/ssh/sshd_config && \
+    sed -i 's/KbdInteractiveAuthentication no/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#KbdInteractiveAuthentication yes/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/UsePAM yes/UsePAM yes/' /etc/ssh/sshd_config
+
+# Generate SSH host keys
+RUN ssh-keygen -A
 
 # Expose the SSH port.
 EXPOSE 22

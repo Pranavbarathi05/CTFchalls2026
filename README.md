@@ -52,7 +52,7 @@
 | overflow_academy      | Binary Exploitation | EC2-3        | nc overflow.challenges2.ctf.dscjssstuniv.in 9001                 | 9001     | `binary_exploitation/overflow_academy`  |
 | upside-down           | Reverse Engineering | EC2-3        | nc upsidedown.challenges2.ctf.dscjssstuniv.in 1339               | 1339     | `reverse_engineering/Upside-down`       |
 | has-to-echo           | Reverse Engineering | EC2-3        | nc hastoecho.challenges2.ctf.dscjssstuniv.in 1340                | 1340     | `reverse_engineering/has-to-echo`       |
-| Conditions            | Reverse Engineering | EC2-3        | nc conditions.challenges2.ctf.dscjssstuniv.in 42552              | 42552    | `reverse_engineering/Conditions`        |
+| Conditions            | Reverse Engineering | EC2-3        | https://conditions.challenges2.ctf.dscjssstuniv.in             | 42552    | `reverse_engineering/Conditions`        |
 | cipher-prison         | Pyjail              | EC2-3        | nc cipherprison.challenges2.ctf.dscjssstuniv.in 1337             | 1337     | `pyjail/cipher-prison`                  |
 | prison-break          | Pyjail              | EC2-3        | nc prisonbreak.challenges2.ctf.dscjssstuniv.in 9999              | 9998     | `pyjail/prison_break`                   |
 | blacklist-hell        | Pyjail              | EC2-3        | nc blacklisthell.challenges2.ctf.dscjssstuniv.in 1338            | 1338     | `pyjail/blacklist-hell`                 |
