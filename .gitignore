@@ -3,6 +3,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
+*/venv/
 DOCKER_COMPOSE_README.md
 .data
