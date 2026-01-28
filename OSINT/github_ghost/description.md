@@ -4,10 +4,9 @@
 **Difficulty:** Medium  
 **Author:** @Poorvi-M  
 
-A developer accidentally leaked sensitive information in a public GitHub repository
-and attempted to remove it shortly after.
-
-Your task is to uncover what was exposed.
+Not everything that was written was meant to stay.
+The archive keeps what the page no longer shows.
+The first hand on the work belonged to Poorvi-M
 
 ---
 
