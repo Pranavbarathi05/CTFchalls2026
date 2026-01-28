@@ -22,9 +22,21 @@ def main():
     print("=== Echo for me ===")
     print("I will echo what you say.")
     print("But only if you sound like me.\n")
-    print("Send input. End with EOF (Ctrl+D / Ctrl+Z).")
+    print("Send input. End with an empty line or EOF (Ctrl+D).")
+    sys.stdout.flush()
 
-    data = sys.stdin.read().rstrip("\n")
+    # Read input until empty line or EOF
+    lines = []
+    try:
+        while True:
+            line = input()
+            if line == "":
+                break
+            lines.append(line)
+    except EOFError:
+        pass
+    
+    data = "\n".join(lines).rstrip("\n")
 
     if not data:
         print("Silence detected.")
