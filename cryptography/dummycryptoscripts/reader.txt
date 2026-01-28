@@ -1,0 +1,2 @@
+This challenge is a multi-layered cryptographic sequence designed to test a user's ability to bridge the gap between ancient "pen-and-paper" ciphers and modern, industry-standard encryption.
+If you like treasure hunting this is the challenge which you will surely enjoy.

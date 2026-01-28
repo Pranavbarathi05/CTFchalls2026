@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 # Install some libs
 RUN apt-get update && apt-get install -y python3 socat && rm -rf /var/lib/apt/lists/*

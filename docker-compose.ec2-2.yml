@@ -1,0 +1,202 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      # TCP entrypoints for coding challenges (netcat access)
+      - "--entrypoints.coding_pathfinding.address=:8004"
+      - "--entrypoints.coding_regex.address=:8006"
+      - "--entrypoints.coding_tree.address=:8005"
+      - "--entrypoints.coding_numbers.address=:54321"
+      - "--entrypoints.coding_math.address=:8018"
+      # Cert Resolvers
+      - "--certificatesresolvers.le.acme.email=admin@dscjssstuniv.in"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      # Expose coding challenge TCP ports
+      - "8004:8004"
+      - "8006:8006"
+      - "8005:8005"
+      - "54321:54321"
+      - "8018:8018"
+      - "8002:8002"
+    networks:
+      - ctf_network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+
+  # Coding Challenges (TCP/netcat access)
+
+  pathfinding_puzzle:
+    build:
+      context: coding/pathfinding_puzzle
+    image: pathfinding_puzzle
+    restart: always
+    container_name: coding_pathfinding
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.pathfinding.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.pathfinding.entrypoints=coding_pathfinding"
+      - "traefik.tcp.routers.pathfinding.service=pathfinding"
+      - "traefik.tcp.services.pathfinding.loadbalancer.server.port=8004"
+
+  regex_master:
+    build:
+      context: coding/regex_master
+    image: regex_master
+    restart: always
+    container_name: coding_regex_master
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.regex.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.regex.entrypoints=coding_regex"
+      - "traefik.tcp.routers.regex.service=regex"
+      - "traefik.tcp.services.regex.loadbalancer.server.port=8006"
+
+  tree_traversal:
+    build:
+      context: coding/tree_traversal_secret
+    image: tree_traversal
+    restart: always
+    container_name: coding_tree_traversal
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.treetraversal.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.treetraversal.entrypoints=coding_tree"
+      - "traefik.tcp.routers.treetraversal.service=treetraversal"
+      - "traefik.tcp.services.treetraversal.loadbalancer.server.port=8005"
+
+  coding_numbers:
+    build:
+      context: coding/NumberOfones/src
+    image: coding_numbers
+    restart: always
+    container_name: coding_numbers
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.numbers.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.numbers.entrypoints=coding_numbers"
+      - "traefik.tcp.routers.numbers.service=numbers"
+      - "traefik.tcp.services.numbers.loadbalancer.server.port=54321"
+
+  math_challenge:
+    build:
+      context: coding/MathChall
+    image: math_challenge
+    restart: always
+    container_name: coding_math_challenge
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.mathchallenge.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.mathchallenge.entrypoints=coding_math"
+      - "traefik.tcp.routers.mathchallenge.service=mathchallenge"
+      - "traefik.tcp.services.mathchallenge.loadbalancer.server.port=8018"
+
+  # Cryptography Challenges
+
+  caesars_pizza:
+    build:
+      context: cryptography/caesars_pizza_menu
+    image: caesars_pizza
+    restart: always
+    container_name: crypto_caesars_pizza
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.caesar.rule=Host(`caesar.challenges1.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.caesar.entrypoints=websecure"
+      - "traefik.http.routers.caesar.tls=true"
+      - "traefik.http.routers.caesar.tls.certresolver=le"
+      - "traefik.http.services.caesar.loadbalancer.server.port=8001"
+
+  # Light Reverse Engineering Challenges
+
+  endgame_protocol:
+    build:
+      context: reverse_engineering/endgame-protocol
+    image: endgame_protocol
+    restart: always
+    container_name: rev_endgame
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.endgame.rule=Host(`endgame.challenges1.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.endgame.entrypoints=websecure"
+      - "traefik.http.routers.endgame.tls=true"
+      - "traefik.http.routers.endgame.tls.certresolver=le"
+      - "traefik.http.services.endgame.loadbalancer.server.port=8000"
+
+  # Light Misc Challenges
+
+  echo_chamber:
+    build:
+      context: Misc/echo_chamber
+    image: echo_chamber
+    restart: always
+    container_name: misc_echo_chamber
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.echochamber.rule=Host(`echochamber.challenges1.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.echochamber.entrypoints=websecure"
+      - "traefik.http.routers.echochamber.tls=true"
+      - "traefik.http.routers.echochamber.tls.certresolver=le"
+      - "traefik.http.services.echochamber.loadbalancer.server.port=80"
+
+  formality_breach:
+    build:
+      context: "Misc/Formality_breach"
+    image: formality_breach
+    restart: always
+    container_name: misc_formality_breach
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.formalitybreach.rule=Host(`formalitybreach.challenges1.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.formalitybreach.entrypoints=websecure"
+      - "traefik.http.routers.formalitybreach.tls=true"
+      - "traefik.http.routers.formalitybreach.tls.certresolver=le"
+      - "traefik.http.services.formalitybreach.loadbalancer.server.port=8015"
+
+networks:
+  ctf_network:
+    driver: bridge
+
+# DNS Records to Create:
+# -----------------------
+# *.challenges1.ctf.dscjssstuniv.in  A    <EC2-2-PUBLIC-IP>
+#
+# Deploy Commands:
+# ----------------
+# docker compose -f docker-compose.ec2-2.yml up -d --build
+#
+# Note: Ensure ./letsencrypt directory exists and acme.json has 600 permissions:
+# mkdir -p letsencrypt && touch letsencrypt/acme.json && chmod 600 letsencrypt/acme.json

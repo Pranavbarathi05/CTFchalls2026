@@ -1,0 +1,294 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--certificatesresolvers.le.acme.email=admin@dscjssstuniv.in"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    networks:
+      - ctf_network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+
+  ctfd:
+    image: ctfd/ctfd:latest
+    container_name: ctfd
+    user: root
+    restart: always
+    environment:
+      - UPLOAD_FOLDER=/var/uploads
+      - DATABASE_URL=mysql+pymysql://ctfd:ctfd@db/ctfd
+      - REDIS_URL=redis://cache:6379
+      - WORKERS=1
+      - LOG_FOLDER=/var/log/CTFd
+      - ACCESS_LOG=-
+      - ERROR_LOG=-
+    volumes:
+      - .data/CTFd/logs:/var/log/CTFd
+      - .data/CTFd/uploads:/var/uploads
+    depends_on:
+      - db
+      - cache
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ctfd.rule=Host(`ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.ctfd.entrypoints=websecure"
+      - "traefik.http.routers.ctfd.tls=true"
+      - "traefik.http.routers.ctfd.tls.certresolver=le"
+      - "traefik.http.services.ctfd.loadbalancer.server.port=8000"
+
+  db:
+    image: mariadb:10.11
+    restart: always
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=ctfd
+      - MYSQL_DATABASE=ctfd
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd
+    volumes:
+      - .data/CTFd/db:/var/lib/mysql
+    networks:
+      - ctf_network
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --wait_timeout=28800
+      - --log-warnings=0
+
+  cache:
+    image: redis:4
+    restart: always
+    container_name: cache
+    volumes:
+      - .data/redis:/data
+    networks:
+      - ctf_network
+
+  # Light Web Challenges
+
+  wrong_password:
+    build:
+      context: web_exploitation/wrong_password
+    image: wrong_password
+    restart: always
+    container_name: web_wrong_password
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.wrongpassword.rule=Host(`wrongpassword.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.wrongpassword.entrypoints=websecure"
+      - "traefik.http.routers.wrongpassword.tls=true"
+      - "traefik.http.routers.wrongpassword.tls.certresolver=le"
+      - "traefik.http.services.wrongpassword.loadbalancer.server.port=8000"
+
+  secure_portal:
+    build:
+      context: web_exploitation/secure_portal
+    image: secure_portal
+    restart: always
+    container_name: web_secure_portal
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.secureportal.rule=Host(`secureportal.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.secureportal.entrypoints=websecure"
+      - "traefik.http.routers.secureportal.tls=true"
+      - "traefik.http.routers.secureportal.tls.certresolver=le"
+      - "traefik.http.services.secureportal.loadbalancer.server.port=8007"
+
+  cookie_recipe:
+    build:
+      context: web_exploitation/cookie-recipe
+    image: cookie_recipe
+    restart: always
+    container_name: web_cookie_recipe
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cookierecipe.rule=Host(`cookierecipe.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.cookierecipe.entrypoints=websecure"
+      - "traefik.http.routers.cookierecipe.tls=true"
+      - "traefik.http.routers.cookierecipe.tls.certresolver=le"
+      - "traefik.http.services.cookierecipe.loadbalancer.server.port=5000"
+
+  curl_unfurl:
+    build:
+      context: web_exploitation/curl-unfurl
+    image: curl_unfurl
+    restart: always
+    container_name: web_curl_unfurl
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.curlunfurl.rule=Host(`curlunfurl.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.curlunfurl.entrypoints=websecure"
+      - "traefik.http.routers.curlunfurl.tls=true"
+      - "traefik.http.routers.curlunfurl.tls.certresolver=le"
+      - "traefik.http.services.curlunfurl.loadbalancer.server.port=5000"
+
+  robots_watching:
+    build:
+      context: web_exploitation/robots-watching
+    image: robots_watching
+    restart: always
+    container_name: web_robots_watching
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.robotswatching.rule=Host(`robotswatching.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.robotswatching.entrypoints=websecure"
+      - "traefik.http.routers.robotswatching.tls=true"
+      - "traefik.http.routers.robotswatching.tls.certresolver=le"
+      - "traefik.http.services.robotswatching.loadbalancer.server.port=5000"
+
+  time_window:
+    build:
+      context: web_exploitation/Time_window_Exposure
+    image: time_window
+    restart: always
+    container_name: web_time_window
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.timewindow.rule=Host(`timewindow.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.timewindow.entrypoints=websecure"
+      - "traefik.http.routers.timewindow.tls=true"
+      - "traefik.http.routers.timewindow.tls.certresolver=le"
+      - "traefik.http.services.timewindow.loadbalancer.server.port=5000"
+
+  stranger_things:
+    build:
+      context: web_exploitation/stranger-things
+    image: stranger_things
+    restart: always
+    container_name: web_stranger_things
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.stranger.rule=Host(`stranger.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.stranger.entrypoints=websecure"
+      - "traefik.http.routers.stranger.tls=true"
+      - "traefik.http.routers.stranger.tls.certresolver=le"
+      - "traefik.http.services.stranger.loadbalancer.server.port=8000"
+
+  overthinker:
+    build:
+      context: web_exploitation/overthinker
+    image: overthinker
+    restart: always
+    container_name: web_overthinker
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overthinker.rule=Host(`overthinker.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.overthinker.entrypoints=websecure"
+      - "traefik.http.routers.overthinker.tls=true"
+      - "traefik.http.routers.overthinker.tls.certresolver=le"
+      - "traefik.http.services.overthinker.loadbalancer.server.port=8000"
+
+  plain_sight:
+    build:
+      context: web_exploitation/plain-sight
+    image: plain_sight
+    restart: always
+    container_name: web_plain_sight
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plainsight.rule=Host(`plainsight.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.plainsight.entrypoints=websecure"
+      - "traefik.http.routers.plainsight.tls=true"
+      - "traefik.http.routers.plainsight.tls.certresolver=le"
+      - "traefik.http.services.plainsight.loadbalancer.server.port=8000"
+
+  flag_in_cache:
+    build:
+      context: web_exploitation/flag_in_cache
+    image: flag_in_cache
+    restart: always
+    container_name: web_flag_in_cache
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flagcache.rule=Host(`flagcache.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.flagcache.entrypoints=websecure"
+      - "traefik.http.routers.flagcache.tls=true"
+      - "traefik.http.routers.flagcache.tls.certresolver=le"
+      - "traefik.http.services.flagcache.loadbalancer.server.port=8000"
+
+  auth_adventure:
+    build:
+      context: web_exploitation/auth_adventure
+    image: auth_adventure
+    restart: always
+    container_name: web_auth_adventure
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.authadventure.rule=Host(`auth.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.authadventure.entrypoints=websecure"
+      - "traefik.http.routers.authadventure.tls=true"
+      - "traefik.http.routers.authadventure.tls.certresolver=le"
+      - "traefik.http.services.authadventure.loadbalancer.server.port=8008"
+
+  nothing_works:
+    build:
+      context: web_exploitation/nothing-works
+    image: nothing_works
+    restart: always
+    container_name: web_nothing_works
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nothingworks.rule=Host(`nothingworks.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.nothingworks.entrypoints=websecure"
+      - "traefik.http.routers.nothingworks.tls=true"
+      - "traefik.http.routers.nothingworks.tls.certresolver=le"
+      - "traefik.http.services.nothingworks.loadbalancer.server.port=8000"
+
+networks:
+  ctf_network:
+    driver: bridge
+
+# DNS Records to Create:
+# -----------------------
+# ctf.dscjssstuniv.in                A    <EC2-1-PUBLIC-IP>
+# *.ctf.dscjssstuniv.in              A    <EC2-1-PUBLIC-IP>
+#
+# Deploy Commands:
+# ----------------
+# docker compose -f docker-compose.ec2-1.yml up -d --build
+#
+# Note: Ensure ./letsencrypt directory exists and acme.json has 600 permissions:
+# mkdir -p letsencrypt && touch letsencrypt/acme.json && chmod 600 letsencrypt/acme.json

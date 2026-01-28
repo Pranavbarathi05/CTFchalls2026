@@ -1,0 +1,250 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: traefik
+    restart: always
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      # Web Entrypoints
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      # TCP Challenge Entrypoints (Define one for each challenge port)
+      - "--entrypoints.pwn_menu.address=:9999"
+      - "--entrypoints.pwn_overflow.address=:9001"
+      - "--entrypoints.rev_upside.address=:1339"
+      - "--entrypoints.rev_echo.address=:1340"
+      # TCP entrypoint for reverse engineering
+      - "--entrypoints.rev_license.address=:8002"
+      # rev_cond removed - it's HTTP, uses web/websecure entrypoints
+      - "--entrypoints.jail_cipher.address=:1337"
+      - "--entrypoints.jail_break.address=:9998"
+      - "--entrypoints.jail_black.address=:1338"
+      - "--entrypoints.misc_ssh.address=:2222"
+      # Cert Resolvers
+      - "--certificatesresolvers.le.acme.email=admin@dscjssstuniv.in"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+      # Expose Challenge Ports via Traefik
+      - "9999:9999"
+      - "9001:9001"
+      - "1339:1339"
+      - "1340:1340"
+      # 42552 removed - conditions uses HTTP (80/443), not direct TCP
+      - "1337:1337"
+      - "9998:9998" # Note: mapped 9998 external to 9998 internal for consistency
+      - "1338:1338"
+      - "2222:2222"
+    networks:
+      - ctf_network
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+
+  # Binary Exploitation Challenges
+
+  menu_pwner:
+    build:
+      context: binary_exploitation/menu_pwner
+    image: menu_pwner
+    restart: always
+    container_name: pwn_menu_pwner
+    # REMOVED: ports section (Traefik handles the port now)
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      # Use TCP Router
+      - "traefik.tcp.routers.menupwner.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.menupwner.entrypoints=pwn_menu"
+      - "traefik.tcp.routers.menupwner.service=menupwner"
+      - "traefik.tcp.services.menupwner.loadbalancer.server.port=9999"
+
+  overflow_academy:
+    build:
+      context: binary_exploitation/overflow_academy
+    image: overflow_academy
+    restart: always
+    container_name: pwn_overflow_academy
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.overflow.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.overflow.entrypoints=pwn_overflow"
+      - "traefik.tcp.routers.overflow.service=overflow"
+      - "traefik.tcp.services.overflow.loadbalancer.server.port=9001"
+
+  # Heavy Reverse Engineering Challenges
+
+  upside_down:
+    build:
+      context: reverse_engineering/Upside-down
+    image: upside_down
+    restart: always
+    container_name: rev_upside_down
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.upsidedown.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.upsidedown.entrypoints=rev_upside"
+      - "traefik.tcp.routers.upsidedown.service=upsidedown"
+      - "traefik.tcp.services.upsidedown.loadbalancer.server.port=1339"
+
+  license_checker:
+    build:
+      context: reverse_engineering/license_checker
+    image: license_checker
+    restart: always
+    container_name: rev_license_checker
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.license.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.license.entrypoints=rev_license"
+      - "traefik.tcp.routers.license.service=license"
+      - "traefik.tcp.services.license.loadbalancer.server.port=8002"
+
+  has_to_echo:
+    build:
+      context: reverse_engineering/has-to-echo
+    image: has_to_echo
+    restart: always
+    container_name: rev_has_to_echo
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.hastoecho.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.hastoecho.entrypoints=rev_echo"
+      - "traefik.tcp.routers.hastoecho.service=hastoecho"
+      - "traefik.tcp.services.hastoecho.loadbalancer.server.port=1340"
+
+  conditions:
+    build:
+      context: reverse_engineering/Conditions
+    image: conditions
+    restart: always
+    container_name: rev_conditions
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      # HTTP router (allows plain HTTP access)
+      - "traefik.http.routers.conditions-http.rule=Host(`conditions.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.conditions-http.entrypoints=web"
+      - "traefik.http.routers.conditions-http.service=conditions"
+      # HTTPS router (with SSL)
+      - "traefik.http.routers.conditions-https.rule=Host(`conditions.challenges2.ctf.dscjssstuniv.in`)"
+      - "traefik.http.routers.conditions-https.entrypoints=websecure"
+      - "traefik.http.routers.conditions-https.tls=true"
+      - "traefik.http.routers.conditions-https.tls.certresolver=le"
+      - "traefik.http.routers.conditions-https.service=conditions"
+      # Service configuration (Flask app listens on port 42552)
+      - "traefik.http.services.conditions.loadbalancer.server.port=42552"
+
+  # Pyjail Challenges
+
+  cipher_prison:
+    build:
+      context: pyjail/cipher-prison
+    image: cipher_prison
+    restart: always
+    container_name: pyjail_cipher_prison
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.cipherprison.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.cipherprison.entrypoints=jail_cipher"
+      - "traefik.tcp.routers.cipherprison.service=cipherprison"
+      - "traefik.tcp.services.cipherprison.loadbalancer.server.port=1337"
+
+  prison_break:
+    build:
+      context: "pyjail/prison_break"
+    image: prison_break
+    restart: always
+    container_name: pyjail_prison_break
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.prisonbreak.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.prisonbreak.entrypoints=jail_break"
+      - "traefik.tcp.routers.prisonbreak.service=prisonbreak"
+      # Note: Service listens on 9999 internally, mapped to entrypoint 9998
+      - "traefik.tcp.services.prisonbreak.loadbalancer.server.port=9999"
+
+  blacklist_hell:
+    build:
+      context: pyjail/blacklist-hell
+    image: blacklist_hell
+    restart: always
+    container_name: pyjail_blacklist_hell
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 100
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.blacklisthell.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.blacklisthell.entrypoints=jail_black"
+      - "traefik.tcp.routers.blacklisthell.service=blacklisthell"
+      - "traefik.tcp.services.blacklisthell.loadbalancer.server.port=1338"
+
+  # Heavy Misc Challenges (SSH Service)
+
+  missing_tools:
+    build:
+      context: Misc/missing_tools
+    image: missing_tools
+    restart: always
+    container_name: misc_missing_tools
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - ctf_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.tcp.routers.missingtools.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.missingtools.entrypoints=misc_ssh"
+      - "traefik.tcp.routers.missingtools.service=missingtools"
+      - "traefik.tcp.services.missingtools.loadbalancer.server.port=22"
+
+networks:
+  ctf_network:
+    driver: bridge

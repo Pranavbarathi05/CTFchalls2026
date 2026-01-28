@@ -1,0 +1,42 @@
+# Solve scripts and solutions
+solve.py
+advanced_solve.py
+*.solution
+
+# Documentation
+*.md
+README.md
+WRITEUP.md
+description.md
+hints.md
+hint.md
+
+# Git
+.git
+.gitignore
+.github
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+docker-compose.yml
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
