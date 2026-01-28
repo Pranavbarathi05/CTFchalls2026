@@ -19,4 +19,4 @@ USER ctfuser
 
 EXPOSE 1340
 
-CMD ["socat", "TCP-LISTEN:1340,reuseaddr,fork", "EXEC:python3 -u challenge.py,pty,stderr"]
+CMD ["socat", "TCP-LISTEN:1340,reuseaddr,fork", "EXEC:'python3 -u challenge.py',stderr"]
