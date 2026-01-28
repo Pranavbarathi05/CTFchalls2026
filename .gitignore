@@ -6,3 +6,7 @@ __pycache__/
 
 DOCKER_COMPOSE_README.md
 .data
+ctfd_test.py
+stress_test.py
+load_test_requirements.txt
+load_test.py
