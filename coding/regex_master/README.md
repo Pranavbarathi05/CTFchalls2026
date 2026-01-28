@@ -86,25 +86,31 @@ python3 solve.py flag
 - `+1-555-123-4567`
 - `(555) 987-6543`
 - `555.321.9876`
-- `call me at 555-0123 today`
+- `call me at 555-012-3456 today`
 
 **Solution**:
 ```regex
 (\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})
 ```
 
-### 3. Flag Hunter 🚩
-**Objective**: Find all CTF flags in mixed text
+### 3. Password Strength 🔒
+**Objective**: Match passwords with:
+- At least 8 characters
+- 1 uppercase letter
+- 1 lowercase letter  
+- 1 digit
+- 1 special character
 
 **Test Cases**:
-- `DSCCTF{R3G3X_P4TT3RN_M4ST3R_2026}`
-- `Flag: DSCCTF{hidden_in_text}`
-- `Multiple flags: DSCCTF{flag1} and DSCCTF{flag2}`
-- `dscctf{lowercase_flag}` (shouldn't match)
+- `Password123!` ✅
+- `simple_password` ❌
+- `Strong@Pass1` ✅
+- `12345678` ❌
+- `Weak1` ❌
 
 **Solution**:
 ```regex
-DSCCTF\{[^}]+\}
+^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$
 ```
 
 ### 4. IPv4 Address Validation 🌐
@@ -122,23 +128,18 @@ DSCCTF\{[^}]+\}
 ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ```
 
-### 5. Password Strength 🔒
-**Objective**: Match passwords with:
-- At least 8 characters
-- 1 uppercase letter
-- 1 lowercase letter  
-- 1 digit
-- 1 special character
+### 5. Flag Hunter 🚩
+**Objective**: Find all CTF flags in mixed text
 
 **Test Cases**:
-- `Password123!` ✅
-- `simple_password` ❌
-- `Strong@Pass1` ✅
-- `12345678` ❌
+- `DSCCTF{R3G3X_P4TT3RN_M4ST3R_2026}`
+- `Flag: DSCCTF{hidden_in_text}`
+- `Multiple flags: DSCCTF{flag1} and DSCCTF{flag2}`
+- `dscctf{lowercase_flag}` (shouldn't match)
 
 **Solution**:
 ```regex
-^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$
+DSCCTF\{[^}]+\}
 ```
 
 ---

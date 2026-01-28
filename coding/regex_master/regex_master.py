@@ -93,23 +93,23 @@ def regex_challenges():
                 "+1-555-123-4567",
                 "(555) 987-6543",
                 "555.321.9876",
-                "call me at 555-0123 today"
+                "call me at 555-012-3456 today"
             ],
             "expected_matches": 4
         },
         {
             "id": 3,
-            "title": "Flag Hunter",
-            "description": "Find all CTF flags in the given text",
-            "pattern": r"DSCCTF\{[^}]+\}",
+            "title": "Password Strength",
+            "description": "Match passwords with at least 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 special char",
+            "pattern": r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
             "test_inputs": [
-                "DSCCTF{R3G3X_P4TT3RN_M4ST3R_2026}",
-                "Flag: DSCCTF{hidden_in_text}",
-                "dscctf{lowercase_flag}",
-                "NoFlag{this_is_fake}",
-                "Multiple flags: DSCCTF{flag1} and DSCCTF{flag2}"
+                "Password123!",
+                "simple_password",
+                "Strong@Pass1",
+                "12345678",
+                "Weak1"
             ],
-            "expected_matches": 4
+            "expected": [True, False, True, False, False]
         },
         {
             "id": 4,
@@ -127,17 +127,17 @@ def regex_challenges():
         },
         {
             "id": 5,
-            "title": "Password Strength",
-            "description": "Match passwords with at least 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 special char",
-            "pattern": r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$",
+            "title": "Flag Hunter",
+            "description": "Find all CTF flags in the given text",
+            "pattern": r"DSCCTF\{[^}]+\}",
             "test_inputs": [
-                "Password123!",
-                "simple_password",
-                "Strong@Pass1",
-                "12345678",
-                "Weak1"
+                "DSCCTF{R3G3X_P4TT3RN_M4ST3R_2026}",
+                "Flag: DSCCTF{hidden_in_text}",
+                "dscctf{lowercase_flag}",
+                "NoFlag{this_is_fake}",
+                "Multiple flags: DSCCTF{flag1} and DSCCTF{flag2}"
             ],
-            "expected": [True, False, True, False, False]
+            "expected_matches": 4
         }
     ]
     
@@ -205,12 +205,6 @@ def interactive_challenge():
             if correct:
                 print("🎉 Challenge completed successfully!")
                 score += 1
-                
-                # Special flag for completing all challenges
-                if challenge['id'] == 3 and correct:  # Flag Hunter challenge
-                    flag_matches = compiled_pattern.findall("DSCCTF{R3G3X_P4TT3RN_M4ST3R_2026}")
-                    if flag_matches:
-                        print(f"🚩 Bonus Flag Found: {flag_matches[0]}")
             else:
                 print("💡 Hint: Check the expected behavior against your pattern")
                 print(f"    Correct pattern: {challenge['pattern']}")
