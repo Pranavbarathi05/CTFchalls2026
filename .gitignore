@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 *.pyd
 */venv/
+*/cryptoenv/
 DOCKER_COMPOSE_README.md
 .data
 ctfd_test.py
