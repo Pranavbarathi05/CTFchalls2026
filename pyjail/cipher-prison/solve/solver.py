@@ -22,8 +22,8 @@ def encode(text, rotation):
 # ============== WORKING EXPLOIT ==============
 
 EXPLOIT_STEPS = [
-    (0,  'print(globals())'),                                           # See what's available
-    (7,  'print(open("/flag.txt").read())'),                           # Direct flag read!
+    (7,  'print("Testing cipher")'),                                    # Test the encoding
+    (14, 'print(open("/flag.txt").read())'),                           # Direct flag read!
 ]
 
 def generate_exploit():
@@ -44,7 +44,7 @@ def generate_exploit():
 
 def interactive_encoder():
     """Interactive encoder"""
-    rotation = 0
+    rotation = 7
     step = 7
     
     print("Cipher-Prison Encoder")

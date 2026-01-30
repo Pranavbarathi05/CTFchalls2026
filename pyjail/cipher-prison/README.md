@@ -58,7 +58,7 @@ ncat -lvnkp 1337 --sh-exec "python3 /path/to/jail.py"
 ### 1. The Cipher (Rotating Caesar) - INPUT ONLY
 
 - **Alphabet**: `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789` (62 chars)
-- **Initial rotation**: 0
+- **Initial rotation**: 7
 - **Rotation step**: +7 after each command
 - **Input**: Encoded by player, decoded by server
 - **Output**: Displayed NORMALLY (not scrambled!)
@@ -113,16 +113,16 @@ def encode(text, rotation):
 
 | Rot | What to Execute | What to Type |
 |-----|-----------------|--------------|
-| 0 | `print("Testing cipher")` | `print("Testing cipher")` |
-| 7 | `print(open("/flag.txt").read())` | `wypuA(vwlu("/mshn.AEA").ylhk())` |
+| 7 | `print("Testing cipher")` | `wypuA("0lzApun jpwoly")` |
+| 14 | `print(open("/flag.txt").read())` | `DFwBH(CDsB("/tzou.HLH").Fsor())` |
 
 **That's it!** Just 2 simple steps thanks to the simplified restrictions.
 
 ### Full Automated Exploit
 
 ```bash
-echo 'print("Testing cipher")
-wypuA(vwlu("/mshn.AEA").ylhk())' | nc TARGET 1337
+echo 'wypuA("0lzApun jpwoly")
+DFwBH(CDsB("/tzou.HLH").Fsor())' | nc TARGET 1337
 ```
 
 **Output:**
@@ -156,10 +156,10 @@ cipher-prison/
 1. **Hint 1** (free): "Output isn't scrambled, only input!"
 2. **Hint 2** (50 pts): "It's a Caesar cipher! Each letter shifts by 7 positions forward in the alphabet: a→h, b→i, etc. The rotation increases by 7 after each command you send."
 3. **Hint 3** (100 pts): "You can't use underscore _ directly, but chr(95) gives you '_' character. The flag is at /flag.txt and you have access to open() function."
-4. **Hint 4** (150 pts): "Solution: First command (rot 0): print('test'). Second command (rot 7): encode 'print(open(\"/flag.txt\").read())' with +7 shift to get the flag!"
+4. **Hint 4** (150 pts): "Solution: First command (rot 7): encode 'print(\"Testing cipher\")' with +7 shift. Second command (rot 14): encode 'print(open(\"/flag.txt\").read())' with +14 shift to get the flag!"
 5. **Hint 5** (400 pts): "High risk High reward indeed! find below the pastable solution:
-echo 'print("Testing cipher")
-wypuA(vwlu("/mshn.AEA").ylhk())' | nc TARGET 1337"
+echo 'wypuA(\"0lzApun jpwoly\")
+DFwBH(CDsB(\"/tzou.HLH\").Fsor())' | nc TARGET 1337"
 
 ---
 
