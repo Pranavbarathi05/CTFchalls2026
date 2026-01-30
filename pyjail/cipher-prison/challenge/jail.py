@@ -164,7 +164,7 @@ def main():
     print(BANNER)
     sys.stdout.flush()
     
-    rotation = 0
+    rotation = 7
     rotation_step = 7
     command_count = 0
     
