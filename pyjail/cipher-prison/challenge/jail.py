@@ -135,18 +135,12 @@ BANNER = r"""
 ║   Rules:                                                      ║
 ║   1. Your INPUT is scrambled by a rotating cipher             ║
 ║   2. Output is displayed normally (so you can read errors!)   ║
-║   3. The rotation changes EVERY command (+7 each time)        ║
-║   4. ⚠️  FORBIDDEN WORDS = INSTANT DEATH ⚠️                   ║
-║   5. The flag awaits those who break free                     ║
+║   3. ⚠️  FORBIDDEN WORDS = INSTANT DEATH ⚠️                    ║
+║   4. The flag awaits those who break free                     ║
 ║                                                               ║
 ║   💀 BLACKLIST (instant death): import, exec, eval, compile,  ║
 ║      subprocess, system, popen                                ║
-║   🚫 FORBIDDEN CHARS: _                                       ║
-║                                                               ║
-║   Hints:                                                      ║
-║   • Caesar cipher on: a-z, A-Z, 0-9 (62 chars)                ║
-║   • Rotation shown in prompt: [Rotation: XX]                  ║
-║   • To send 'print' at rot 7, encode it first!                ║
+║   🚫 FORBIDDEN CHARS: _                                       ║!                
 ║                                                               ║
 ║   Goal: Read /flag.txt                                        ║
 ║                                                               ║
@@ -155,20 +149,13 @@ BANNER = r"""
 
 HELP_TEXT = """
 Commands:
-  help     - Show this help
-  rotation - Show current rotation value  
+  help     - Show this help 
   quit     - Exit the jail
 
 The cipher:
   - Caesar cipher on alphanumeric chars (a-zA-Z0-9 = 62 chars)
-  - Rotation starts at 0, increases by 7 each command
   - Only YOUR INPUT is encoded, output is normal!
-
-Example at rotation 7:
-  To execute 'print(1)' you must type 'wypuA(1)'
   
-Encoder formula:
-  encoded_char = ALPHABET[(index + rotation) % 62]
 """
 
 # ============== MAIN LOOP ==============
@@ -187,7 +174,7 @@ def main():
             forward_map, reverse_map = generate_swap_map(rotation)
             
             # Show prompt with current rotation
-            prompt = f"\n[Rotation: {rotation:02d}] >>> "
+            prompt = f"\n[Input] >>> "
             print(prompt, end='')
             sys.stdout.flush()
             
