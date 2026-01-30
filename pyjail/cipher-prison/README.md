@@ -9,7 +9,7 @@ A CTF challenge combining a Python jail with a dynamic rotating Caesar cipher.
 | **Name**      | Cipher-Prison |
 | **Category**  | pyjail |
 | **Difficulty**| Medium (200-250 pts) |
-| **Flag**      | `DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}` |
+| **Flag**      | `DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k_2026}` |
 | **Port**      | 1337 |
 
 ## Challenge Description (for CTF platform)
@@ -127,7 +127,7 @@ DFwBH(CDsB("/tzou.HLH").Fsor())' | nc TARGET 1337
 
 **Output:**
 ```
-DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}
+DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k_2026}
 ```
 
 ---
@@ -138,7 +138,7 @@ DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}
 cipher-prison/
 ├── challenge/
 │   ├── jail.py              # Main challenge
-│   ├── flag.txt             # DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k3r_2026}
+│   ├── flag.txt             # DSCCTF{dyn4m1c_k3ysw4p_j41l_br34k_2026}
 │   └── description.md       # Challenge description for CTF platform
 ├── solve/
 │   └── solver.py            # Encoder + automated solver
