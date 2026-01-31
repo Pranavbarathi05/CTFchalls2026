@@ -1,12 +1,4 @@
-# SECURITY WARNING: Python 2.7 reached End of Life in January 2020
-# This image uses EOL Debian Buster with archive.debian.org workarounds
-# Recommended for isolated/sandboxed environments only - NOT for production internet-facing deployments
-# Consider migrating to Python 3 if challenge logic permits
-FROM python:2.7-slim
-
-# Fix Debian Buster EOL repository issues
-RUN echo "deb http://archive.debian.org/debian/ buster main" > /etc/apt/sources.list && \
-    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list
+FROM python:3.9-slim
 
 # Install socat for serving the jail
 RUN apt-get update && \
@@ -27,4 +19,4 @@ RUN useradd -m ctf
 EXPOSE 9999
 
 # Use socat to serve the jail (fork for each connection)
-CMD ["socat", "-T120", "TCP-LISTEN:9999,reuseaddr,fork", "EXEC:python /challenge/jail.py,stderr"]
+CMD ["socat", "-T120", "TCP-LISTEN:9999,reuseaddr,fork", "EXEC:python3 /challenge/jail.py,stderr"]
