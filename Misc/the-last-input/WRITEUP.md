@@ -22,9 +22,7 @@ An empty input is the only correct answer.
 ---
 
 ## Flag
-
-DSCCTF{kn0w1ng_wh3n_t0_st0p_2026}
-
+ empty
 ---
 
 ## Lesson
