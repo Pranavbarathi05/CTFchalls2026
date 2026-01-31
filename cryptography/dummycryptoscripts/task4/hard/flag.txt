@@ -1,0 +1,32 @@
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import binascii
+import os
+
+def run_aes_gcm():
+    # 1. Setup
+    flag = "DSCCTF{cybersec101}".encode('utf-8')
+    
+    # AES-GCM uses a 128, 192, or 256 bit key
+    key = AESGCM.generate_key(bit_length=128)
+    # Nonce (Initialization Vector) should be 12 bytes for GCM
+    nonce = os.urandom(12)
+
+    print(f"Original Flag: {flag.decode()}")
+
+    # 2. Encryption
+    aesgcm = AESGCM(key)
+    ciphertext = aesgcm.encrypt(nonce, flag, None)
+    
+    print(f"Key (Hex): {binascii.hexlify(key).decode()}")
+    print(f"Ciphertext (Hex): {binascii.hexlify(ciphertext).decode()}")
+
+    # 3. Decryption
+    try:
+        decrypted_data = aesgcm.decrypt(nonce, ciphertext, None)
+        print(f"Decrypted Flag: {decrypted_data.decode('utf-8')}")
+    except Exception as e:
+        print(f"Decryption failed: {e}")
+
+if __name__ == "__main__":
+    run_aes_gcm()
+    
