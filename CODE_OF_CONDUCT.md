@@ -1,503 +1,200 @@
-# Contributing Guidelines
+# Contributor Covenant Code of Conduct
 
-Thank you for your interest in contributing to CTFchalls2026! This document provides guidelines for contributing new challenges, improvements, and fixes to our CTF platform.
+## Our Pledge
 
----
+We as members, contributors, and leaders pledge to make participation in our
+CTF platform and community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, caste, color, religion, or sexual
+identity and orientation.
 
-## Table of Contents
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community focused on **learning and teaching cybersecurity**.
 
-- [Code of Conduct](#code-of-conduct)
-- [How Can I Contribute?](#how-can-i-contribute)
-- [Challenge Contribution Guidelines](#challenge-contribution-guidelines)
-- [Pull Request Process](#pull-request-process)
-- [Style Guidelines](#style-guidelines)
-- [Testing Requirements](#testing-requirements)
-- [Directory Structure](#directory-structure)
+## Our Standards
 
----
+Examples of behavior that contributes to a positive environment for our
+community include:
 
-## Code of Conduct
+* Demonstrating empathy and kindness toward other people
+* Being respectful of differing opinions, viewpoints, and experiences
+* Giving and gracefully accepting constructive feedback
+* Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+* Focusing on what is best not just for us as individuals, but for the overall
+  community
+* **Sharing knowledge and helping beginners learn security concepts**
+* **Providing constructive feedback on challenges and solutions**
+* **Reporting vulnerabilities responsibly and ethically**
 
-### Our Standards
+Examples of unacceptable behavior include:
 
-- **Be respectful** - Treat all contributors with respect
-- **Be constructive** - Provide helpful feedback
-- **Be inclusive** - Welcome diverse perspectives
-- **Be ethical** - Don't exploit vulnerabilities for malicious purposes
-- **Be educational** - Focus on learning and teaching security concepts
+* The use of sexualized language or imagery, and sexual attention or advances of
+  any kind
+* Trolling, insulting or derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or email address,
+  without their explicit permission
+* **Exploiting platform vulnerabilities for malicious purposes**
+* **Sharing challenge solutions publicly before the CTF ends**
+* **DDoS attacks or intentional service disruption**
+* **Attempting to compromise other participants' accounts or submissions**
+* **Brute-forcing flags or attacking the scoring system**
+* Other conduct which could reasonably be considered inappropriate in a
+  professional setting
 
-### Unacceptable Behavior
+## CTF-Specific Guidelines
 
-- Harassment, discrimination, or trolling
-- Publishing others' private information
-- Malicious exploitation of platform vulnerabilities
-- Submitting intentionally broken or malicious code
+### Allowed During CTF Events
 
----
+✅ Solving challenges using any intended or unintended methods  
+✅ Discussing general approaches after solving  
+✅ Asking for hints in designated channels  
+✅ Reporting bugs or broken challenges privately  
+✅ Collaborating with your registered team members  
 
-## How Can I Contribute?
+### Not Allowed During CTF Events
 
-### 1. 🎯 Submit New Challenges
+❌ Sharing flags or complete solutions publicly  
+❌ Attacking the platform infrastructure  
+❌ Creating multiple accounts to gain advantages  
+❌ Sabotaging other teams' progress  
+❌ Reverse-engineering challenges to extract flags without solving  
 
-We welcome new challenge submissions in the following categories:
-- Web Exploitation
-- Binary Exploitation (PWN)
-- Reverse Engineering
-- Cryptography
-- Forensics
-- Miscellaneous
-- Pyjail
-- OSINT
-- Coding/Programming
+### After CTF Ends
 
-### 2. 🐛 Report Bugs
+✅ **Writeups are encouraged!** Share your solutions to help others learn  
+✅ Discuss creative solutions and unintended approaches  
+✅ Contribute improvements to challenge quality  
 
-Found an issue? Please report:
-- Unintended solutions (exploits)
-- Broken challenges
-- Deployment issues
-- Documentation errors
+## Enforcement Responsibilities
 
-### 3. 📚 Improve Documentation
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
 
-Help us improve:
-- Challenge descriptions
-- Solution writeups
-- Deployment guides
-- Architecture documentation
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
 
-### 4. 🔧 Fix Issues
+## Scope
 
-Check our [Issues](https://github.com/Pranavbarathi05/CTFchalls2026/issues) page for:
-- `good-first-issue` - Easy tasks for newcomers
-- `help-wanted` - Tasks needing assistance
-- `bug` - Known issues to fix
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
 
----
+This also applies to:
+- GitHub repository interactions (issues, PRs, discussions)
+- CTF platform (CTFd) during competitions
+- Discord/Slack channels (if applicable)
+- Social media posts mentioning the CTF
 
-## Challenge Contribution Guidelines
+## Enforcement
 
-### General Requirements
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at:
 
-All challenges must include:
+### Primary Contact Methods
 
-1. **Challenge Files**
-   - Source code (well-commented)
-   - Dockerfile and docker-compose.yml
-   - Build scripts if needed
+**Email:** conduct@dscjssstuniv.in  
+**GitHub Issues:** [Report Here](https://github.com/Pranavbarathi05/CTFchalls2026/issues/new?template=code_of_conduct.md)  
+**Discord:** @Pranavbarathi (if you have a Discord server)
 
-2. **Documentation**
-   - README.md with challenge description
-   - Solution/writeup (in `/solve` directory)
-   - Hints (optional, in `/hints` directory)
+### For Security Vulnerabilities
 
-3. **Testing**
-   - Verified working deployment
-   - Tested intended solution
-   - Checked for unintended solutions
+**DO NOT** report security issues via public GitHub issues.  
+Use our [Security Policy](SECURITY.md) for responsible disclosure.
 
-4. **Flag Format**
-   - Must follow format: `DSCCTF{...}`
-   - Should be descriptive and related to challenge
-   - Example: `DSCCTF{h3ll0_w0rld_2026}`
+All complaints will be reviewed and investigated promptly and fairly.
 
-### Challenge Quality Standards
+All community leaders are obligated to respect the privacy and security of the
+reporter of any incident.
 
-#### ✅ Good Challenges
+## Enforcement Guidelines
 
-- **Educational** - Teaches a specific security concept
-- **Fair difficulty** - Matches stated difficulty level
-- **Clear objectives** - Players know what to find
-- **No guessing** - Solution is logical, not random
-- **Tested** - Works reliably without crashes
-- **Documented** - Clear setup and solution instructions
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
 
-#### ❌ Avoid
+### 1. Correction
 
-- **Guessy challenges** - Requiring random guessing
-- **Unstable services** - Frequent crashes or timeouts
-- **Unclear objectives** - Players don't know what to do
-- **Poor documentation** - Missing setup or solution info
-- **Broken challenges** - Don't work as intended
-- **Excessive resources** - Require > 512MB RAM or > 1 CPU
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
 
----
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
 
-## Pull Request Process
+### 2. Warning
 
-### Before Submitting
+**Community Impact**: A violation through a single incident or series of
+actions.
 
-1. **Fork the repository**
-   ```bash
-   git clone https://github.com/Pranavbarathi05/CTFchalls2026.git
-   cd CTFchalls2026
-   git checkout -b feature/your-challenge-name
-   ```
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or permanent
+ban.
 
-2. **Create your challenge directory**
-   ```bash
-   mkdir -p category/challenge-name
-   cd category/challenge-name
-   ```
+### 3. Temporary Ban
 
-3. **Follow the directory structure** (see below)
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
 
-4. **Test locally**
-   ```bash
-   docker-compose up --build
-   # Test challenge functionality
-   # Verify intended solution works
-   # Check for unintended solutions
-   ```
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
 
-5. **Update documentation**
-   - Add challenge to main README.md
-   - Update ARCHITECTURE.md if needed
-   - Create challenge-specific README.md
+### 4. Permanent Ban
 
-### Submitting Pull Request
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior, harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
 
-1. **Commit your changes**
-   ```bash
-   git add .
-   git commit -m "Add: [Category] Challenge Name"
-   ```
+**Consequence**: A permanent ban from any sort of public interaction within the
+community.
 
-2. **Push to your fork**
-   ```bash
-   git push origin feature/your-challenge-name
-   ```
+### CTF-Specific Enforcement
 
-3. **Create Pull Request**
-   - Use template below
-   - Reference any related issues
-   - Add screenshots/demos if applicable
+**Platform Abuse:**  
+- First offense: Warning + temporary account suspension  
+- Second offense: Permanent ban from platform  
 
-### Pull Request Template
+**Challenge Solution Leaks:**  
+- During CTF: Immediate disqualification  
+- After CTF: Warning (accidental) or temporary ban (intentional)  
 
-```markdown
-## Challenge Information
+**Infrastructure Attacks:**  
+- Immediate permanent ban  
+- Report to institution/authorities if applicable  
 
-**Challenge Name:** 
-**Category:** 
-**Difficulty:** (Easy/Medium/Hard)
-**Points:** (100/200/300/400/500)
-**Flag:** DSCCTF{...}
+## Attribution
 
-## Description
+This Code of Conduct is adapted from the [Contributor Covenant][homepage],
+version 2.1, available at
+[https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1].
 
-Brief description of what the challenge teaches.
+Community Impact Guidelines were inspired by
+[Mozilla's code of conduct enforcement ladder][Mozilla CoC].
 
-## Testing Checklist
+For answers to common questions about this code of conduct, see the FAQ at
+[https://www.contributor-covenant.org/faq][FAQ]. Translations are available at
+[https://www.contributor-covenant.org/translations][translations].
 
-- [ ] Challenge builds successfully with Docker
-- [ ] Intended solution tested and works
-- [ ] No unintended solutions found
-- [ ] Documentation is complete
-- [ ] Flag follows DSCCTF{...} format
-- [ ] Resource limits defined (if applicable)
-- [ ] README.md included
-- [ ] Solution writeup included
-
-## Additional Notes
-
-Any special setup requirements or notes for reviewers.
-```
-
-### Review Process
-
-1. **Automated checks** - CI/CD will verify basic requirements
-2. **Maintainer review** - We'll test your challenge
-3. **Feedback** - We may request changes
-4. **Approval** - Once approved, we'll merge!
-
-**Expected timeline:** 3-7 days for review
+[homepage]: https://www.contributor-covenant.org
+[v2.1]: https://www.contributor-covenant.org/version/2/1/code_of_conduct.html
+[Mozilla CoC]: https://github.com/mozilla/diversity
+[FAQ]: https://www.contributor-covenant.org/faq
+[translations]: https://www.contributor-covenant.org/translations
 
 ---
 
-## Style Guidelines
-
-### Code Style
-
-**Python:**
-```python
-# Use black formatter
-# Install: pip install black
-black your_file.py
-
-# Follow PEP 8
-# Max line length: 88 characters
-```
-
-**JavaScript/Node.js:**
-```javascript
-// Use Prettier
-// Install: npm install -g prettier
-prettier --write your_file.js
-
-// Use semicolons
-// 2-space indentation
-```
-
-**Bash:**
-```bash
-# Use shellcheck
-# Install: sudo apt install shellcheck
-shellcheck your_script.sh
-
-# 2-space indentation
-# Quote variables: "$variable"
-```
-
-### Docker Best Practices
-
-```dockerfile
-# Use specific versions, not 'latest'
-FROM python:3.11-slim
-
-# Run as non-root user
-RUN useradd -m -u 1000 ctfuser
-USER ctfuser
-
-# Multi-stage builds for smaller images
-# Copy only necessary files
-# Clean up in same layer to reduce size
-```
-
-### Documentation Style
-
-- Use Markdown formatting
-- Include code examples
-- Add comments for clarity
-- Use emojis sparingly for readability
-- Keep line length reasonable (80-100 chars)
-
----
-
-## Testing Requirements
-
-### Local Testing
-
-Before submitting, test:
-
-1. **Build successfully**
-   ```bash
-   docker-compose up --build
-   ```
-
-2. **Service is accessible**
-   ```bash
-   curl http://localhost:PORT
-   # or
-   nc localhost PORT
-   ```
-
-3. **Intended solution works**
-   ```bash
-   cd solve
-   python3 solver.py
-   # Should output: DSCCTF{...}
-   ```
-
-4. **No unintended solutions**
-   - Try common bypass techniques
-   - Test edge cases
-   - Check for info leaks
-
-5. **Resource usage acceptable**
-   ```bash
-   docker stats
-   # Memory should stay under limits
-   ```
-
-### Security Testing
-
-- [ ] No hardcoded credentials in code
-- [ ] No sensitive data in Docker images
-- [ ] Service doesn't expose unnecessary ports
-- [ ] Input validation is proper
-- [ ] No obvious command injection
-- [ ] Resource limits prevent DoS
-
----
-
-## Directory Structure
-
-### For New Challenges
-
-```
-category/challenge-name/
-├── challenge/
-│   ├── Dockerfile          # Container definition
-│   ├── docker-compose.yml  # Service configuration
-│   ├── flag.txt            # The flag (DSCCTF{...})
-│   ├── src/                # Source code
-│   │   └── app.py          # Main application
-│   └── description.md      # Challenge description for CTFd
-├── solve/
-│   ├── solver.py           # Automated solution script
-│   └── writeup.md          # Detailed solution explanation
-├── hints/                  # Optional hints
-│   ├── hint1.md
-│   └── hint2.md
-└── README.md               # Challenge documentation
-```
-
-### README.md Template for Challenges
-
-```markdown
-# Challenge Name
-
-Brief one-line description.
-
-## Challenge Info
-
-| Field         | Value |
-|---------------|-------|
-| **Name**      | Challenge Name |
-| **Category**  | Web/PWN/Reverse/etc |
-| **Difficulty**| Easy/Medium/Hard |
-| **Points**    | 100-500 |
-| **Flag**      | DSCCTF{...} |
-| **Port**      | 1337 (if applicable) |
-
-## Description
-
-Full challenge description that players will see.
-
-## Learning Objectives
-
-What security concept does this teach?
-
-## Deployment
-
-```bash
-docker-compose up -d --build
-```
-
-## Solution
-
-High-level overview of the solution approach.
-See `/solve/writeup.md` for detailed solution.
-
-## Author
-
-Your Name (@your_github_username)
-```
-
----
-
-## Architecture Considerations
-
-When contributing challenges, consider:
-
-### Resource Allocation
-
-- **EC2-1** - Web challenges (lightweight HTTP)
-- **EC2-2** - Coding, Crypto, Light challenges
-- **EC2-3** - PWN, Pyjail, Heavy challenges
-
-### Container Limits
-
-```yaml
-# For heavy workloads (PWN/Pyjail)
-deploy:
-  resources:
-    limits:
-      memory: 256m
-      cpus: '0.5'
-    pids: 100  # For pyjail only
-
-# Security options
-security_opt:
-  - no-new-privileges:true
-```
-
-### Networking
-
-- **HTTP services** - Use Traefik labels for HTTPS
-- **TCP services** - Expose specific ports
-- **No direct port exposure** - Use reverse proxy
-
-See [ARCHITECTURE.md](ARCHITECTURE.md) for full details.
-
----
-
-## Commit Message Guidelines
-
-Follow conventional commits format:
-
-```
-<type>: <short summary>
-
-<optional body>
-
-<optional footer>
-```
-
-**Types:**
-- `feat:` - New challenge or feature
-- `fix:` - Bug fix
-- `docs:` - Documentation changes
-- `style:` - Code style changes (formatting)
-- `refactor:` - Code refactoring
-- `test:` - Adding tests
-- `chore:` - Maintenance tasks
-
-**Examples:**
-```
-feat: Add SQL injection challenge (Web)
-
-Added beginner-friendly SQL injection challenge teaching
-basic authentication bypass techniques.
-
-Refs: #42
-
----
-
-fix: Correct flag format in Caesar cipher challenge
-
-Changed flag from DSCCTF{caesar123} to follow naming convention
-DSCCTF{c43s4r_c1ph3r_2026}
-
-Closes: #56
-
----
-
-docs: Update deployment guide for EC2-3
-
-Added resource limit explanation and troubleshooting steps
-for OOM issues.
-```
-
----
-
-## Recognition
-
-Contributors will be recognized in:
-
-- Challenge author credit (README.md)
-- Main repository CONTRIBUTORS.md file
-- CTF platform "Challenge Authors" page
-- Social media shoutouts (with permission)
-
-### Hall of Fame
-
-Top contributors each month:
-- Most challenges contributed
-- Best challenge quality
-- Most helpful reviews
-
----
-
-## Questions?
-
-- **GitHub Issues:** https://github.com/Pranavbarathi05/CTFchalls2026/issues
-- **Discussions:** https://github.com/Pranavbarathi05/CTFchalls2026/discussions
-- **Email:** admin@dscjssstuniv.in
-
-We appreciate your contributions to making this CTF platform better! 🎯🔒
-
----
-
-**Last Updated:** 2026-02-01
+**Last Updated:** 2026-02-01  
+**Version:** 2.1 (CTF Edition)
