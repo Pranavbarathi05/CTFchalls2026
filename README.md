@@ -1,3 +1,21 @@
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Using These Challenges
+
+You are free to:
+- ✅ Host these challenges in your own CTF
+- ✅ Modify and adapt them for educational purposes
+- ✅ Learn from the source code and solutions
+- ✅ Share with attribution
+
+Please give credit by linking back to this repository when using these challenges.
+
+
+
+
+
 | Domain                  | Easy | Medium | Hard | Total | Website left                                  |
 | ----------------------- | ---- | ------ | ---- | ----- | --------------------------------------------- |
 | **Binary Exploitation** | 2    | 1      | 0    | 3     | 0                                             |
